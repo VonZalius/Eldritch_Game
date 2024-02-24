@@ -19,6 +19,7 @@ Map::Map()
             }
         }
     }
+    grille[2][2] = Mur;
 }
 
 void Map::chargerTextures()
