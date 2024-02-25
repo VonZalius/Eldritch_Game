@@ -7,6 +7,8 @@ Jeu::Jeu() : fenetre(sf::VideoMode(F_Largeur, F_Hauteur), "Titre du Jeu")
 
 void Jeu::initialiserJeu()
 {
+    srand(time(0));
+
     if (textureJoueur.loadFromFile("sprites/joueur.png"))
     {
         joueur.sprite.setTexture(textureJoueur);
@@ -65,6 +67,11 @@ void Jeu::initialiserJeu()
 void Jeu::reinitialiser()
 {
     attaques.A.status = Inactif;
+    attaques.B.status = Inactif;
+    attaques.C.status = Inactif;
+    attaques.D.status = Inactif;
+    attaques.status = false;
+
     killedStatus = false;
     joueur.position = sf::Vector2f(joueur.X_Initial, joueur.Y_Initial);
 }
@@ -188,6 +195,21 @@ void Jeu::dessiner()
         fenetre.draw(attaques.A.sprite_A);
     else if (attaques.A.status == Actif)
         fenetre.draw(attaques.A.sprite_B);
+
+    else if (attaques.B.status == Charge)
+        fenetre.draw(attaques.B.sprite_A);
+    else if (attaques.B.status == Actif)
+        fenetre.draw(attaques.B.sprite_B);
+
+    else if (attaques.C.status == Charge)
+        fenetre.draw(attaques.C.sprite_A);
+    else if (attaques.C.status == Actif)
+        fenetre.draw(attaques.C.sprite_B);
+
+    else if (attaques.D.status == Charge)
+        fenetre.draw(attaques.D.sprite_A);
+    else if (attaques.D.status == Actif)
+        fenetre.draw(attaques.D.sprite_B);
 
     fenetre.display();
 }

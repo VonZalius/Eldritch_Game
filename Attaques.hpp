@@ -34,6 +34,8 @@ struct Attaques
     void attaques_rng(Jeu *jeu);
 
     sf::Clock attaqueTimer;
+    bool status = false;
+    int rng;
     Paterne A;
     Paterne B;
     Paterne C;
