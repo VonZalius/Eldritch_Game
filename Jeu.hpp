@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include "Map.hpp"
+#include "Attaques.hpp"
 
 struct Joueur
 {
@@ -40,7 +41,6 @@ public:
     Jeu();
     void executer();
 
-private:
     sf::RenderWindow fenetre;
     static const int F_Hauteur = 900;
     static const int F_Largeur = 1600;
@@ -50,6 +50,8 @@ private:
     sf::Texture textureJoueur; // Ajout pour gérer la texture du sprite du joueur
 
     EcranTitre ecranTitre;
+
+    Attaques attaques;
 
     Map map;
 

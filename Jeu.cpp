@@ -10,8 +10,8 @@ void Jeu::initialiserJeu()
     if (textureJoueur.loadFromFile("sprites/joueur.png"))
     {
         joueur.sprite.setTexture(textureJoueur);
+        joueur.position = sf::Vector2f(joueur.X_Initial - (joueur.TailleSprite / 2), joueur.Y_Initial - (joueur.TailleSprite / 2)); // Position initiale au milieu de l'écran
     }
-    joueur.position = sf::Vector2f(joueur.X_Initial, joueur.Y_Initial); // Position initiale au milieu de l'écran
 
 
     if (ecranTitre.textureEcranTitre.loadFromFile("sprites/Titre.png"))
@@ -64,6 +64,7 @@ void Jeu::initialiserJeu()
 
 void Jeu::reinitialiser()
 {
+    attaques.A.status = Inactif;
     killedStatus = false;
     joueur.position = sf::Vector2f(joueur.X_Initial, joueur.Y_Initial);
 }
@@ -76,14 +77,19 @@ void Jeu::executer()
         ecranTitre.demarrage(fenetre);
 
         sf::Clock horloge;
+        attaques.attaqueTimer.restart();
 
         while (fenetre.isOpen())
         {
             sf::Time deltaTime = horloge.restart();
             traiterEvenements();
             mettreAJour(deltaTime);
+            attaques.attaques_rng(this);
             if(killedStatus == true)
+            {
+                ecranTitre.killed(fenetre);
                 break;
+            }
             dessiner();
         }
         reinitialiser();
@@ -140,7 +146,6 @@ void Jeu::mettreAJour(sf::Time deltaTime)
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::K)) 
     {
-        ecranTitre.killed(fenetre);
         killedStatus = true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
@@ -178,5 +183,11 @@ void Jeu::dessiner()
     fenetre.draw(ecranTitre.spriteEcranTitre);
     map.dessiner(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
     fenetre.draw(joueur.sprite); // Dessiner le joueur
+
+    if (attaques.A.status == Charge)
+        fenetre.draw(attaques.A.sprite_A);
+    else if (attaques.A.status == Actif)
+        fenetre.draw(attaques.A.sprite_B);
+
     fenetre.display();
 }
