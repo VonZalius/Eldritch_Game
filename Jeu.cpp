@@ -11,20 +11,82 @@ void Jeu::initialiserJeu()
     {
         joueur.sprite.setTexture(textureJoueur);
     }
-
     joueur.position = sf::Vector2f(joueur.X_Initial, joueur.Y_Initial); // Position initiale au milieu de l'écran
+
+
+    if (ecranTitre.textureEcranTitre.loadFromFile("sprites/Titre.png"))
+    {
+        ecranTitre.spriteEcranTitre.setTexture(ecranTitre.textureEcranTitre);  
+    }
+
+    if (ecranTitre.font.loadFromFile("sprites/police.ttf"))
+    {
+        ecranTitre.texteTitre.setFont(ecranTitre.font); 
+        ecranTitre.texteTitre.setString("Appuyez sur une touche pour commencer");
+        ecranTitre.texteTitre.setCharacterSize(20); // en pixels
+        ecranTitre.texteTitre.setFillColor(sf::Color::White);
+        ecranTitre.texteTitre.setPosition(50, 50); // Ajustez selon vos besoins
+    }
+
+    if (ecranTitre.fontDemarrage.loadFromFile("sprites/police.ttf"))
+    {
+        ecranTitre.texteDemarrage3.setFont(ecranTitre.fontDemarrage); 
+        ecranTitre.texteDemarrage3.setString("3...");
+        ecranTitre.texteDemarrage3.setCharacterSize(100); // en pixels
+        ecranTitre.texteDemarrage3.setFillColor(sf::Color::White);
+        ecranTitre.texteDemarrage3.setPosition(50, 50); // Ajustez selon vos besoins
+    }
+    if (ecranTitre.fontDemarrage.loadFromFile("sprites/police.ttf"))
+    {
+        ecranTitre.texteDemarrage2.setFont(ecranTitre.fontDemarrage); 
+        ecranTitre.texteDemarrage2.setString("2...");
+        ecranTitre.texteDemarrage2.setCharacterSize(100); // en pixels
+        ecranTitre.texteDemarrage2.setFillColor(sf::Color::Yellow);
+        ecranTitre.texteDemarrage2.setPosition(50, 50); // Ajustez selon vos besoins
+    }
+    if (ecranTitre.fontDemarrage.loadFromFile("sprites/police.ttf"))
+    {
+        ecranTitre.texteDemarrage1.setFont(ecranTitre.fontDemarrage); 
+        ecranTitre.texteDemarrage1.setString("1...");
+        ecranTitre.texteDemarrage1.setCharacterSize(100); // en pixels
+        ecranTitre.texteDemarrage1.setFillColor(sf::Color::Red);
+        ecranTitre.texteDemarrage1.setPosition(50, 50); // Ajustez selon vos besoins
+    }
+    if (ecranTitre.fontKilled.loadFromFile("sprites/police.ttf"))
+    {
+        ecranTitre.texteKilled.setFont(ecranTitre.fontKilled); 
+        ecranTitre.texteKilled.setString("Vous etes mort...\nFin de partie !");
+        ecranTitre.texteKilled.setCharacterSize(30); // en pixels
+        ecranTitre.texteKilled.setFillColor(sf::Color::Red);
+        ecranTitre.texteKilled.setPosition(50, 50); // Ajustez selon vos besoins
+    }
+}
+
+void Jeu::reinitialiser()
+{
+    killedStatus = false;
+    joueur.position = sf::Vector2f(joueur.X_Initial, joueur.Y_Initial);
 }
 
 void Jeu::executer()
 {
-    sf::Clock horloge;
-
     while (fenetre.isOpen())
     {
-        sf::Time deltaTime = horloge.restart();
-        traiterEvenements();
-        mettreAJour(deltaTime);
-        dessiner();
+        ecranTitre.afficherEcranTitre(fenetre);
+        ecranTitre.demarrage(fenetre);
+
+        sf::Clock horloge;
+
+        while (fenetre.isOpen())
+        {
+            sf::Time deltaTime = horloge.restart();
+            traiterEvenements();
+            mettreAJour(deltaTime);
+            if(killedStatus == true)
+                break;
+            dessiner();
+        }
+        reinitialiser();
     }
 }
 
@@ -76,6 +138,11 @@ void Jeu::mettreAJour(sf::Time deltaTime)
     // Mise à jour de la position du sprite du joueur
     joueur.sprite.setPosition(joueur.position);
 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::K)) 
+    {
+        ecranTitre.killed(fenetre);
+        killedStatus = true;
+    }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
     {
         this->fenetre.close();
@@ -108,6 +175,7 @@ bool Jeu::collision(int p, sf::Time deltaTime, float vitesseActuelle)
 void Jeu::dessiner()
 {
     fenetre.clear();
+    fenetre.draw(ecranTitre.spriteEcranTitre);
     map.dessiner(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
     fenetre.draw(joueur.sprite); // Dessiner le joueur
     fenetre.display();

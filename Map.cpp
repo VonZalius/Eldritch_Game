@@ -19,7 +19,18 @@ Map::Map()
             }
         }
     }
-    grille[2][2] = Mur;
+    grille[3][3] = Mur;
+    grille[3][4] = Mur;
+    grille[4][3] = Mur;
+    grille[18][3] = Mur;
+    grille[17][3] = Mur;
+    grille[18][4] = Mur;
+    grille[3][18] = Mur;
+    grille[3][17] = Mur;
+    grille[4][18] = Mur;
+    grille[18][18] = Mur;
+    grille[18][17] = Mur;
+    grille[17][18] = Mur;
 }
 
 void Map::chargerTextures()
