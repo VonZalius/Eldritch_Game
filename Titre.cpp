@@ -23,6 +23,7 @@ void EcranTitre::afficherEcranTitre(sf::RenderWindow& fenetre)
 
         fenetre.clear();
         fenetre.draw(spriteEcranTitre);
+        fenetre.draw(spriteEldritch);
         fenetre.draw(texteTitre);
         fenetre.display();
     }

@@ -21,13 +21,22 @@ void Jeu::initialiserJeu()
         ecranTitre.spriteEcranTitre.setTexture(ecranTitre.textureEcranTitre);  
     }
 
+    if (ecranTitre.textureEldritch.loadFromFile("sprites/Eldritch.png"))
+    {
+        ecranTitre.spriteEldritch.setTexture(ecranTitre.textureEldritch);  
+        //ecranTitre.spriteEldritch.setScale(0.5f, 0.5f);
+        float largeurEldritch = ecranTitre.spriteEldritch.getLocalBounds().width;
+        ecranTitre.spriteEldritch.setPosition((F_Largeur / 2) - (largeurEldritch / 2), 50);
+    }
+
     if (ecranTitre.font.loadFromFile("sprites/police.ttf"))
     {
         ecranTitre.texteTitre.setFont(ecranTitre.font); 
         ecranTitre.texteTitre.setString("Appuyez sur une touche pour commencer");
-        ecranTitre.texteTitre.setCharacterSize(20); // en pixels
+        ecranTitre.texteTitre.setCharacterSize(50); // en pixels
         ecranTitre.texteTitre.setFillColor(sf::Color::White);
-        ecranTitre.texteTitre.setPosition(50, 50); // Ajustez selon vos besoins
+        float largeurTexte = ecranTitre.texteTitre.getLocalBounds().width;
+        ecranTitre.texteTitre.setPosition((F_Largeur / 2) - (largeurTexte / 2), 400); // Ajustez selon vos besoins
     }
 
     if (ecranTitre.fontDemarrage.loadFromFile("sprites/police.ttf"))
@@ -85,6 +94,7 @@ void Jeu::executer()
 
         sf::Clock horloge;
         attaques.attaqueTimer.restart();
+        map.generer();
 
         while (fenetre.isOpen())
         {

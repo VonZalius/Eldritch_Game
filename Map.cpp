@@ -33,11 +33,27 @@ Map::Map()
     grille[17][18] = Mur;
 }
 
+void Map::generer()
+{
+    for (int y = 0; y < (T_HAUTEUR + 0); ++y)
+    {
+        for (int x = 0 ; x < (T_LARGEUR + 0); ++x)
+        {
+            grilleRNG[x][y] = rand() % (TilesetTilesNbrX * TilesetTilesNbrY);
+            //EXEPTIONS
+            if (grilleRNG[x][y] == 62 || grilleRNG[x][y] == 63)
+                x--;
+        }
+    }
+}
+
 void Map::chargerTextures()
 {
     // Chargez ici les textures pour le sol et le mur
-    textureSol.loadFromFile("sprites/cobblestone.png");
+    //textureSol.loadFromFile("sprites/cobblestone.png");
     textureMur.loadFromFile("sprites/bricks.png");
+
+    textureSol.loadFromFile("sprites/Texture/TilesetGrass.png");
 }
 
 void Map::dessiner(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur)
@@ -53,7 +69,14 @@ void Map::dessiner(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_L
             sf::Sprite sprite;
             if (grille[x][y] == Sol)
             {
+                rectSol.left = (grilleRNG[x][y] % TilesetTilesNbrX) * TilesetTilesSIZE; // Nouvelle position X
+                rectSol.top = (grilleRNG[x][y] / TilesetTilesNbrX) * TilesetTilesSIZE; // Nouvelle position Y
+                rectSol.width = TilesetTilesSIZE; // Nouvelle largeur
+                rectSol.height = TilesetTilesSIZE; // Nouvelle hauteur
                 sprite.setTexture(textureSol);
+                sprite.setTextureRect(rectSol);
+                float goodsize = TailleTuile / TilesetTilesSIZE;
+                sprite.setScale(goodsize, goodsize);
             }
             else if (grille[x][y] == Mur)
             {

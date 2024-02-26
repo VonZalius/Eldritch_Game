@@ -25,12 +25,18 @@ struct EcranTitre
 
     sf::Texture textureEcranTitre;
     sf::Sprite spriteEcranTitre;
+
+    sf::Texture textureEldritch;
+    sf::Sprite spriteEldritch;
+
     sf::Font font;
     sf::Text texteTitre;
+
     sf::Font fontDemarrage;
     sf::Text texteDemarrage3;
     sf::Text texteDemarrage2;
     sf::Text texteDemarrage1;
+
     sf::Font fontKilled;
     sf::Text texteKilled;
 };
