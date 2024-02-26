@@ -35,13 +35,30 @@ Map::Map()
 
 void Map::generer()
 {
+    // Limites du rectangle spécifié (en termes de ligne et colonne)
+    int debutColonne = TilesetTilesStartX, finColonne = TilesetTilesEndX;
+    int debutLigne = TilesetTilesStartY, finLigne = TilesetTilesEndY;
+    // Calcul des indices linéaires du sous-rectangle
+    std::vector<int> indicesRectangle;
+    for (int ligne = debutLigne; ligne <= finLigne; ++ligne)
+    {
+        for (int colonne = debutColonne; colonne <= finColonne; ++colonne)
+        {
+            int indiceLineaire = ligne * (TilesetTilesX + 1) + colonne;
+            indicesRectangle.push_back(indiceLineaire);
+        }
+    }
+    // Assignation aléatoire
     for (int y = 0; y < (T_HAUTEUR + 0); ++y)
     {
         for (int x = 0 ; x < (T_LARGEUR + 0); ++x)
         {
-            grilleRNG[x][y] = rand() % (TilesetTilesNbrX * TilesetTilesNbrY);
+
+            // Générer un indice aléatoire parmi les indices du rectangle
+            grilleRNG[x][y] = indicesRectangle[rand() % indicesRectangle.size()];
+            //std::cout << grilleRNG[x][y] << " , ";
             //EXEPTIONS
-            if (grilleRNG[x][y] == 62 || grilleRNG[x][y] == 63)
+            if (grilleRNG[x][y] == 77 || grilleRNG[x][y] == 78 || grilleRNG[x][y] == 100 || grilleRNG[x][y] == 101)
                 x--;
         }
     }
@@ -52,8 +69,7 @@ void Map::chargerTextures()
     // Chargez ici les textures pour le sol et le mur
     //textureSol.loadFromFile("sprites/cobblestone.png");
     textureMur.loadFromFile("sprites/bricks.png");
-
-    textureSol.loadFromFile("sprites/Texture/TilesetGrass.png");
+    textureSol.loadFromFile(TilesetSol);
 }
 
 void Map::dessiner(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur)
@@ -69,8 +85,8 @@ void Map::dessiner(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_L
             sf::Sprite sprite;
             if (grille[x][y] == Sol)
             {
-                rectSol.left = (grilleRNG[x][y] % TilesetTilesNbrX) * TilesetTilesSIZE; // Nouvelle position X
-                rectSol.top = (grilleRNG[x][y] / TilesetTilesNbrX) * TilesetTilesSIZE; // Nouvelle position Y
+                rectSol.left = (grilleRNG[x][y] % (TilesetTilesX + 1)) * TilesetTilesSIZE; // Nouvelle position X
+                rectSol.top = (grilleRNG[x][y] / (TilesetTilesX + 1)) * TilesetTilesSIZE; // Nouvelle position Y
                 rectSol.width = TilesetTilesSIZE; // Nouvelle largeur
                 rectSol.height = TilesetTilesSIZE; // Nouvelle hauteur
                 sprite.setTexture(textureSol);
