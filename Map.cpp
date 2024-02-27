@@ -29,6 +29,7 @@ Map::Map()
             }
         }
     }
+    grille[5][5] = Player;
 
     grille[3][3] = MurSE;
     grille[3][4] = MurNS;
@@ -71,6 +72,19 @@ void Map::generer()
             //EXEPTIONS
             if (grilleRNG[x][y] == 77 || grilleRNG[x][y] == 78 || grilleRNG[x][y] == 100 || grilleRNG[x][y] == 101)
                 x--;
+        }
+    }
+
+    for (int y = 0; y < T_HAUTEUR; ++y)
+    {
+        for (int x = 0; x < T_LARGEUR; ++x)
+        {
+            if (grille[x][y] == Player)
+            {
+                player_x = (x * TailleTuile);
+                player_y = (y * TailleTuile);
+                grille[x][y] = Sol;
+            }
         }
     }
 }

@@ -6,6 +6,7 @@
 
 enum TypeTuile
 {
+    Player,
     Sol,
     Mur,
     MurNS,
@@ -33,6 +34,8 @@ public:
     TypeTuile grille[T_LARGEUR][T_HAUTEUR];
     int y_initial;
     int x_initial;
+    int player_x;
+    int player_y;
 
     //Tileset SOL, on compte a partir de 0 !
     static const int TilesetTilesX = 22;

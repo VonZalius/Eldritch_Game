@@ -12,7 +12,7 @@ void Jeu::initialiserJeu()
     if (textureJoueur.loadFromFile("sprites/joueur.png"))
     {
         joueur.sprite.setTexture(textureJoueur);
-        joueur.position = sf::Vector2f(joueur.X_Initial - (joueur.TailleSprite / 2), joueur.Y_Initial - (joueur.TailleSprite / 2)); // Position initiale au milieu de l'écran
+        //joueur.position = sf::Vector2f(joueur.X_Initial - (joueur.TailleSprite / 2), joueur.Y_Initial - (joueur.TailleSprite / 2)); // Position initiale au milieu de l'écran
     }
 
 
@@ -82,7 +82,7 @@ void Jeu::reinitialiser()
     attaques.status = false;
 
     killedStatus = false;
-    joueur.position = sf::Vector2f(joueur.X_Initial, joueur.Y_Initial);
+    //joueur.position = sf::Vector2f(joueur.X_Initial, joueur.Y_Initial);
 }
 
 void Jeu::executer()
@@ -95,6 +95,7 @@ void Jeu::executer()
         sf::Clock horloge;
         attaques.attaqueTimer.restart();
         map.generer();
+        joueur.position = sf::Vector2f((F_Largeur / 2) - ((map.TailleTuile * map.T_LARGEUR) / 2) + map.player_x, (F_Hauteur / 2) - ((map.TailleTuile * map.T_HAUTEUR) / 2) + map.player_y);
 
         while (fenetre.isOpen())
         {
