@@ -22,7 +22,8 @@ class Map
 public:
     Map();
     void implementer_Mures(int xs, int ys, int x, int y, sf::RenderWindow& fenetre);
-    void dessiner(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur);
+    void dessiner_bottom(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur);
+    void dessiner_top(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur);
     void generer();
 
     std::string TilesetSol = "sprites/fantasy/forest_/forest_.png";

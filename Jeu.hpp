@@ -12,9 +12,22 @@ struct Joueur
     sf::Sprite sprite;
     float vitesse = 200.0f; // pixels par seconde
     float vitesseAugmentee = 400.0f;
-    static const int Y_Initial = 450;
-    static const int X_Initial = 800;
-    static const int TailleSprite = 32;
+    static const int TailleSprite = 48;
+    static const int collision_div = 5;
+
+    std::string joueurSprite = "sprites/player/dinoCharactersVersion1.1/sheets/DinoSprites - doux.png";
+    sf::Texture textureJoueur; // Ajout pour gérer la texture du sprite du joueur
+    std::vector<sf::IntRect> framesJoueur;
+
+    // Taille originelle du Sprite
+    static const int frameWidth = 24;
+    static const int frameHeight = 24;
+    // Position des différent sprite pour l'animation, compter a partir de 0 !!
+    static const int frameStartX = 4;
+    static const int frameEndX = 9;
+
+    sf::Clock animationClock;
+    int currentFrame = 0;
 };
 
 struct EcranTitre
@@ -53,7 +66,6 @@ public:
     bool killedStatus = false;
 
     Joueur joueur;
-    sf::Texture textureJoueur; // Ajout pour gérer la texture du sprite du joueur
 
     EcranTitre ecranTitre;
 

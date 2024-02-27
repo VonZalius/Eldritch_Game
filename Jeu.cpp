@@ -9,9 +9,16 @@ void Jeu::initialiserJeu()
 {
     srand(time(0));
 
-    if (textureJoueur.loadFromFile("sprites/joueur.png"))
+    if (joueur.textureJoueur.loadFromFile(joueur.joueurSprite))
     {
-        joueur.sprite.setTexture(textureJoueur);
+        joueur.sprite.setTexture(joueur.textureJoueur);
+        float goodsize = static_cast<float>(joueur.TailleSprite) / static_cast<float>(joueur.frameWidth);
+        joueur.sprite.setScale(goodsize, goodsize);
+        joueur.sprite.setOrigin(joueur.frameWidth / 2, joueur.frameHeight / 2);
+
+        for (int i = joueur.frameStartX; i <= joueur.frameEndX; ++i)
+            joueur.framesJoueur.push_back(sf::IntRect(i * joueur.frameWidth, 0, joueur.frameWidth, joueur.frameHeight));
+
         //joueur.position = sf::Vector2f(joueur.X_Initial - (joueur.TailleSprite / 2), joueur.Y_Initial - (joueur.TailleSprite / 2)); // Position initiale au milieu de l'écran
     }
 
@@ -79,6 +86,7 @@ void Jeu::reinitialiser()
     attaques.B.status = Inactif;
     attaques.C.status = Inactif;
     attaques.D.status = Inactif;
+    attaques.global_status = Inactif;
     attaques.status = false;
 
     killedStatus = false;
@@ -95,10 +103,13 @@ void Jeu::executer()
         sf::Clock horloge;
         attaques.attaqueTimer.restart();
         map.generer();
-        joueur.position = sf::Vector2f((F_Largeur / 2) - ((map.TailleTuile * map.T_LARGEUR) / 2) + map.player_x, (F_Hauteur / 2) - ((map.TailleTuile * map.T_HAUTEUR) / 2) + map.player_y);
+        attaques.generer(map.T_LARGEUR, map.T_HAUTEUR);
+        joueur.position = sf::Vector2f((F_Largeur / 2) - ((map.TailleTuile * map.T_LARGEUR) / 2) + map.player_x + map.TailleTuile / 2,
+                                        (F_Hauteur / 2) - ((map.TailleTuile * map.T_HAUTEUR) / 2) + map.player_y + map.TailleTuile / 2);
 
         while (fenetre.isOpen())
         {
+            //std::cout << joueur.position.x << " , " << joueur.position.y << std::endl;
             sf::Time deltaTime = horloge.restart();
             traiterEvenements();
             mettreAJour(deltaTime);
@@ -126,16 +137,28 @@ void Jeu::traiterEvenements()
 
 void Jeu::mettreAJour(sf::Time deltaTime)
 {
+    // Mise à jour de l'animation
+    if (joueur.animationClock.getElapsedTime().asSeconds() > 0.1f) { // 0.1s par frame, ajustez selon le besoin
+        joueur.currentFrame = (joueur.currentFrame + 1) % joueur.framesJoueur.size();
+        joueur.sprite.setTextureRect(joueur.framesJoueur[joueur.currentFrame]);
+        joueur.animationClock.restart();
+    }
+
+
     // Détermination de la direction du déplacement
     float deplacementX = 0.0f;
     float deplacementY = 0.0f;
 
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) && collision(1, deltaTime, joueur.vitesse))
     {
+        float goodsize = static_cast<float>(joueur.TailleSprite) / static_cast<float>(joueur.frameWidth);
+        joueur.sprite.setScale(-goodsize, goodsize); // Inverse horizontalement
         deplacementX -= 1.0f;
     }
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) && collision(2, deltaTime, joueur.vitesse))
     {
+        float goodsize = static_cast<float>(joueur.TailleSprite) / static_cast<float>(joueur.frameWidth);
+        joueur.sprite.setScale(goodsize, goodsize); // Inverse horizontalement
         deplacementX += 1.0f;
     }
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && collision(3, deltaTime, joueur.vitesse))
@@ -175,6 +198,31 @@ void Jeu::mettreAJour(sf::Time deltaTime)
 
 bool Jeu::collision(int p, sf::Time deltaTime, float vitesseActuelle)
 {
+    /*int jpx = joueur.position.x - ((F_Largeur / 2) - ((map.T_LARGEUR * map.TailleTuile) / 2));
+    int jpy = joueur.position.y - ((F_Hauteur / 2) - ((map.T_HAUTEUR * map.TailleTuile) / 2));
+
+    if(p == 1)
+        jpx -= vitesseActuelle * deltaTime.asSeconds();
+    else if(p == 2)
+        jpx += vitesseActuelle * deltaTime.asSeconds() + 1;
+    else if(p == 3)
+        jpy -= vitesseActuelle * deltaTime.asSeconds();
+    else if(p == 4)
+        jpy += vitesseActuelle * deltaTime.asSeconds() + 1;
+
+    int tileX = jpx / map.TailleTuile;
+    int tileY = jpy / map.TailleTuile;
+
+        // Vérification si le point n'est pas sur une tuile 'Sol'
+        if (map.grille[tileX][tileY] != Sol)
+        {
+            return false; // Collision détectée
+        }
+    
+
+    return true; // Aucune collision détectée*/
+
+
     int jpx = joueur.position.x - ((F_Largeur / 2) - ((map.T_LARGEUR * map.TailleTuile) / 2));
     int jpy = joueur.position.y - ((F_Hauteur / 2) - ((map.T_HAUTEUR * map.TailleTuile) / 2));
     if(p == 1)
@@ -187,22 +235,51 @@ bool Jeu::collision(int p, sf::Time deltaTime, float vitesseActuelle)
         jpy += vitesseActuelle * deltaTime.asSeconds() + 1;
 
 
-    if (map.grille[jpx / map.TailleTuile][jpy / map.TailleTuile] != Sol ||
-        map.grille[(jpx + joueur.TailleSprite - 1) / map.TailleTuile][jpy / map.TailleTuile] != Sol ||
-        map.grille[jpx / map.TailleTuile][(jpy + joueur.TailleSprite - 1) / map.TailleTuile] != Sol ||
-        map.grille[(jpx + joueur.TailleSprite - 1) / map.TailleTuile][(jpy + joueur.TailleSprite - 1) / map.TailleTuile] != Sol)
-        return false;
-    return true;
+    // Calcul du centre du joueur
+    int rayon = joueur.TailleSprite / joueur.collision_div;
+
+    // Points à vérifier sur le cercle
+    int points[8][2] =
+    {
+        {jpx + rayon, jpy}, // Droite
+        {jpx - rayon, jpy}, // Gauche
+        {jpx, jpy - rayon}, // Haut
+        {jpx, jpy + rayon}, // Bas
+        {static_cast<int>(jpx + rayon / sqrt(2)), static_cast<int>(jpy + rayon / sqrt(2))}, // Bas-droite
+        {static_cast<int>(jpx - rayon / sqrt(2)), static_cast<int>(jpy + rayon / sqrt(2))}, // Bas-gauche
+        {static_cast<int>(jpx + rayon / sqrt(2)), static_cast<int>(jpy - rayon / sqrt(2))}, // Haut-droite
+        {static_cast<int>(jpx - rayon / sqrt(2)), static_cast<int>(jpy - rayon / sqrt(2))}  // Haut-gauche
+    };
+
+    // Vérification de chaque point
+    for (int i = 0; i < 8; ++i)
+    {
+        int x = points[i][0];
+        int y = points[i][1];
+
+        // Convertir les coordonnées du point en indices de grille
+        int tileX = x / map.TailleTuile;
+        int tileY = y / map.TailleTuile;
+        // Vérification si le point n'est pas sur une tuile 'Sol'
+        if (map.grille[tileX][tileY] != Sol)
+        {
+            return false; // Collision détectée
+        }
+    }
+
+    return true; // Aucune collision détectée
 }
 
 void Jeu::dessiner()
 {
     fenetre.clear();
     fenetre.draw(ecranTitre.spriteEcranTitre);
-    map.dessiner(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
+    map.dessiner_bottom(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
     fenetre.draw(joueur.sprite); // Dessiner le joueur
+    map.dessiner_top(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
+    attaques.dessiner_zone(fenetre, F_Hauteur, F_Largeur, this);
 
-    if (attaques.A.status == Charge)
+    /*if (attaques.A.status == Charge)
         fenetre.draw(attaques.A.sprite_A);
     else if (attaques.A.status == Actif)
         fenetre.draw(attaques.A.sprite_B);
@@ -220,7 +297,6 @@ void Jeu::dessiner()
     else if (attaques.D.status == Charge)
         fenetre.draw(attaques.D.sprite_A);
     else if (attaques.D.status == Actif)
-        fenetre.draw(attaques.D.sprite_B);
-
+        fenetre.draw(attaques.D.sprite_B);*/
     fenetre.display();
 }

@@ -71,7 +71,7 @@ void Map::implementer_Mures(int xs, int ys, int x, int y, sf::RenderWindow& fene
     fenetre.draw(sprite);
 }
 
-void Map::dessiner(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur)
+void Map::dessiner_bottom(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur)
 {
     // Placement des Tuiles au centre de la fenetre
     y_initial = (F_Hauteur / 2) - ((T_HAUTEUR * TailleTuile) / 2);
@@ -93,7 +93,20 @@ void Map::dessiner(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_L
             sprite.setScale(goodsize, goodsize);
             sprite.setPosition((x * TailleTuile) + x_initial, (y * TailleTuile) + y_initial);
             fenetre.draw(sprite);
-            
+        }
+    }
+}
+
+void Map::dessiner_top(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur)
+{
+    // Placement des Tuiles au centre de la fenetre
+    y_initial = (F_Hauteur / 2) - ((T_HAUTEUR * TailleTuile) / 2);
+    x_initial = (F_Largeur / 2) - ((T_LARGEUR * TailleTuile) / 2);
+
+    for (int y = 0; y < T_HAUTEUR; ++y)
+    {
+        for (int x = 0; x < T_LARGEUR; ++x)
+        {
             // Le reste
             if (grille[x][y] == MurNS)
             {

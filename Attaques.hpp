@@ -13,6 +13,12 @@ enum AttaqueStatus
     Actif
 };
 
+enum ZoneDegats
+{
+    OK,
+    KO
+};
+
 typedef void (*FonctionPtr)(Jeu*);
 
 struct Paterne
@@ -31,11 +37,15 @@ struct Paterne
 struct Attaques
 {
     Attaques();
+    void generer(int T_LARGEUR, int T_HAUTEUR);
     void attaques_rng(Jeu *jeu);
+    void dessiner_zone(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur, Jeu *jeu);
 
     sf::Clock attaqueTimer;
     bool status = false;
     int rng;
+    std::vector<std::vector<ZoneDegats>> grille;
+    AttaqueStatus global_status = Inactif;
     Paterne A;
     Paterne B;
     Paterne C;
