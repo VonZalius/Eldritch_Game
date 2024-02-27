@@ -186,10 +186,10 @@ bool Jeu::collision(int p, sf::Time deltaTime, float vitesseActuelle)
         jpy += vitesseActuelle * deltaTime.asSeconds() + 1;
 
 
-    if (map.grille[jpx / map.TailleTuile][jpy / map.TailleTuile] == Mur ||
-        map.grille[(jpx + joueur.TailleSprite - 1) / map.TailleTuile][jpy / map.TailleTuile] == Mur ||
-        map.grille[jpx / map.TailleTuile][(jpy + joueur.TailleSprite - 1) / map.TailleTuile] == Mur ||
-        map.grille[(jpx + joueur.TailleSprite - 1) / map.TailleTuile][(jpy + joueur.TailleSprite - 1) / map.TailleTuile] == Mur)
+    if (map.grille[jpx / map.TailleTuile][jpy / map.TailleTuile] != Sol ||
+        map.grille[(jpx + joueur.TailleSprite - 1) / map.TailleTuile][jpy / map.TailleTuile] != Sol ||
+        map.grille[jpx / map.TailleTuile][(jpy + joueur.TailleSprite - 1) / map.TailleTuile] != Sol ||
+        map.grille[(jpx + joueur.TailleSprite - 1) / map.TailleTuile][(jpy + joueur.TailleSprite - 1) / map.TailleTuile] != Sol)
         return false;
     return true;
 }
