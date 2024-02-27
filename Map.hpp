@@ -28,10 +28,10 @@ public:
     std::string TilesetSol = "sprites/fantasy/forest_/forest_.png";
     std::string TilesetMur = "sprites/fantasy/forest_/forest_ [fencesAndWalls].png";
     //Zone de jeu
-    static const int T_LARGEUR = 22;
-    static const int T_HAUTEUR = 22;
+    int T_LARGEUR;
+    int T_HAUTEUR;
+    std::vector<std::vector<TypeTuile>> grille;
     static const int TailleTuile = 35;
-    TypeTuile grille[T_LARGEUR][T_HAUTEUR];
     int y_initial;
     int x_initial;
     int player_x;
@@ -50,13 +50,16 @@ public:
     static const int TilesetTilesMurSIZE = 16;
 
 
-    int grilleRNG[T_LARGEUR][T_HAUTEUR];
+    std::vector<std::vector<int>> grilleRNG;
 
     sf::Texture textureSol;
     sf::IntRect rectSol;
     sf::Texture textureMur;
     sf::IntRect rectMur;
-    void chargerTextures();
 };
+
+void map_1(Map *map);
+void map_2(Map *map);
+void map_3(Map *map);
 
 #endif

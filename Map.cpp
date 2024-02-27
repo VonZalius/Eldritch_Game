@@ -2,51 +2,16 @@
 
 Map::Map()
 {
-    chargerTextures();
-
-    // Initialisation simple de la grille avec des murs autour et du sol à l'intérieur
-
-    for (int y = 0; y < T_HAUTEUR; ++y)
-    {
-        for (int x = 0; x < T_LARGEUR; ++x)
-        {
-            // Coins spécifiques
-            if (x == 0 && y == 0) { // Coin nord-ouest
-                grille[x][y] = MurSE;
-            } else if (x == T_LARGEUR - 1 && y == 0) { // Coin nord-est
-                grille[x][y] = MurSO;
-            } else if (x == 0 && y == T_HAUTEUR - 1) { // Coin sud-ouest
-                grille[x][y] = MurNE;
-            } else if (x == T_LARGEUR - 1 && y == T_HAUTEUR - 1) { // Coin sud-est
-                grille[x][y] = MurNO;
-            // Bords spécifiques
-            } else if (y == 0 || y == T_HAUTEUR - 1) { // Haut et bas
-                grille[x][y] = MurEO;
-            } else if (x == 0 || x == T_LARGEUR - 1) { // Gauche et droite
-                grille[x][y] = MurNS;
-            } else {
-                grille[x][y] = Sol; // Intérieur
-            }
-        }
-    }
-    grille[5][5] = Player;
-
-    grille[3][3] = MurSE;
-    grille[3][4] = MurNS;
-    grille[4][3] = MurEO;
-    grille[18][3] = MurSO;
-    grille[17][3] = MurEO;
-    grille[18][4] = MurNS;
-    grille[3][18] = MurNE;
-    grille[3][17] = MurNS;
-    grille[4][18] = MurEO;
-    grille[18][18] = MurNO;
-    grille[18][17] = MurNS;
-    grille[17][18] = MurEO;
 }
 
 void Map::generer()
 {
+    //Choix aléatoire de la map
+    int rng = rand() % 3;
+    void (*tableauDeFonctions[])(Map *map) =
+        {map_1, map_2, map_3};
+    (*tableauDeFonctions[rng])(this);
+
     // Limites du rectangle spécifié (en termes de ligne et colonne)
     int debutColonne = TilesetTilesStartX, finColonne = TilesetTilesEndX;
     int debutLigne = TilesetTilesStartY, finLigne = TilesetTilesEndY;
@@ -87,14 +52,6 @@ void Map::generer()
             }
         }
     }
-}
-
-void Map::chargerTextures()
-{
-    // Chargez ici les textures pour le sol et le mur
-    //textureMur.loadFromFile("sprites/cobblestone.png");
-    textureMur.loadFromFile(TilesetMur);
-    textureSol.loadFromFile(TilesetSol);
 }
 
 void Map::implementer_Mures(int xs, int ys, int x, int y, sf::RenderWindow& fenetre)
@@ -164,4 +121,196 @@ void Map::dessiner(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_L
             }
         }
     }
+}
+
+void map_1(Map *map)
+{
+    map->T_LARGEUR = 22;
+    map->T_HAUTEUR = 22;
+    
+    // Ajuster le nombre de lignes
+    map->grille.resize(map->T_LARGEUR);
+    // Ajuster le nombre de colonnes pour chaque ligne
+    for (auto& ligne : map->grille) {
+        ligne.resize(map->T_HAUTEUR);
+    }
+
+    // Ajuster le nombre de lignes
+    map->grilleRNG.resize(map->T_LARGEUR);
+    // Ajuster le nombre de colonnes pour chaque ligne
+    for (auto& ligne : map->grilleRNG) {
+        ligne.resize(map->T_HAUTEUR);
+    }
+
+    map->textureMur.loadFromFile(map->TilesetMur);
+    map->textureSol.loadFromFile(map->TilesetSol);
+    // Initialisation simple de la grille avec des murs autour et du sol à l'intérieur
+
+    //Pourtour
+    for (int y = 0; y < map->T_HAUTEUR; ++y)
+    {
+        for (int x = 0; x < map->T_LARGEUR; ++x)
+        {
+            // Coins spécifiques
+            if (x == 0 && y == 0) { // Coin nord-ouest
+                map->grille[x][y] = MurSE;
+            } else if (x == map->T_LARGEUR - 1 && y == 0) { // Coin nord-est
+                map->grille[x][y] = MurSO;
+            } else if (x == 0 && y == map->T_HAUTEUR - 1) { // Coin sud-ouest
+                map->grille[x][y] = MurNE;
+            } else if (x == map->T_LARGEUR - 1 && y == map->T_HAUTEUR - 1) { // Coin sud-est
+                map->grille[x][y] = MurNO;
+            // Bords spécifiques
+            } else if (y == 0 || y == map->T_HAUTEUR - 1) { // Haut et bas
+                map->grille[x][y] = MurEO;
+            } else if (x == 0 || x == map->T_LARGEUR - 1) { // Gauche et droite
+                map->grille[x][y] = MurNS;
+            } else {
+                map->grille[x][y] = Sol; // Intérieur
+            }
+        }
+    }
+
+    map->grille[5][5] = Player;
+
+    map->grille[3][3] = MurSE;
+    map->grille[3][4] = MurNS;
+    map->grille[4][3] = MurEO;
+    map->grille[18][3] = MurSO;
+    map->grille[17][3] = MurEO;
+    map->grille[18][4] = MurNS;
+    map->grille[3][18] = MurNE;
+    map->grille[3][17] = MurNS;
+    map->grille[4][18] = MurEO;
+    map->grille[18][18] = MurNO;
+    map->grille[18][17] = MurNS;
+    map->grille[17][18] = MurEO;
+}
+
+void map_2(Map *map)
+{
+    map->T_LARGEUR = 10;
+    map->T_HAUTEUR = 20;
+    
+    // Ajuster le nombre de lignes
+    map->grille.resize(map->T_LARGEUR);
+    // Ajuster le nombre de colonnes pour chaque ligne
+    for (auto& ligne : map->grille) {
+        ligne.resize(map->T_HAUTEUR);
+    }
+
+    // Ajuster le nombre de lignes
+    map->grilleRNG.resize(map->T_LARGEUR);
+    // Ajuster le nombre de colonnes pour chaque ligne
+    for (auto& ligne : map->grilleRNG) {
+        ligne.resize(map->T_HAUTEUR);
+    }
+
+    map->textureMur.loadFromFile(map->TilesetMur);
+    map->textureSol.loadFromFile(map->TilesetSol);
+    // Initialisation simple de la grille avec des murs autour et du sol à l'intérieur
+
+    //Pourtour
+    for (int y = 0; y < map->T_HAUTEUR; ++y)
+    {
+        for (int x = 0; x < map->T_LARGEUR; ++x)
+        {
+            // Coins spécifiques
+            if (x == 0 && y == 0) { // Coin nord-ouest
+                map->grille[x][y] = MurSE;
+            } else if (x == map->T_LARGEUR - 1 && y == 0) { // Coin nord-est
+                map->grille[x][y] = MurSO;
+            } else if (x == 0 && y == map->T_HAUTEUR - 1) { // Coin sud-ouest
+                map->grille[x][y] = MurNE;
+            } else if (x == map->T_LARGEUR - 1 && y == map->T_HAUTEUR - 1) { // Coin sud-est
+                map->grille[x][y] = MurNO;
+            // Bords spécifiques
+            } else if (y == 0 || y == map->T_HAUTEUR - 1) { // Haut et bas
+                map->grille[x][y] = MurEO;
+            } else if (x == 0 || x == map->T_LARGEUR - 1) { // Gauche et droite
+                map->grille[x][y] = MurNS;
+            } else {
+                map->grille[x][y] = Sol; // Intérieur
+            }
+        }
+    }
+
+    map->grille[5][5] = Player;
+
+    /*map->grille[3][3] = MurSE;
+    map->grille[3][4] = MurNS;
+    map->grille[4][3] = MurEO;
+    map->grille[18][3] = MurSO;
+    map->grille[17][3] = MurEO;
+    map->grille[18][4] = MurNS;
+    map->grille[3][18] = MurNE;
+    map->grille[3][17] = MurNS;
+    map->grille[4][18] = MurEO;
+    map->grille[18][18] = MurNO;
+    map->grille[18][17] = MurNS;
+    map->grille[17][18] = MurEO;*/
+}
+
+void map_3(Map *map)
+{
+    map->T_LARGEUR = 20;
+    map->T_HAUTEUR = 10;
+    
+    // Ajuster le nombre de lignes
+    map->grille.resize(map->T_LARGEUR);
+    // Ajuster le nombre de colonnes pour chaque ligne
+    for (auto& ligne : map->grille) {
+        ligne.resize(map->T_HAUTEUR);
+    }
+
+    // Ajuster le nombre de lignes
+    map->grilleRNG.resize(map->T_LARGEUR);
+    // Ajuster le nombre de colonnes pour chaque ligne
+    for (auto& ligne : map->grilleRNG) {
+        ligne.resize(map->T_HAUTEUR);
+    }
+
+    map->textureMur.loadFromFile(map->TilesetMur);
+    map->textureSol.loadFromFile(map->TilesetSol);
+    // Initialisation simple de la grille avec des murs autour et du sol à l'intérieur
+
+    //Pourtour
+    for (int y = 0; y < map->T_HAUTEUR; ++y)
+    {
+        for (int x = 0; x < map->T_LARGEUR; ++x)
+        {
+            // Coins spécifiques
+            if (x == 0 && y == 0) { // Coin nord-ouest
+                map->grille[x][y] = MurSE;
+            } else if (x == map->T_LARGEUR - 1 && y == 0) { // Coin nord-est
+                map->grille[x][y] = MurSO;
+            } else if (x == 0 && y == map->T_HAUTEUR - 1) { // Coin sud-ouest
+                map->grille[x][y] = MurNE;
+            } else if (x == map->T_LARGEUR - 1 && y == map->T_HAUTEUR - 1) { // Coin sud-est
+                map->grille[x][y] = MurNO;
+            // Bords spécifiques
+            } else if (y == 0 || y == map->T_HAUTEUR - 1) { // Haut et bas
+                map->grille[x][y] = MurEO;
+            } else if (x == 0 || x == map->T_LARGEUR - 1) { // Gauche et droite
+                map->grille[x][y] = MurNS;
+            } else {
+                map->grille[x][y] = Sol; // Intérieur
+            }
+        }
+    }
+
+    map->grille[5][5] = Player;
+
+    /*map->grille[3][3] = MurSE;
+    map->grille[3][4] = MurNS;
+    map->grille[4][3] = MurEO;
+    map->grille[18][3] = MurSO;
+    map->grille[17][3] = MurEO;
+    map->grille[18][4] = MurNS;
+    map->grille[3][18] = MurNE;
+    map->grille[3][17] = MurNS;
+    map->grille[4][18] = MurEO;
+    map->grille[18][18] = MurNO;
+    map->grille[18][17] = MurNS;
+    map->grille[17][18] = MurEO;*/
 }
