@@ -51,6 +51,44 @@ struct Attaques
     Paterne C;
     Paterne D;
     Paterne E;
+
+    //OMBRE
+    sf::Sprite sprite;
+    static const int TailleSprite = 32;
+
+    // Taille originelle du Sprite
+    static const int Width = 16;
+    static const int Height = 16;
+
+    // Texture principale
+    std::string impactSprite = "sprites/shadow.png";
+    sf::Texture textureImpact; // Ajout pour gérer la texture du sprite du joueur
+    std::vector<sf::IntRect> framesImpact;
+    sf::Clock animationTimer;
+    int currentFrame = 0;
+    // Position des différent sprite pour l'animation, compter a partir de 0 !!
+    static const int TileStartX = 0;
+    static const int TileStartY = 0;
+    static const int TileEndX = 4;
+    static const int TileEndY = 0;
+
+    //IMPACT
+    sf::Sprite sprite2;
+    static const int TailleSprite2 = 64;
+
+    // Taille originelle du Sprite
+    static const int Width2 = 32;
+    static const int Height2 = 32;
+    // Texture principale
+    std::string impactSprite2 = "sprites/Impact.png";
+    sf::Texture textureImpact2; // Ajout pour gérer la texture du sprite du joueur
+    std::vector<sf::IntRect> framesImpact2;
+    int currentFrame2 = 0;
+    // Position des différent sprite pour l'animation, compter a partir de 0 !!
+    static const int TileStartX2 = 0;
+    static const int TileStartY2 = 10;
+    static const int TileEndX2 = 4;
+    static const int TileEndY2 = 10;
 };
 
 void strike_1(Jeu *jeu);

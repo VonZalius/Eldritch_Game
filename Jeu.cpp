@@ -274,6 +274,20 @@ void Jeu::mettreAJour(sf::Time deltaTime)
         gold.animationTimer.restart();
     }
 
+    /*if (attaques.animationTimer.getElapsedTime().asSeconds() > 0.20f && attaques.currentFrame < static_cast<int>(attaques.framesImpact.size()) && attaques.global_status == Charge)
+    { // 0.1s par frame, ajustez selon le besoin
+        attaques.currentFrame++ ;
+        attaques.sprite.setTextureRect(attaques.framesImpact[attaques.currentFrame]);
+        attaques.animationTimer.restart();
+    }
+    else if (attaques.animationTimer.getElapsedTime().asSeconds() > 0.25f && attaques.currentFrame2 < static_cast<int>(attaques.framesImpact2.size()) && attaques.global_status == Actif)
+    { // 0.1s par frame, ajustez selon le besoin
+        attaques.currentFrame2++ ;
+        attaques.sprite2.setTextureRect(attaques.framesImpact2[attaques.currentFrame2]);
+        attaques.animationTimer.restart();
+    }*/
+
+
     // Normalisation du vecteur de déplacement si nécessaire
     float magnitude = sqrt(deplacementX * deplacementX + deplacementY * deplacementY);
     if (magnitude > 0.0f) // Pour éviter la division par zéro
@@ -384,8 +398,8 @@ void Jeu::dessiner()
     map.dessiner_bottom(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
     fenetre.draw(joueur.sprite); // Dessiner le joueur
     gold.afficherGold(this);
-    map.dessiner_top(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
     attaques.dessiner_zone(this);
+    map.dessiner_top(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
 
     /*if (attaques.A.status == Charge)
         fenetre.draw(attaques.A.sprite_A);
