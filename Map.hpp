@@ -14,14 +14,20 @@ enum TypeTuile
     MurNE,
     MurSE,
     MurSO,
-    MurNO
+    MurNO,
+    BarriereNS,
+    BarriereEO,
+    BarriereNE,
+    BarriereSE,
+    BarriereSO,
+    BarriereNO
 };
 
 class Map
 {
 public:
     Map();
-    void implementer_Mures(int xs, int ys, int x, int y, sf::RenderWindow& fenetre);
+    void implementer_Mures(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre);
     void dessiner_bottom(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur);
     void dessiner_top(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur);
     void generer();
@@ -32,7 +38,7 @@ public:
     int T_LARGEUR;
     int T_HAUTEUR;
     std::vector<std::vector<TypeTuile>> grille;
-    static const int TailleTuile = 35;
+    static const int TailleTuile = 32;
     int y_initial;
     int x_initial;
     int player_x;
@@ -62,5 +68,6 @@ public:
 void map_1(Map *map);
 void map_2(Map *map);
 void map_3(Map *map);
+void map_4(Map *map);
 
 #endif

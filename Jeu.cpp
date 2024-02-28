@@ -86,6 +86,7 @@ void Jeu::reinitialiser()
     attaques.B.status = Inactif;
     attaques.C.status = Inactif;
     attaques.D.status = Inactif;
+    attaques.E.status = Inactif;
     attaques.global_status = Inactif;
     attaques.status = false;
 

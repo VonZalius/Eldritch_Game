@@ -2,10 +2,11 @@
 
 //950
 Attaques::Attaques() :
-    A(-150, 0, "sprites/attaqueA1_A.png", "sprites/attaqueA1_B.png", strike_1),
-    B(800, 0, "sprites/attaqueA1_A.png", "sprites/attaqueA1_B.png", strike_2),
-    C(325, -500, "sprites/attaqueA1_A.png", "sprites/attaqueA1_B.png", strike_3),
-    D(325, 450, "sprites/attaqueA1_A.png", "sprites/attaqueA1_B.png", strike_4)
+    A(strike_1),
+    B(strike_2),
+    C(strike_3),
+    D(strike_4),
+    E(strike_5)
 {}
 
 void Attaques::generer(int T_LARGEUR, int T_HAUTEUR)
@@ -25,31 +26,20 @@ void Attaques::generer(int T_LARGEUR, int T_HAUTEUR)
     }
 }
 
-Paterne::Paterne(int X, int Y, std::string TA, std::string TB, FonctionPtr ptr) : degatZone(ptr)
-{
-    if (texture_A.loadFromFile(TA))
-    {
-        sprite_A.setTexture(texture_A); 
-        sprite_A.setPosition(X, Y);
-    }
-    if (texture_B.loadFromFile(TB))
-    {
-        sprite_B.setTexture(texture_B); 
-        sprite_B.setPosition(X, Y);
-    }
-}
+Paterne::Paterne(FonctionPtr ptr) : degatZone(ptr)
+{}
 
 void Attaques::attaques_rng(Jeu *jeu)
 {
     if (status == true)
     {
         void (*tableauDeFonctions[])(Jeu *jeu) =
-            {A.degatZone, B.degatZone, C.degatZone, D.degatZone};
+            {A.degatZone, B.degatZone, C.degatZone, D.degatZone, E.degatZone};
         (*tableauDeFonctions[rng])(jeu);
     }
     else if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() >= 1)
     {
-        rng = rand() % 4;
+        rng = rand() % 5;
         status = true;
     }
 }
@@ -301,4 +291,47 @@ void strike_4(Jeu *jeu)
     }
 }
 
-// NE PAS OUBLIER D'AJOUTER UN RESET DANS REINITIALISER
+//Case aléatoire 1/3
+void strike_5(Jeu *jeu)
+{
+    //Phases de Charge
+    if (jeu->attaques.D.status == Inactif)
+    {
+        int E_rng;
+        jeu->attaques.attaqueTimer.restart();
+        //Initialisation de la zone de KO
+        for (int y = 0; y < jeu->map.T_HAUTEUR; ++y)
+        {
+            for (int x = 0; x < jeu->map.T_LARGEUR; ++x)
+            { 
+                E_rng = rand() % 3;
+                if (E_rng == 0)
+                    jeu->attaques.grille[x][y] = KO;
+            }
+        }
+    }
+    jeu->attaques.D.status = Charge;
+    jeu->attaques.global_status = Charge;
+
+    //Phase de Dégats
+    if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() >= 1)
+    {
+        jeu->attaques.D.status = Actif;
+        jeu->attaques.global_status = Actif;
+        if (KO_checker(jeu))
+            jeu->killedStatus = true;   
+    }
+    
+    //Phase de fin
+    if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() >= 2)
+    {
+        //Reset OK
+        OK_reset(jeu);
+        jeu->attaques.D.status = Inactif;
+        jeu->attaques.global_status = Inactif;
+        jeu->attaques.attaqueTimer.restart();
+        jeu->attaques.status = false;
+    }
+}
+
+// NE PAS OUBLIER D'AJOUTER DANS :: Jeu.cpp -> Reinitialiser, Attaques.hpp -> Paterne ET Fonction au fond, Attaques.cpp -> attaques_rng !!!!!

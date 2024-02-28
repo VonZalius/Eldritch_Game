@@ -31,7 +31,7 @@ struct Paterne
     TypeTuile **grille;
     FonctionPtr degatZone;
 
-    Paterne(int X, int Y, std::string TA, std::string TB, FonctionPtr ptr);
+    Paterne(/*int X, int Y, std::string TA, std::string TB, */FonctionPtr ptr);
 };
 
 struct Attaques
@@ -50,11 +50,13 @@ struct Attaques
     Paterne B;
     Paterne C;
     Paterne D;
+    Paterne E;
 };
 
 void strike_1(Jeu *jeu);
 void strike_2(Jeu *jeu);
 void strike_3(Jeu *jeu);
 void strike_4(Jeu *jeu);
+void strike_5(Jeu *jeu);
 
 #endif
