@@ -2,6 +2,7 @@
 #define JEU_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <cmath>
 #include "Map.hpp"
 #include "Attaques.hpp"
@@ -68,6 +69,32 @@ struct EcranTitre
     sf::Text texteKilled;
 };
 
+struct Sound
+{
+    std::string musiqueFile1 = "music/Pixel Music Pack/Ogg/Pixel 3.ogg";
+    sf::Music musique1;
+    static const int volume1 = 10;
+
+    std::string musiqueFile2 = "music/Pixel Music Pack/Ogg/Pixel 1.ogg";
+    sf::Music musique2;
+    static const int volume2 = 10;
+
+    std::string SoundFile1 = "music/FreeSFX/GameSFX/Magic/Retro Magic 11.wav";
+    sf::SoundBuffer buffer1;
+    sf::Sound sound1;
+    static const int soundVolume1 = 10;
+
+    std::string SoundFile2 = "music/FreeSFX/GameSFX/Explosion/Retro Explosion Swoshes 04.wav";
+    sf::SoundBuffer buffer2;
+    sf::Sound sound2;
+    static const int soundVolume2 = 10;
+
+    std::string SoundFile3 = "music/FreeSFX/GameSFX/Impact/Retro Impact 20.wav";
+    sf::SoundBuffer buffer3;
+    sf::Sound sound3;
+    static const int soundVolume3 = 10;
+};
+
 class Jeu
 {
 public:
@@ -86,6 +113,8 @@ public:
     Attaques attaques;
 
     Map map;
+
+    Sound sound;
 
     void initialiserJeu();
     void traiterEvenements();

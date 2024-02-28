@@ -9,6 +9,9 @@ Attaques::Attaques() :
     E(strike_5)
 {}
 
+Paterne::Paterne(FonctionPtr ptr) : degatZone(ptr)
+{}
+
 void Attaques::generer(int T_LARGEUR, int T_HAUTEUR)
 {
     // Ajuster le nombre de lignes
@@ -25,9 +28,6 @@ void Attaques::generer(int T_LARGEUR, int T_HAUTEUR)
         }
     }
 }
-
-Paterne::Paterne(FonctionPtr ptr) : degatZone(ptr)
-{}
 
 void Attaques::attaques_rng(Jeu *jeu)
 {
@@ -143,15 +143,19 @@ void strike_1(Jeu *jeu)
                     jeu->attaques.grille[x][y] = KO;
             }
         }
+        jeu->attaques.A.status = Charge;
+        jeu->attaques.global_status = Charge;
     }
-    jeu->attaques.A.status = Charge;
-    jeu->attaques.global_status = Charge;
 
     //Phase de Dégats
     if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() >= 1)
     {
-        jeu->attaques.A.status = Actif;
-        jeu->attaques.global_status = Actif;
+        if (jeu->attaques.A.status == Charge)
+        {
+            jeu->sound.sound3.play();
+            jeu->attaques.A.status = Actif;
+            jeu->attaques.global_status = Actif;
+        }
         if (KO_checker(jeu))
             jeu->killedStatus = true;   
     }
@@ -184,15 +188,19 @@ void strike_2(Jeu *jeu)
                     jeu->attaques.grille[x][y] = KO;
             }
         }
+        jeu->attaques.B.status = Charge;
+        jeu->attaques.global_status = Charge;
     }
-    jeu->attaques.B.status = Charge;
-    jeu->attaques.global_status = Charge;
 
     //Phase de Dégats
     if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() >= 1)
     {
-        jeu->attaques.B.status = Actif;
-        jeu->attaques.global_status = Actif;
+        if (jeu->attaques.B.status == Charge)
+        {
+            jeu->sound.sound3.play();
+            jeu->attaques.B.status = Actif;
+            jeu->attaques.global_status = Actif;
+        }
         if (KO_checker(jeu))
             jeu->killedStatus = true;   
     }
@@ -225,15 +233,19 @@ void strike_3(Jeu *jeu)
                     jeu->attaques.grille[x][y] = KO;
             }
         }
+        jeu->attaques.C.status = Charge;
+        jeu->attaques.global_status = Charge;
     }
-    jeu->attaques.C.status = Charge;
-    jeu->attaques.global_status = Charge;
 
     //Phase de Dégats
     if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() >= 1)
     {
-        jeu->attaques.C.status = Actif;
-        jeu->attaques.global_status = Actif;
+        if (jeu->attaques.C.status == Charge)
+        {
+            jeu->sound.sound3.play();
+            jeu->attaques.C.status = Actif;
+            jeu->attaques.global_status = Actif;
+        }
         if (KO_checker(jeu))
             jeu->killedStatus = true;   
     }
@@ -266,15 +278,19 @@ void strike_4(Jeu *jeu)
                     jeu->attaques.grille[x][y] = KO;
             }
         }
+        jeu->attaques.D.status = Charge;
+        jeu->attaques.global_status = Charge;
     }
-    jeu->attaques.D.status = Charge;
-    jeu->attaques.global_status = Charge;
 
     //Phase de Dégats
     if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() >= 1)
     {
-        jeu->attaques.D.status = Actif;
-        jeu->attaques.global_status = Actif;
+        if (jeu->attaques.D.status == Charge)
+        {
+            jeu->sound.sound3.play();
+            jeu->attaques.D.status = Actif;
+            jeu->attaques.global_status = Actif;
+        }
         if (KO_checker(jeu))
             jeu->killedStatus = true;   
     }
@@ -295,7 +311,7 @@ void strike_4(Jeu *jeu)
 void strike_5(Jeu *jeu)
 {
     //Phases de Charge
-    if (jeu->attaques.D.status == Inactif)
+    if (jeu->attaques.E.status == Inactif)
     {
         int E_rng;
         jeu->attaques.attaqueTimer.restart();
@@ -309,15 +325,19 @@ void strike_5(Jeu *jeu)
                     jeu->attaques.grille[x][y] = KO;
             }
         }
+        jeu->attaques.E.status = Charge;
+        jeu->attaques.global_status = Charge;
     }
-    jeu->attaques.D.status = Charge;
-    jeu->attaques.global_status = Charge;
 
     //Phase de Dégats
     if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() >= 1)
     {
-        jeu->attaques.D.status = Actif;
-        jeu->attaques.global_status = Actif;
+        if (jeu->attaques.E.status == Charge)
+        {
+            jeu->sound.sound3.play();
+            jeu->attaques.E.status = Actif;
+            jeu->attaques.global_status = Actif;
+        }
         if (KO_checker(jeu))
             jeu->killedStatus = true;   
     }
@@ -327,7 +347,7 @@ void strike_5(Jeu *jeu)
     {
         //Reset OK
         OK_reset(jeu);
-        jeu->attaques.D.status = Inactif;
+        jeu->attaques.E.status = Inactif;
         jeu->attaques.global_status = Inactif;
         jeu->attaques.attaqueTimer.restart();
         jeu->attaques.status = false;

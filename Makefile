@@ -14,7 +14,7 @@ all: $(NAME)
 
 # Compile the program with the objects.
 $(NAME): $(OBJS)
-	@$(CXX) $(OBJS) -o $@  -lsfml-graphics -lsfml-window -lsfml-system
+	@$(CXX) $(OBJS) -o $@  -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 # This won't run if the source files don't exist or are not modified.
 %.o: %.cpp

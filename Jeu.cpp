@@ -1,6 +1,6 @@
 #include "Jeu.hpp"
 
-Jeu::Jeu() : fenetre(sf::VideoMode(F_Largeur, F_Hauteur), "Titre du Jeu")
+Jeu::Jeu() : fenetre(sf::VideoMode(F_Largeur, F_Hauteur), "Eldritch", sf::Style::None | sf::Style::Fullscreen)
 {
     initialiserJeu();
 }
@@ -9,6 +9,7 @@ void Jeu::initialiserJeu()
 {
     srand(time(0));
 
+    //JOUEUR
     if (joueur.textureJoueur.loadFromFile(joueur.joueurSprite))
     {
         joueur.sprite.setTexture(joueur.textureJoueur);
@@ -43,7 +44,39 @@ void Jeu::initialiserJeu()
         }
     }
 
+    //MUSIC
+    if (sound.musique1.openFromFile(sound.musiqueFile1))
+    {
+        sound.musique1.setLoop(true);
+        //sound.musique1.setVolume(sound.volume1);
+    }
 
+    if (sound.musique2.openFromFile(sound.musiqueFile2))
+    {
+        sound.musique2.setLoop(true);
+        //sound.musique2.setVolume(sound.volume2);
+    }   
+
+    if (sound.buffer1.loadFromFile(sound.SoundFile1))
+    {
+        sound.sound1.setBuffer(sound.buffer1);
+        //sound.sound1.setVolume(sound.soundVolume1);
+    }
+
+    if (sound.buffer2.loadFromFile(sound.SoundFile2))
+    {
+        sound.sound2.setBuffer(sound.buffer2);
+        //sound.sound2.setVolume(sound.soundVolume2);
+    }
+
+    if (sound.buffer3.loadFromFile(sound.SoundFile3))
+    {
+        sound.sound3.setBuffer(sound.buffer3);
+        //sound.sound3.setVolume(sound.soundVolume3);
+    }
+
+
+    //TITRES
     if (ecranTitre.textureEcranTitre.loadFromFile("sprites/Titre.png"))
     {
         ecranTitre.spriteEcranTitre.setTexture(ecranTitre.textureEcranTitre);  
@@ -54,7 +87,7 @@ void Jeu::initialiserJeu()
         ecranTitre.spriteEldritch.setTexture(ecranTitre.textureEldritch);  
         //ecranTitre.spriteEldritch.setScale(0.5f, 0.5f);
         float largeurEldritch = ecranTitre.spriteEldritch.getLocalBounds().width;
-        ecranTitre.spriteEldritch.setPosition((F_Largeur / 2) - (largeurEldritch / 2), 50);
+        ecranTitre.spriteEldritch.setPosition((F_Largeur / 2) - (largeurEldritch / 2), 200);
     }
 
     if (ecranTitre.font.loadFromFile("sprites/police.ttf"))
@@ -64,7 +97,7 @@ void Jeu::initialiserJeu()
         ecranTitre.texteTitre.setCharacterSize(50); // en pixels
         ecranTitre.texteTitre.setFillColor(sf::Color::White);
         float largeurTexte = ecranTitre.texteTitre.getLocalBounds().width;
-        ecranTitre.texteTitre.setPosition((F_Largeur / 2) - (largeurTexte / 2), 400); // Ajustez selon vos besoins
+        ecranTitre.texteTitre.setPosition((F_Largeur / 2) - (largeurTexte / 2), 550); // Ajustez selon vos besoins
     }
 
     if (ecranTitre.fontDemarrage.loadFromFile("sprites/police.ttf"))
@@ -127,8 +160,12 @@ void Jeu::executer()
 {
     while (fenetre.isOpen())
     {
+        sound.musique1.play();
         ecranTitre.afficherEcranTitre(fenetre);
+        sound.musique1.stop();
+        sound.sound1.play();
         ecranTitre.demarrage(fenetre);
+        sound.musique2.play();
 
         sf::Clock horloge;
         attaques.attaqueTimer.restart();
@@ -146,6 +183,8 @@ void Jeu::executer()
             attaques.attaques_rng(this);
             if(killedStatus == true)
             {
+                sound.musique2.stop();
+                sound.sound2.play();
                 ecranTitre.killed(fenetre);
                 break;
             }
