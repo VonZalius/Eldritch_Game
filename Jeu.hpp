@@ -49,7 +49,7 @@ struct EcranTitre
 {
     void afficherEcranTitre(sf::RenderWindow& fenetre);
     void demarrage(sf::RenderWindow& fenetre);
-    void killed(sf::RenderWindow& fenetre);
+    void killed(Jeu *jeu);
 
     sf::Texture textureEcranTitre;
     sf::Sprite spriteEcranTitre;
@@ -93,6 +93,57 @@ struct Sound
     sf::SoundBuffer buffer3;
     sf::Sound sound3;
     static const int soundVolume3 = 10;
+
+    std::string SoundFile4 = "music/FreeSFX/GameSFX/FootStep/Retro FootStep Grass 01.wav";
+    sf::SoundBuffer buffer4;
+    sf::Sound sound4;
+    static const int soundVolume4 = 10;
+    sf::Clock soundClock4;
+};
+
+struct Gold
+{
+    Gold();
+    void generer(int T_LARGEUR, int T_HAUTEUR);
+    void gold_rng(Jeu *jeu);
+    void afficherGold(Jeu *jeu);
+    void getGold(int x, int y);
+
+    std::vector<std::vector<bool>> grille;
+    bool status;
+    int rngX;
+    int rngY;
+    sf::Clock goldTimer;
+    int GoldCount;
+
+    sf::Sprite sprite;
+    static const int TailleSprite = 32;
+
+    // Taille originelle du Sprite
+    static const int Width = 16;
+    static const int Height = 16;
+
+    // Texture principale
+    std::string goldSprite = "sprites/Coin_Gems/MonedaD.png";
+    sf::Texture textureGold; // Ajout pour gérer la texture du sprite du joueur
+    std::vector<sf::IntRect> framesGold;
+    sf::Clock animationTimer;
+    int currentFrame = 0;
+    // Position des différent sprite pour l'animation, compter a partir de 0 !!
+    static const int TileStartX = 0;
+    static const int TileStartY = 0;
+    static const int TileEndX = 4;
+    static const int TileEndY = 0;
+
+    //Affichage Score
+    sf::Font font;
+    sf::Text texteCount;
+
+    //Son
+    std::string SoundFile1 = "music/FreeSFX/GameSFX/PickUp/Retro PickUp Coin 04.wav";
+    sf::SoundBuffer buffer1;
+    sf::Sound sound1;
+    static const int soundVolume1 = 10;
 };
 
 class Jeu
@@ -115,6 +166,8 @@ public:
     Map map;
 
     Sound sound;
+
+    Gold gold;
 
     void initialiserJeu();
     void traiterEvenements();

@@ -2,7 +2,7 @@
 NAME     := Game
 
 # Sources and objects.
-SRCS     := main.cpp Jeu.cpp Map.cpp Titre.cpp Attaques.cpp
+SRCS     := main.cpp Jeu.cpp Map.cpp Titre.cpp Attaques.cpp Gold.cpp
 OBJS     := $(SRCS:.cpp=.o)
 
 # Define all the compiling flags.

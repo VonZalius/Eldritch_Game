@@ -68,19 +68,23 @@ void EcranTitre::demarrage(sf::RenderWindow& fenetre)
     }
 }
 
-void EcranTitre::killed(sf::RenderWindow& fenetre)
+void EcranTitre::killed(Jeu *jeu)
 {
     sf::Event evenement;
     sf::Clock timer;
     timer.restart();
-    while (fenetre.isOpen() && timer.getElapsedTime().asSeconds() <= 3)
+    while (jeu->fenetre.isOpen() && timer.getElapsedTime().asSeconds() <= 3)
     {
-        while (fenetre.pollEvent(evenement))
+        while (jeu->fenetre.pollEvent(evenement))
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
-                fenetre.close();
-        fenetre.clear();
-        fenetre.draw(spriteEcranTitre);
-        fenetre.draw(texteKilled);
-        fenetre.display();
+                jeu->fenetre.close();
+        texteKilled.setString("Vous etes mort...\nScore : " + std::to_string(jeu->gold.GoldCount));
+        float largeurTexte = texteKilled.getLocalBounds().width;
+        float hauteurTexte = texteKilled.getLocalBounds().height;
+        texteKilled.setPosition((jeu->F_Largeur / 2) - (largeurTexte / 2), (jeu->F_Hauteur / 2) - (hauteurTexte));
+        jeu->fenetre.clear();
+        jeu->fenetre.draw(spriteEcranTitre);
+        jeu->fenetre.draw(texteKilled);
+        jeu->fenetre.display();
     }
 }

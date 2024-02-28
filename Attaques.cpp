@@ -44,11 +44,11 @@ void Attaques::attaques_rng(Jeu *jeu)
     }
 }
 
-void Attaques::dessiner_zone(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur, Jeu *jeu)
+void Attaques::dessiner_zone(Jeu *jeu)
 {
     // Placement des Tuiles au centre de la fenetre
-    jeu->map.y_initial = (F_Hauteur / 2) - ((jeu->map.T_HAUTEUR * jeu->map.TailleTuile) / 2);
-    jeu->map.x_initial = (F_Largeur / 2) - ((jeu->map.T_LARGEUR * jeu->map.TailleTuile) / 2);
+    jeu->map.y_initial = (jeu->F_Hauteur / 2) - ((jeu->map.T_HAUTEUR * jeu->map.TailleTuile) / 2);
+    jeu->map.x_initial = (jeu->F_Largeur / 2) - ((jeu->map.T_LARGEUR * jeu->map.TailleTuile) / 2);
 
     sf::Texture sprite;
     if (jeu->attaques.global_status == Charge)
@@ -69,7 +69,7 @@ void Attaques::dessiner_zone(sf::RenderWindow& fenetre, const int F_Hauteur, con
             if (grille[x][y] == KO)
             {
                 sprite2.setPosition((x * jeu->map.TailleTuile) + jeu->map.x_initial, (y * jeu->map.TailleTuile) + jeu->map.y_initial);
-                fenetre.draw(sprite2);
+                jeu->fenetre.draw(sprite2);
             }
         }
     }

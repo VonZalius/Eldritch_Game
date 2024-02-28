@@ -75,6 +75,12 @@ void Jeu::initialiserJeu()
         //sound.sound3.setVolume(sound.soundVolume3);
     }
 
+    if (sound.buffer4.loadFromFile(sound.SoundFile4))
+    {
+        sound.sound4.setBuffer(sound.buffer4);
+        //sound.sound4.setVolume(sound.soundVolume4);
+    }
+
 
     //TITRES
     if (ecranTitre.textureEcranTitre.loadFromFile("sprites/planches.png"))
@@ -138,12 +144,12 @@ void Jeu::initialiserJeu()
     if (ecranTitre.fontKilled.loadFromFile("sprites/police.ttf"))
     {
         ecranTitre.texteKilled.setFont(ecranTitre.fontKilled); 
-        ecranTitre.texteKilled.setString("Vous etes mort...\nFin de partie !");
+        //ecranTitre.texteKilled.setString("Vous etes mort...\nFin de partie !");
         ecranTitre.texteKilled.setCharacterSize(100); // en pixels
         ecranTitre.texteKilled.setFillColor(sf::Color::White);
-        float largeurTexte = ecranTitre.texteKilled.getLocalBounds().width;
+        /*float largeurTexte = ecranTitre.texteKilled.getLocalBounds().width;
         float hauteurTexte = ecranTitre.texteKilled.getLocalBounds().height;
-        ecranTitre.texteKilled.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte));
+        ecranTitre.texteKilled.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte));*/
     }
 }
 
@@ -158,6 +164,8 @@ void Jeu::reinitialiser()
     attaques.status = false;
 
     killedStatus = false;
+
+    gold.status = false;
     //joueur.position = sf::Vector2f(joueur.X_Initial, joueur.Y_Initial);
 }
 
@@ -174,8 +182,10 @@ void Jeu::executer()
 
         sf::Clock horloge;
         attaques.attaqueTimer.restart();
+        gold.goldTimer.restart();
         map.generer();
         attaques.generer(map.T_LARGEUR, map.T_HAUTEUR);
+        gold.generer(map.T_LARGEUR, map.T_HAUTEUR);
         joueur.position = sf::Vector2f((F_Largeur / 2) - ((map.TailleTuile * map.T_LARGEUR) / 2) + map.player_x + map.TailleTuile / 2,
                                         (F_Hauteur / 2) - ((map.TailleTuile * map.T_HAUTEUR) / 2) + map.player_y + map.TailleTuile / 2);
 
@@ -185,12 +195,13 @@ void Jeu::executer()
             sf::Time deltaTime = horloge.restart();
             traiterEvenements();
             mettreAJour(deltaTime);
+            gold.gold_rng(this);
             attaques.attaques_rng(this);
             if(killedStatus == true)
             {
                 sound.musique2.stop();
                 sound.sound2.play();
-                ecranTitre.killed(fenetre);
+                ecranTitre.killed(this);
                 break;
             }
             dessiner();
@@ -256,6 +267,12 @@ void Jeu::mettreAJour(sf::Time deltaTime)
         joueur.sprite.setTextureRect(joueur.framesJoueur_2[joueur.currentFrame]);
         joueur.animationClock.restart();
     }
+    if (gold.animationTimer.getElapsedTime().asSeconds() > 0.1f)
+    { // 0.1s par frame, ajustez selon le besoin
+        gold.currentFrame = (gold.currentFrame + 1) % gold.framesGold.size();
+        gold.sprite.setTextureRect(gold.framesGold[gold.currentFrame]);
+        gold.animationTimer.restart();
+    }
 
     // Normalisation du vecteur de déplacement si nécessaire
     float magnitude = sqrt(deplacementX * deplacementX + deplacementY * deplacementY);
@@ -270,10 +287,23 @@ void Jeu::mettreAJour(sf::Time deltaTime)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
         vitesseActuelle = joueur.vitesseAugmentee;
+        // Son de déplacement
+        if (sound.soundClock4.getElapsedTime().asSeconds() > 0.15f && mouvement == true)
+        {
+            sound.sound4.play();
+            sound.soundClock4.restart();
+        }
     }
     else
     {
         vitesseActuelle = joueur.vitesse;
+
+        // Son de déplacement
+        if (sound.soundClock4.getElapsedTime().asSeconds() > 0.3f && mouvement == true)
+        {
+            sound.sound4.play();
+            sound.soundClock4.restart();
+        }
     }
 
 
@@ -295,31 +325,6 @@ void Jeu::mettreAJour(sf::Time deltaTime)
 
 bool Jeu::collision(int p, sf::Time deltaTime, float vitesseActuelle)
 {
-    /*int jpx = joueur.position.x - ((F_Largeur / 2) - ((map.T_LARGEUR * map.TailleTuile) / 2));
-    int jpy = joueur.position.y - ((F_Hauteur / 2) - ((map.T_HAUTEUR * map.TailleTuile) / 2));
-
-    if(p == 1)
-        jpx -= vitesseActuelle * deltaTime.asSeconds();
-    else if(p == 2)
-        jpx += vitesseActuelle * deltaTime.asSeconds() + 1;
-    else if(p == 3)
-        jpy -= vitesseActuelle * deltaTime.asSeconds();
-    else if(p == 4)
-        jpy += vitesseActuelle * deltaTime.asSeconds() + 1;
-
-    int tileX = jpx / map.TailleTuile;
-    int tileY = jpy / map.TailleTuile;
-
-        // Vérification si le point n'est pas sur une tuile 'Sol'
-        if (map.grille[tileX][tileY] != Sol)
-        {
-            return false; // Collision détectée
-        }
-    
-
-    return true; // Aucune collision détectée*/
-
-
     int jpx = joueur.position.x - ((F_Largeur / 2) - ((map.T_LARGEUR * map.TailleTuile) / 2));
     int jpy = joueur.position.y - ((F_Hauteur / 2) - ((map.T_HAUTEUR * map.TailleTuile) / 2));
     if(p == 1)
@@ -357,6 +362,11 @@ bool Jeu::collision(int p, sf::Time deltaTime, float vitesseActuelle)
         // Convertir les coordonnées du point en indices de grille
         int tileX = x / map.TailleTuile;
         int tileY = y / map.TailleTuile;
+        // Vérification si le point est sur une tuile 'Gold'
+        if (gold.grille[tileX][tileY] == true)
+        {
+            gold.getGold(tileX, tileY);
+        }
         // Vérification si le point n'est pas sur une tuile 'Sol'
         if (map.grille[tileX][tileY] != Sol)
         {
@@ -373,8 +383,9 @@ void Jeu::dessiner()
     fenetre.draw(ecranTitre.spriteEcranTitre);
     map.dessiner_bottom(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
     fenetre.draw(joueur.sprite); // Dessiner le joueur
+    gold.afficherGold(this);
     map.dessiner_top(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
-    attaques.dessiner_zone(fenetre, F_Hauteur, F_Largeur, this);
+    attaques.dessiner_zone(this);
 
     /*if (attaques.A.status == Charge)
         fenetre.draw(attaques.A.sprite_A);
