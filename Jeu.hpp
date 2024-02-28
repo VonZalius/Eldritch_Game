@@ -102,8 +102,8 @@ public:
     void executer();
 
     sf::RenderWindow fenetre;
-    static const int F_Hauteur = 900;
-    static const int F_Largeur = 1600;
+    static const int F_Hauteur = 1080;
+    static const int F_Largeur = 1920;
     bool killedStatus = false;
 
     Joueur joueur;

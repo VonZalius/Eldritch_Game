@@ -77,9 +77,14 @@ void Jeu::initialiserJeu()
 
 
     //TITRES
-    if (ecranTitre.textureEcranTitre.loadFromFile("sprites/Titre.png"))
+    if (ecranTitre.textureEcranTitre.loadFromFile("sprites/planches.png"))
     {
-        ecranTitre.spriteEcranTitre.setTexture(ecranTitre.textureEcranTitre);  
+        ecranTitre.spriteEcranTitre.setTexture(ecranTitre.textureEcranTitre);
+        float largeurTitre = ecranTitre.spriteEcranTitre.getLocalBounds().width;
+        float hauteurTitre = ecranTitre.spriteEcranTitre.getLocalBounds().height;
+        float goodsize = static_cast<float>(F_Largeur) / static_cast<float>(largeurTitre);
+        float goodsize2 = static_cast<float>(F_Hauteur) / static_cast<float>(hauteurTitre);
+        ecranTitre.spriteEcranTitre.setScale(goodsize, goodsize2);
     }
 
     if (ecranTitre.textureEldritch.loadFromFile("sprites/Eldritch.png"))
@@ -108,7 +113,7 @@ void Jeu::initialiserJeu()
         ecranTitre.texteDemarrage3.setFillColor(sf::Color::White);
         float largeurTexte = ecranTitre.texteDemarrage3.getLocalBounds().width;
         float hauteurTexte = ecranTitre.texteDemarrage3.getLocalBounds().height;
-        ecranTitre.texteDemarrage3.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte / 2));
+        ecranTitre.texteDemarrage3.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte));
     }
     if (ecranTitre.fontDemarrage.loadFromFile("sprites/police.ttf"))
     {
@@ -118,7 +123,7 @@ void Jeu::initialiserJeu()
         ecranTitre.texteDemarrage2.setFillColor(sf::Color::White);
         float largeurTexte = ecranTitre.texteDemarrage2.getLocalBounds().width;
         float hauteurTexte = ecranTitre.texteDemarrage2.getLocalBounds().height;
-        ecranTitre.texteDemarrage2.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte / 2));
+        ecranTitre.texteDemarrage2.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte));
     }
     if (ecranTitre.fontDemarrage.loadFromFile("sprites/police.ttf"))
     {
@@ -128,7 +133,7 @@ void Jeu::initialiserJeu()
         ecranTitre.texteDemarrage1.setFillColor(sf::Color::White);
         float largeurTexte = ecranTitre.texteDemarrage1.getLocalBounds().width;
         float hauteurTexte = ecranTitre.texteDemarrage1.getLocalBounds().height;
-        ecranTitre.texteDemarrage1.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte / 2));
+        ecranTitre.texteDemarrage1.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte));
     }
     if (ecranTitre.fontKilled.loadFromFile("sprites/police.ttf"))
     {
@@ -138,7 +143,7 @@ void Jeu::initialiserJeu()
         ecranTitre.texteKilled.setFillColor(sf::Color::White);
         float largeurTexte = ecranTitre.texteKilled.getLocalBounds().width;
         float hauteurTexte = ecranTitre.texteKilled.getLocalBounds().height;
-        ecranTitre.texteKilled.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte / 2));
+        ecranTitre.texteKilled.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte));
     }
 }
 
