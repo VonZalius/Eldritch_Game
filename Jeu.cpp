@@ -16,10 +16,31 @@ void Jeu::initialiserJeu()
         joueur.sprite.setScale(goodsize, goodsize);
         joueur.sprite.setOrigin(joueur.frameWidth / 2, joueur.frameHeight / 2);
 
-        for (int i = joueur.frameStartX; i <= joueur.frameEndX; ++i)
-            joueur.framesJoueur.push_back(sf::IntRect(i * joueur.frameWidth, 0, joueur.frameWidth, joueur.frameHeight));
+        for (int ligne = joueur.frameStartY; ligne <= joueur.frameEndY; ++ligne)
+        {
+            for (int col = joueur.frameStartX; col <= joueur.frameEndX; ++col)
+            {
+                joueur.framesJoueur.push_back(sf::IntRect(
+                    col * joueur.frameWidth, // Position X ajustée pour la colonne
+                    ligne * joueur.frameHeight, // Position Y ajustée pour la ligne
+                    joueur.frameWidth, // Largeur de la frame
+                    joueur.frameHeight // Hauteur de la frame
+                ));
+            }
+        }
 
-        //joueur.position = sf::Vector2f(joueur.X_Initial - (joueur.TailleSprite / 2), joueur.Y_Initial - (joueur.TailleSprite / 2)); // Position initiale au milieu de l'écran
+        for (int ligne = joueur.frameStartY_2; ligne <= joueur.frameEndY_2; ++ligne)
+        {
+            for (int col = joueur.frameStartX_2; col <= joueur.frameEndX_2; ++col)
+            {
+                joueur.framesJoueur_2.push_back(sf::IntRect(
+                    col * joueur.frameWidth, // Position X ajustée pour la colonne
+                    ligne * joueur.frameHeight, // Position Y ajustée pour la ligne
+                    joueur.frameWidth, // Largeur de la frame
+                    joueur.frameHeight // Hauteur de la frame
+                ));
+            }
+        }
     }
 
 
@@ -52,31 +73,39 @@ void Jeu::initialiserJeu()
         ecranTitre.texteDemarrage3.setString("3...");
         ecranTitre.texteDemarrage3.setCharacterSize(100); // en pixels
         ecranTitre.texteDemarrage3.setFillColor(sf::Color::White);
-        ecranTitre.texteDemarrage3.setPosition(50, 50); // Ajustez selon vos besoins
+        float largeurTexte = ecranTitre.texteDemarrage3.getLocalBounds().width;
+        float hauteurTexte = ecranTitre.texteDemarrage3.getLocalBounds().height;
+        ecranTitre.texteDemarrage3.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte / 2));
     }
     if (ecranTitre.fontDemarrage.loadFromFile("sprites/police.ttf"))
     {
         ecranTitre.texteDemarrage2.setFont(ecranTitre.fontDemarrage); 
         ecranTitre.texteDemarrage2.setString("2...");
         ecranTitre.texteDemarrage2.setCharacterSize(100); // en pixels
-        ecranTitre.texteDemarrage2.setFillColor(sf::Color::Yellow);
-        ecranTitre.texteDemarrage2.setPosition(50, 50); // Ajustez selon vos besoins
+        ecranTitre.texteDemarrage2.setFillColor(sf::Color::White);
+        float largeurTexte = ecranTitre.texteDemarrage2.getLocalBounds().width;
+        float hauteurTexte = ecranTitre.texteDemarrage2.getLocalBounds().height;
+        ecranTitre.texteDemarrage2.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte / 2));
     }
     if (ecranTitre.fontDemarrage.loadFromFile("sprites/police.ttf"))
     {
         ecranTitre.texteDemarrage1.setFont(ecranTitre.fontDemarrage); 
         ecranTitre.texteDemarrage1.setString("1...");
         ecranTitre.texteDemarrage1.setCharacterSize(100); // en pixels
-        ecranTitre.texteDemarrage1.setFillColor(sf::Color::Red);
-        ecranTitre.texteDemarrage1.setPosition(50, 50); // Ajustez selon vos besoins
+        ecranTitre.texteDemarrage1.setFillColor(sf::Color::White);
+        float largeurTexte = ecranTitre.texteDemarrage1.getLocalBounds().width;
+        float hauteurTexte = ecranTitre.texteDemarrage1.getLocalBounds().height;
+        ecranTitre.texteDemarrage1.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte / 2));
     }
     if (ecranTitre.fontKilled.loadFromFile("sprites/police.ttf"))
     {
         ecranTitre.texteKilled.setFont(ecranTitre.fontKilled); 
         ecranTitre.texteKilled.setString("Vous etes mort...\nFin de partie !");
-        ecranTitre.texteKilled.setCharacterSize(30); // en pixels
-        ecranTitre.texteKilled.setFillColor(sf::Color::Red);
-        ecranTitre.texteKilled.setPosition(50, 50); // Ajustez selon vos besoins
+        ecranTitre.texteKilled.setCharacterSize(100); // en pixels
+        ecranTitre.texteKilled.setFillColor(sf::Color::White);
+        float largeurTexte = ecranTitre.texteKilled.getLocalBounds().width;
+        float hauteurTexte = ecranTitre.texteKilled.getLocalBounds().height;
+        ecranTitre.texteKilled.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte / 2));
     }
 }
 
@@ -139,12 +168,7 @@ void Jeu::traiterEvenements()
 void Jeu::mettreAJour(sf::Time deltaTime)
 {
     // Mise à jour de l'animation
-    if (joueur.animationClock.getElapsedTime().asSeconds() > 0.1f) { // 0.1s par frame, ajustez selon le besoin
-        joueur.currentFrame = (joueur.currentFrame + 1) % joueur.framesJoueur.size();
-        joueur.sprite.setTextureRect(joueur.framesJoueur[joueur.currentFrame]);
-        joueur.animationClock.restart();
-    }
-
+    bool mouvement = false;
 
     // Détermination de la direction du déplacement
     float deplacementX = 0.0f;
@@ -155,20 +179,38 @@ void Jeu::mettreAJour(sf::Time deltaTime)
         float goodsize = static_cast<float>(joueur.TailleSprite) / static_cast<float>(joueur.frameWidth);
         joueur.sprite.setScale(-goodsize, goodsize); // Inverse horizontalement
         deplacementX -= 1.0f;
+        mouvement = true;
     }
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) && collision(2, deltaTime, joueur.vitesse))
     {
         float goodsize = static_cast<float>(joueur.TailleSprite) / static_cast<float>(joueur.frameWidth);
         joueur.sprite.setScale(goodsize, goodsize); // Inverse horizontalement
         deplacementX += 1.0f;
+        mouvement = true;
     }
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && collision(3, deltaTime, joueur.vitesse))
     {
         deplacementY -= 1.0f;
+        mouvement = true;
     }
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) && collision(4, deltaTime, joueur.vitesse))
     {
         deplacementY += 1.0f;
+        mouvement = true;
+    }
+
+    // Mise à jour de l'animation partie 2
+    if (joueur.animationClock.getElapsedTime().asSeconds() > 0.1f && mouvement == false)
+    { // 0.1s par frame, ajustez selon le besoin
+        joueur.currentFrame = (joueur.currentFrame + 1) % joueur.framesJoueur.size();
+        joueur.sprite.setTextureRect(joueur.framesJoueur[joueur.currentFrame]);
+        joueur.animationClock.restart();
+    }
+    else if (joueur.animationClock.getElapsedTime().asSeconds() > 0.1f && mouvement == true)
+    { // 0.1s par frame, ajustez selon le besoin
+        joueur.currentFrame = (joueur.currentFrame + 1) % joueur.framesJoueur_2.size();
+        joueur.sprite.setTextureRect(joueur.framesJoueur_2[joueur.currentFrame]);
+        joueur.animationClock.restart();
     }
 
     // Normalisation du vecteur de déplacement si nécessaire
@@ -180,7 +222,17 @@ void Jeu::mettreAJour(sf::Time deltaTime)
     }
 
     // Application de la vitesse
-    float vitesseActuelle = sf::Keyboard::isKeyPressed(sf::Keyboard::Space) ? joueur.vitesseAugmentee : joueur.vitesse;
+    float vitesseActuelle;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    {
+        vitesseActuelle = joueur.vitesseAugmentee;
+    }
+    else
+    {
+        vitesseActuelle = joueur.vitesse;
+    }
+
+
     joueur.position.x += deplacementX * vitesseActuelle * deltaTime.asSeconds();
     joueur.position.y += deplacementY * vitesseActuelle * deltaTime.asSeconds();
     // Mise à jour de la position du sprite du joueur

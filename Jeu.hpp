@@ -9,22 +9,36 @@
 struct Joueur
 {
     sf::Vector2f position;
-    sf::Sprite sprite;
     float vitesse = 200.0f; // pixels par seconde
     float vitesseAugmentee = 400.0f;
-    static const int TailleSprite = 48;
-    static const int collision_div = 5;
+    static const int TailleSprite = 64;
+    static const int collision_div = 10;
+    sf::Sprite sprite;
 
-    std::string joueurSprite = "sprites/player/dinoCharactersVersion1.1/sheets/DinoSprites - doux.png";
-    sf::Texture textureJoueur; // Ajout pour gérer la texture du sprite du joueur
-    std::vector<sf::IntRect> framesJoueur;
 
     // Taille originelle du Sprite
-    static const int frameWidth = 24;
-    static const int frameHeight = 24;
+    static const int frameWidth = 32;
+    static const int frameHeight = 32;
+
+    // Texture principale
+    std::string joueurSprite = "sprites/camelot_/percival_.png";
+    sf::Texture textureJoueur; // Ajout pour gérer la texture du sprite du joueur
+    std::vector<sf::IntRect> framesJoueur;
     // Position des différent sprite pour l'animation, compter a partir de 0 !!
-    static const int frameStartX = 4;
-    static const int frameEndX = 9;
+    static const int frameStartX = 0;
+    static const int frameStartY = 0;
+    static const int frameEndX = 3;
+    static const int frameEndY = 0;
+
+    // Texture secondaire
+    std::string joueurSprite_2 = "sprites/camelot_/percival_.png";
+    sf::Texture textureJoueur_2; // Ajout pour gérer la texture du sprite du joueur
+    std::vector<sf::IntRect> framesJoueur_2;
+    // Position des différent sprite pour l'animation, compter a partir de 0 !!
+    static const int frameStartX_2 = 0;
+    static const int frameStartY_2 = 1;
+    static const int frameEndX_2 = 3;
+    static const int frameEndY_2 = 2;
 
     sf::Clock animationClock;
     int currentFrame = 0;

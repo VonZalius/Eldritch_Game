@@ -32,8 +32,8 @@ public:
     void dessiner_top(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur);
     void generer();
 
-    std::string TilesetSol = "sprites/fantasy/forest_/forest_.png";
-    std::string TilesetMur = "sprites/fantasy/forest_/forest_ [fencesAndWalls].png";
+    std::string TilesetSol = "sprites/fantasy_/forest_/forest_.png";
+    std::string TilesetMur = "sprites/fantasy_/forest_/forest_ [fencesAndWalls].png";
     //Zone de jeu
     int T_LARGEUR;
     int T_HAUTEUR;
