@@ -19,19 +19,26 @@ enum ZoneDegats
     KO
 };
 
+enum Zones
+{
+    Normal,
+    Ombré,
+    Explosé
+};
+
 typedef void (*FonctionPtr)(Jeu*);
 
 struct Paterne
 {
-    AttaqueStatus status = Inactif;
-    sf::Texture texture_A;
+    //AttaqueStatus status = Inactif;
+    /*sf::Texture texture_A;
     sf::Sprite sprite_A;
     sf::Texture texture_B;
-    sf::Sprite sprite_B;
-    TypeTuile **grille;
+    sf::Sprite sprite_B;*/
+    //TypeTuile **grille;
     FonctionPtr degatZone;
 
-    Paterne(/*int X, int Y, std::string TA, std::string TB, */FonctionPtr ptr);
+    Paterne(FonctionPtr ptr);
 };
 
 struct Attaques
@@ -44,8 +51,13 @@ struct Attaques
     sf::Clock attaqueTimer;
     bool status = false;
     int rng;
-    std::vector<std::vector<ZoneDegats>> grille;
-    AttaqueStatus global_status = Inactif;
+    //std::vector<std::vector<ZoneDegats>> grille;
+    //AttaqueStatus global_status = Inactif;
+    std::vector<std::vector<Zones>> grille_degat;
+
+    int paterne_phases;
+    std::vector<float> Time_to;
+    
     Paterne A;
     Paterne B;
     Paterne C;

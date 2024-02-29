@@ -1,6 +1,6 @@
 #include "Jeu.hpp"
 
-Jeu::Jeu() : fenetre(sf::VideoMode(F_Largeur, F_Hauteur), "Eldritch", sf::Style::None | sf::Style::Fullscreen)
+Jeu::Jeu() : fenetre(sf::VideoMode(F_Largeur, F_Hauteur), "Eldritch"/*, sf::Style::None | sf::Style::Fullscreen*/)
 {
     initialiserJeu();
 }
@@ -155,16 +155,15 @@ void Jeu::initialiserJeu()
 
 void Jeu::reinitialiser()
 {
-    attaques.A.status = Inactif;
+    /*attaques.A.status = Inactif;
     attaques.B.status = Inactif;
     attaques.C.status = Inactif;
     attaques.D.status = Inactif;
-    attaques.E.status = Inactif;
-    attaques.global_status = Inactif;
+    attaques.E.status = Inactif;*/
+    //attaques.global_status = Inactif;
     attaques.status = false;
 
     killedStatus = false;
-
     gold.status = false;
     //joueur.position = sf::Vector2f(joueur.X_Initial, joueur.Y_Initial);
 }
@@ -274,20 +273,6 @@ void Jeu::mettreAJour(sf::Time deltaTime)
         gold.animationTimer.restart();
     }
 
-    /*if (attaques.animationTimer.getElapsedTime().asSeconds() > 0.20f && attaques.currentFrame < static_cast<int>(attaques.framesImpact.size()) && attaques.global_status == Charge)
-    { // 0.1s par frame, ajustez selon le besoin
-        attaques.currentFrame++ ;
-        attaques.sprite.setTextureRect(attaques.framesImpact[attaques.currentFrame]);
-        attaques.animationTimer.restart();
-    }
-    else if (attaques.animationTimer.getElapsedTime().asSeconds() > 0.25f && attaques.currentFrame2 < static_cast<int>(attaques.framesImpact2.size()) && attaques.global_status == Actif)
-    { // 0.1s par frame, ajustez selon le besoin
-        attaques.currentFrame2++ ;
-        attaques.sprite2.setTextureRect(attaques.framesImpact2[attaques.currentFrame2]);
-        attaques.animationTimer.restart();
-    }*/
-
-
     // Normalisation du vecteur de déplacement si nécessaire
     float magnitude = sqrt(deplacementX * deplacementX + deplacementY * deplacementY);
     if (magnitude > 0.0f) // Pour éviter la division par zéro
@@ -394,6 +379,7 @@ bool Jeu::collision(int p, sf::Time deltaTime, float vitesseActuelle)
 void Jeu::dessiner()
 {
     fenetre.clear();
+
     fenetre.draw(ecranTitre.spriteEcranTitre);
     map.dessiner_bottom(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
     fenetre.draw(joueur.sprite); // Dessiner le joueur
@@ -401,24 +387,5 @@ void Jeu::dessiner()
     attaques.dessiner_zone(this);
     map.dessiner_top(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
 
-    /*if (attaques.A.status == Charge)
-        fenetre.draw(attaques.A.sprite_A);
-    else if (attaques.A.status == Actif)
-        fenetre.draw(attaques.A.sprite_B);
-
-    else if (attaques.B.status == Charge)
-        fenetre.draw(attaques.B.sprite_A);
-    else if (attaques.B.status == Actif)
-        fenetre.draw(attaques.B.sprite_B);
-
-    else if (attaques.C.status == Charge)
-        fenetre.draw(attaques.C.sprite_A);
-    else if (attaques.C.status == Actif)
-        fenetre.draw(attaques.C.sprite_B);
-
-    else if (attaques.D.status == Charge)
-        fenetre.draw(attaques.D.sprite_A);
-    else if (attaques.D.status == Actif)
-        fenetre.draw(attaques.D.sprite_B);*/
     fenetre.display();
 }
