@@ -8,7 +8,7 @@ Map::Map()
 void Map::generer()
 {
     //Choix aléatoire de la map
-    int rng = 4;//rand() % 5;
+    int rng = 1;//rand() % 5;
     void (*tableAUEAUDeFonctions[])(Map *map) =
         {map_1, map_2, map_3, map_4, map_5};
     (*tableAUEAUDeFonctions[rng])(this);
@@ -138,8 +138,68 @@ void Map::dessiner_bottom(sf::RenderWindow& fenetre, const int F_Hauteur, const 
         {
 
             // Le reste
-            if (grille[x][y] == EAU)
+            if (grille[x][y] == XXX)
+                implementer_Sol(0, 0, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == EAU)
                 implementer_Sol(4, 7, 1, 1, x, y, fenetre);
+
+            else if (grille[x][y] == F01)
+                implementer_Sol(14, 1, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F02)
+                implementer_Sol(14, 3, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F03)
+                implementer_Sol(12, 3, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F04)
+                implementer_Sol(12, 1, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F05)
+                implementer_Sol(16, 1, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F06)
+                implementer_Sol(16, 2, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F07)
+                implementer_Sol(15, 2, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F08)
+                implementer_Sol(15, 1, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F09)
+                implementer_Sol(13, 1, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F10)
+                implementer_Sol(14, 2, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F11)
+                implementer_Sol(13, 3, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F12)
+                implementer_Sol(12, 2, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F13)
+                implementer_Sol(15, 3, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F14)
+                implementer_Sol(16, 3, 1, 1, x, y, fenetre);
+
+            else if (grille[x][y] == F15)
+                implementer_Sol(19, 1, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F16)
+                implementer_Sol(19, 3, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F17)
+                implementer_Sol(17, 3, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F18)
+                implementer_Sol(17, 1, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F19)
+                implementer_Sol(21, 1, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F20)
+                implementer_Sol(21, 2, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F21)
+                implementer_Sol(20, 2, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F22)
+                implementer_Sol(20, 1, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F23)
+                implementer_Sol(18, 1, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F24)
+                implementer_Sol(19, 2, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F25)
+                implementer_Sol(18, 3, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F26)
+                implementer_Sol(17, 2, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F27)
+                implementer_Sol(20, 3, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F28)
+                implementer_Sol(21, 3, 1, 1, x, y, fenetre);
 
             else if (grille[x][y] == R01)
                 implementer_Sol(3, 5, 1, 1, x, y, fenetre);
@@ -206,7 +266,7 @@ void Map::dessiner_top(Jeu *jeu)
             else if (grille[x][y] == M02)
                 implementer_Mures(1, 9, 1, 1, x, y, jeu->fenetre);
             else if (grille[x][y] == M03)
-                implementer_Mures(1, 8, 1, 1.5, x, y, jeu->fenetre);
+                implementer_Mures(1, 8, 1, 1, x, y, jeu->fenetre);
             else if (grille[x][y] == M04)
                 implementer_Mures(13, 5, 1, 1, x, y, jeu->fenetre);
             else if (grille[x][y] == M05) //Inexistant
@@ -239,6 +299,17 @@ void Map::dessiner_top(Jeu *jeu)
                 implementer_Mures(7, 5.5, 1, 1.5, x, y, jeu->fenetre);
             else if (grille[x][y] == M18)
                 implementer_Mures(7, 9.5, 1, 1.5, x, y, jeu->fenetre);
+            
+            else if (grille[x][y] == M19)
+                implementer_Mures(6, 5.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == M20)
+                implementer_Mures(7, 7.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == M21)
+                implementer_Mures(6, 9.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == M22)
+                implementer_Mures(5, 7.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == M23)
+                implementer_Mures(6, 7.5, 1, 1.5, x, y, jeu->fenetre);
             
             else if (grille[x][y] == BA1)
                 implementer_Mures(4, 2, 1, 1, x, y, jeu->fenetre);
@@ -297,329 +368,3 @@ void Map::dessiner_top(Jeu *jeu)
         }
     }
 }
-
-void map_1(Map *map)
-{
-    map->T_LARGEUR = 22;
-    map->T_HAUTEUR = 22;
-    
-    // Ajuster le nombre de lignes
-    map->grille.resize(map->T_LARGEUR);
-    // Ajuster le nombre de colonnes pour chaque ligne
-    for (auto& ligne : map->grille) {
-        ligne.resize(map->T_HAUTEUR);
-    }
-
-    // Ajuster le nombre de lignes
-    map->grilleRNG.resize(map->T_LARGEUR);
-    // Ajuster le nombre de colonnes pour chaque ligne
-    for (auto& ligne : map->grilleRNG) {
-        ligne.resize(map->T_HAUTEUR);
-    }
-
-    map->textureMur.loadFromFile(map->TilesetMur);
-    map->textureSol.loadFromFile(map->TilesetSol);
-    // Initialisation simple de la grille avec des murs autour et du sol à l'intérieur
-
-    //Pourtour
-    for (int y = 0; y < map->T_HAUTEUR; ++y)
-    {
-        for (int x = 0; x < map->T_LARGEUR; ++x)
-        {
-            // Coins spécifiques
-            if (x == 0 && y == 0) { // Coin nord-ouest
-                map->grille[x][y] = M16;
-            } else if (x == map->T_LARGEUR - 1 && y == 0) { // Coin nord-est
-                map->grille[x][y] = M17;
-            } else if (x == 0 && y == map->T_HAUTEUR - 1) { // Coin sud-ouest
-                map->grille[x][y] = M15;
-            } else if (x == map->T_LARGEUR - 1 && y == map->T_HAUTEUR - 1) { // Coin sud-est
-                map->grille[x][y] = M18;
-            // Bords spécifiques
-            } else if (y == 0 || y == map->T_HAUTEUR - 1) { // Haut et bas
-                map->grille[x][y] = M10;
-            } else if (x == 0 || x == map->T_LARGEUR - 1) { // Gauche et droite
-                map->grille[x][y] = M02;
-            } else {
-                map->grille[x][y] = Sol; // Intérieur
-            }
-        }
-    }
-
-    map->grille[5][5] = PLA;
-
-    map->grille[3] = {M00, M00, M00, M00, M00};
-    /*map->grille[3][4] = M00;
-    map->grille[4][3] = M00;
-    map->grille[18][3] = M00;
-    map->grille[17][3] = M00;
-    map->grille[18][4] = M00;
-    map->grille[3][18] = M00;
-    map->grille[3][17] = M00;
-    map->grille[4][18] = M00;
-    map->grille[18][18] = M00;
-    map->grille[18][17] = M00;
-    map->grille[17][18] = M00;*/
-}
-
-void map_2(Map *map)
-{
-    map->T_LARGEUR = 11;
-    map->T_HAUTEUR = 20;
-    
-    // Ajuster le nombre de lignes
-    map->grille.resize(map->T_LARGEUR);
-    // Ajuster le nombre de colonnes pour chaque ligne
-    for (auto& ligne : map->grille) {
-        ligne.resize(map->T_HAUTEUR);
-    }
-
-    // Ajuster le nombre de lignes
-    map->grilleRNG.resize(map->T_LARGEUR);
-    // Ajuster le nombre de colonnes pour chaque ligne
-    for (auto& ligne : map->grilleRNG) {
-        ligne.resize(map->T_HAUTEUR);
-    }
-
-    map->textureMur.loadFromFile(map->TilesetMur);
-    map->textureSol.loadFromFile(map->TilesetSol);
-    // Initialisation simple de la grille avec des murs autour et du sol à l'intérieur
-
-    //Pourtour
-    for (int y = 0; y < map->T_HAUTEUR; ++y)
-    {
-        for (int x = 0; x < map->T_LARGEUR; ++x)
-        {
-            // Coins spécifiques
-            if (x == 0 && y == 0) { // Coin nord-ouest
-                map->grille[x][y] = M16;
-            } else if (x == map->T_LARGEUR - 1 && y == 0) { // Coin nord-est
-                map->grille[x][y] = M17;
-            } else if (x == 0 && y == map->T_HAUTEUR - 1) { // Coin sud-ouest
-                map->grille[x][y] = M15;
-            } else if (x == map->T_LARGEUR - 1 && y == map->T_HAUTEUR - 1) { // Coin sud-est
-                map->grille[x][y] = M18;
-            // Bords spécifiques
-            } else if (y == 0 || y == map->T_HAUTEUR - 1) { // Haut et bas
-                map->grille[x][y] = M10;
-            } else if (x == 0 || x == map->T_LARGEUR - 1) { // Gauche et droite
-                map->grille[x][y] = M02;
-            } else {
-                map->grille[x][y] = Sol; // Intérieur
-            }
-        }
-    }
-
-    map->grille[5][3] = PLA;
-
-    for (int x = 5; x < 15; ++x)
-        map->grille[5][x] = M00;
-
-    /*map->grille[3][3] = M15;
-    map->grille[3][4] = M02;
-    map->grille[4][3] = M10;
-    map->grille[18][3] = M16;
-    map->grille[17][3] = M10;
-    map->grille[18][4] = M02;
-    map->grille[3][18] = M14;
-    map->grille[3][17] = M02;
-    map->grille[4][18] = M10;
-    map->grille[18][18] = M17;
-    map->grille[18][17] = M02;
-    map->grille[17][18] = M10;*/
-}
-
-void map_3(Map *map)
-{
-    map->T_LARGEUR = 20;
-    map->T_HAUTEUR = 11;
-    
-    // Ajuster le nombre de lignes
-    map->grille.resize(map->T_LARGEUR);
-    // Ajuster le nombre de colonnes pour chaque ligne
-    for (auto& ligne : map->grille) {
-        ligne.resize(map->T_HAUTEUR);
-    }
-
-    // Ajuster le nombre de lignes
-    map->grilleRNG.resize(map->T_LARGEUR);
-    // Ajuster le nombre de colonnes pour chaque ligne
-    for (auto& ligne : map->grilleRNG) {
-        ligne.resize(map->T_HAUTEUR);
-    }
-
-    map->textureMur.loadFromFile(map->TilesetMur);
-    map->textureSol.loadFromFile(map->TilesetSol);
-    // Initialisation simple de la grille avec des murs autour et du sol à l'intérieur
-
-    //Pourtour
-    for (int y = 0; y < map->T_HAUTEUR; ++y)
-    {
-        for (int x = 0; x < map->T_LARGEUR; ++x)
-        {
-            // Coins spécifiques
-            if (x == 0 && y == 0) { // Coin nord-ouest
-                map->grille[x][y] = M16;
-            } else if (x == map->T_LARGEUR - 1 && y == 0) { // Coin nord-est
-                map->grille[x][y] = M17;
-            } else if (x == 0 && y == map->T_HAUTEUR - 1) { // Coin sud-ouest
-                map->grille[x][y] = M15;
-            } else if (x == map->T_LARGEUR - 1 && y == map->T_HAUTEUR - 1) { // Coin sud-est
-                map->grille[x][y] = M18;
-            // Bords spécifiques
-            } else if (y == 0 || y == map->T_HAUTEUR - 1) { // Haut et bas
-                map->grille[x][y] = M10;
-            } else if (x == 0 || x == map->T_LARGEUR - 1) { // Gauche et droite
-                map->grille[x][y] = M02;
-            } else {
-                map->grille[x][y] = Sol; // Intérieur
-            }
-        }
-    }
-    
-    map->grille[3][5] = PLA;
-
-    for (int x = 5; x < 15; ++x)
-        map->grille[x][5] = M00;
-    /*map->grille[3][3] = M15;
-    map->grille[3][4] = M02;
-    map->grille[4][3] = M10;
-    map->grille[18][3] = M16;
-    map->grille[17][3] = M10;
-    map->grille[18][4] = M02;
-    map->grille[3][18] = M14;
-    map->grille[3][17] = M02;
-    map->grille[4][18] = M10;
-    map->grille[18][18] = M17;
-    map->grille[18][17] = M02;
-    map->grille[17][18] = M10;*/
-}
-
-void map_4(Map *map)
-{
-    map->T_LARGEUR = 22;
-    map->T_HAUTEUR = 22;
-    
-    // Ajuster le nombre de lignes
-    map->grille.resize(map->T_LARGEUR);
-    // Ajuster le nombre de colonnes pour chaque ligne
-    for (auto& ligne : map->grille) {
-        ligne.resize(map->T_HAUTEUR);
-    }
-
-    // Ajuster le nombre de lignes
-    map->grilleRNG.resize(map->T_LARGEUR);
-    // Ajuster le nombre de colonnes pour chaque ligne
-    for (auto& ligne : map->grilleRNG) {
-        ligne.resize(map->T_HAUTEUR);
-    }
-
-    map->textureMur.loadFromFile(map->TilesetMur);
-    map->textureSol.loadFromFile(map->TilesetSol);
-    // Initialisation simple de la grille avec des murs autour et du sol à l'intérieur
-
-    //Pourtour
-    for (int y = 0; y < map->T_HAUTEUR; ++y)
-    {
-        for (int x = 0; x < map->T_LARGEUR; ++x)
-        {
-            // Coins spécifiques
-            if (x == 0 && y == 0) { // Coin nord-ouest
-                map->grille[x][y] = M16;
-            } else if (x == map->T_LARGEUR - 1 && y == 0) { // Coin nord-est
-                map->grille[x][y] = M17;
-            } else if (x == 0 && y == map->T_HAUTEUR - 1) { // Coin sud-ouest
-                map->grille[x][y] = M15;
-            } else if (x == map->T_LARGEUR - 1 && y == map->T_HAUTEUR - 1) { // Coin sud-est
-                map->grille[x][y] = M18;
-            // Bords spécifiques
-            } else if (y == 0 || y == map->T_HAUTEUR - 1) { // Haut et bas
-                map->grille[x][y] = M10;
-            } else if (x == 0 || x == map->T_LARGEUR - 1) { // Gauche et droite
-                map->grille[x][y] = M02;
-            } else {
-                map->grille[x][y] = Sol; // Intérieur
-            }
-        }
-    }
-
-    map->grille[5][5] = PLA;
-
-    for (int y = 7; y <= 14; ++y)
-    {
-        for (int x = 7; x <= 14; ++x)
-        {
-            // Coins spécifiques
-            if (x == 7 && y == 7) { // Coin nord-ouest
-                map->grille[x][y] = BA4;
-            } else if (x == 14 && y == 7) { // Coin nord-est
-                map->grille[x][y] = BA5;
-            } else if (x == 7 && y == 14) { // Coin sud-ouest
-                map->grille[x][y] = BA3;
-            } else if (x == 14 && y == 14) { // Coin sud-est
-                map->grille[x][y] = BA6;
-            // Bords spécifiques
-            } else if (y == 7 || y == 14) { // Haut et bas
-                map->grille[x][y] = BA2;
-            } else if (x == 7 || x == 14) { // Gauche et droite
-                map->grille[x][y] = BA1;
-            } else {
-                map->grille[x][y] = Sol; // Intérieur
-            }
-        }
-    }
-    /*map->grille[17][3] = Mur;
-    map->grille[18][4] = Mur;
-    map->grille[3][18] = Mur;
-    map->grille[3][17] = Mur;
-    map->grille[4][18] = Mur;
-    map->grille[18][18] = Mur;
-    map->grille[18][17] = Mur;
-    map->grille[17][18] = Mur;*/
-}
-
-
-
-
-void map_5(Map *map)
-{
-    map->T_LARGEUR = 12;
-    map->T_HAUTEUR = 12;
-    
-    // Ajuster le nombre de lignes
-    map->grille.resize(map->T_LARGEUR);
-    // Ajuster le nombre de colonnes pour chaque ligne
-    for (auto& ligne : map->grille) {
-        ligne.resize(map->T_HAUTEUR);
-    }
-
-    // Ajuster le nombre de lignes
-    map->grilleRNG.resize(map->T_LARGEUR);
-    // Ajuster le nombre de colonnes pour chaque ligne
-    for (auto& ligne : map->grilleRNG) {
-        ligne.resize(map->T_HAUTEUR);
-    }
-
-    map->textureSol.loadFromFile(map->TilesetSol);
-    map->textureMur.loadFromFile(map->TilesetMur);
-    map->textureItem.loadFromFile(map->TilesetItem);
-    map->textureBridge.loadFromFile(map->TilesetBridge);
-    // Initialisation simple de la grille avec des murs autour et du sol à l'intérieur
-
-
-
-    map->grille[0]  = {EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU};
-    map->grille[1]  = {EAU,R04,R12,R12,R12,R12,R12,R12,R12,R12,R03,EAU};
-    map->grille[2]  = {EAU,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,EAU};
-    map->grille[3]  = {EAU,R09,Sol,Sol,Sol,Sol,Sol,M07,Sol,Sol,R11,EAU};
-    map->grille[4]  = {EAU,R09,Sol,Sol,RO2,Sol,Sol,M17,M02,Sol,R11,EAU};
-    map->grille[5]  = {EAU,R09,Sol,AR1,Sol,Sol,PLA,Sol,Sol,Sol,R11,EAU};
-    map->grille[6]  = {EAU,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,EAU};
-    map->grille[7]  = {EAU,R09,Sol,Sol,Sol,Sol,Sol,BU1,Sol,Sol,R11,EAU};
-    map->grille[8]  = {EAU,R09,Sol,Sol,Sol,Sol,Sol,Sol,AR1,Sol,R11,EAU};
-    map->grille[9]  = {EAU,R09,Sol,BU2,Sol,Sol,Sol,Sol,Sol,Sol,R11,EAU};
-    map->grille[10] = {EAU,R01,R10,R10,R10,R10,R10,R10,R10,R10,R02,EAU};
-    map->grille[11] = {EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU}; 
-}
-
-// NE PAS OUBLIER D'AJOUTER DANS :: Map.hpp -> Fonction au fond, Map.cpp -> generer !!!!!

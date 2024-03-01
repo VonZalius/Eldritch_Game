@@ -8,10 +8,49 @@ class Jeu;
 
 enum TypeTuile
 {
+    XXX,
+
     PLA,            //Player,
     Sol,            //Sol
 
     EAU,            //Eau
+
+    F01,            //Fin eau NE
+    F02,            //Fin eau SE
+    F03,            //Fin eau SO
+    F04,            //Fin eau NO
+
+    F05,            //Fin eau interieur NE
+    F06,            //Fin eau interieur SE     
+    F07,            //Fin eau interieur SO
+    F08,            //Fin eau interieur NO
+
+    F09,            //Fin eau N
+    F10,            //Fin eau E
+    F11,            //Fin eau S
+    F12,            //Fin eau O
+
+    F13,            //Fin eau inter NO-SE
+    F14,            //Fin eau inter NE-SO
+
+    F15,            //Fin sol NE
+    F16,            //Fin sol SE
+    F17,            //Fin sol SO
+    F18,            //Fin sol NO
+
+    F19,            //Fin sol interieur NE
+    F20,            //Fin sol interieur SE     
+    F21,            //Fin sol interieur SO
+    F22,            //Fin sol interieur NO
+
+    F23,            //Fin sol N
+    F24,            //Fin sol E
+    F25,            //Fin sol S
+    F26,            //Fin sol O
+
+    F27,            //Fin sol inter NO-SE
+    F28,            //Fin sol inter NE-SO
+
 
     R01,            //Bord de l'eau NE
     R02,            //Bord de l'eau SE
@@ -50,6 +89,12 @@ enum TypeTuile
     M16,            //MurSE,
     M17,            //MurSO,
     M18,            //MurNO,
+
+    M19,            //Mur croisement xN,
+    M20,            //Mur croisement xE,
+    M21,            //Mur croisement xS,
+    M22,            //Mur croisement xO,
+    M23,            //Mur croisement tout,
 
     BA1,            //BarriereNS,
     BA2,            //BarriereEO,
@@ -114,7 +159,7 @@ public:
     static const int TilesetTilesX = 22;
     static const int TilesetTilesStartX = 8;
     static const int TilesetTilesEndX = 11;
-    static const int TilesetTilesStartY = 1;
+    static const int TilesetTilesStartY = 0;
     static const int TilesetTilesEndY = 4;
 
 
