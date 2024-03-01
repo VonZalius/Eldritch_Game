@@ -11,13 +11,28 @@ enum TypeTuile
 
     EAU,            //Eau
 
+    R01,            //Bord de l'eau NE
+    R02,            //Bord de l'eau SE
+    R03,            //Bord de l'eau SO
+    R04,            //Bord de l'eau NO
+
+    R05,            //Bord de l'eau interieur NE
+    R06,            //Bord de l'eau interieur SE
+    R07,            //Bord de l'eau interieur SO
+    R08,            //Bord de l'eau interieur NO
+
+    R09,            //Bord de l'eau N
+    R10,            //Bord de l'eau E
+    R11,            //Bord de l'eau S
+    R12,            //Bord de l'eau O
+
     M00,            //Mur_seul
 
     M01,            //MurNS_finN1,
     M02,            //MurNS_finS1,
     M03,            //MurNS_suite1,
     M04,            //MurNS_finN2,
-    M05,            //M5MurNS_finS2,
+    M05,            //MurNS_finS2,  inexistant
     M06,            //MurNS_suite2,
 
     M07,            //MurEO_finE1,
@@ -25,12 +40,14 @@ enum TypeTuile
     M09,            //MurEO_suite1,
     M10,            //MurEO_finE2,
     M11,            //MurEO_finO2,
-    M12,            //MurEO_suite2,
+    M12,            //MurEO_suite2_1,
+    M13,            //MurEO_suite2_2,
+    M14,            //MurEO_suite2_3,
 
-    M13,            //MurNE,
-    M14,            //MurSE,
-    M15,            //MurSO,
-    M16,            //MurNO,
+    M15,            //MurNE,
+    M16,            //MurSE,
+    M17,            //MurSO,
+    M18,            //MurNO,
 
     BA1,            //BarriereNS,
     BA2,            //BarriereEO,
@@ -55,7 +72,13 @@ enum TypeTuile
     P13,            //Pont1_3,
     P21,            //Pont2_1,
     P22,            //Pont2_2,
-    P23             //Pont2_3 
+    P23,            //Pont2_3 
+    P31,            //Pont3_1,
+    P32,            //Pont3_2,
+    P33,            //Pont3_3,
+    P41,            //Pont4_1,
+    P42,            //Pont4_2,
+    P43             //Pont4_3 
 
 };
 
@@ -63,6 +86,7 @@ class Map
 {
 public:
     Map();
+    void implementer_Sol(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre);
     void implementer_Mures(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre);
     void implementer_Item(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre);
     void implementer_Bridge(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre);
@@ -91,6 +115,8 @@ public:
     static const int TilesetTilesStartY = 1;
     static const int TilesetTilesEndY = 4;
 
+
+    //Tileset Sol
     static const int TilesetTilesSolSIZE = 16;
     sf::Texture textureSol;
     sf::IntRect rectSol;
@@ -100,12 +126,12 @@ public:
     sf::Texture textureMur;
     sf::IntRect rectMur;
 
-    //Tileset MUR
+    //Tileset Item
     static const int TilesetTilesItemSIZE = 16;
     sf::Texture textureItem;
     sf::IntRect rectItem;
 
-    //Tileset MUR
+    //Tileset Bridge
     static const int TilesetTilesBridgeSIZE = 16;
     sf::Texture textureBridge;
     sf::IntRect rectBridge;

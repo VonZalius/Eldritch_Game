@@ -25,7 +25,8 @@ void Map::generer()
             indicesRectangle.push_back(indiceLineaire);
         }
     }
-    // Assignation aléatoire
+
+    // Assignation aléatoire du sol
     for (int y = 0; y < (T_HAUTEUR + 0); ++y)
     {
         for (int x = 0 ; x < (T_LARGEUR + 0); ++x)
@@ -40,6 +41,7 @@ void Map::generer()
         }
     }
 
+    //Position départ du joueur
     for (int y = 0; y < T_HAUTEUR; ++y)
     {
         for (int x = 0; x < T_LARGEUR; ++x)
@@ -78,6 +80,23 @@ void Map::dessiner_bottom(sf::RenderWindow& fenetre, const int F_Hauteur, const 
             fenetre.draw(sprite);
         }
     }
+}
+
+void Map::implementer_Sol(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre)
+{
+    sf::Sprite sprite;
+
+    rectSol.left = x_co * TilesetTilesSolSIZE; // Nouvelle position X
+    rectSol.top = y_co * TilesetTilesSolSIZE; // Nouvelle position Y
+    rectSol.width = x_taille * TilesetTilesSolSIZE; // Nouvelle largeur
+    rectSol.height = y_taille * TilesetTilesSolSIZE; // Nouvelle hauteur
+    sprite.setTexture(textureSol);
+    sprite.setTextureRect(rectSol);
+    float goodsize = static_cast<float>(TailleTuile) / static_cast<float>(TilesetTilesSolSIZE);
+    sprite.setScale(goodsize, goodsize);
+
+    sprite.setPosition((x * TailleTuile) + x_initial - (TailleTuile * (x_taille - 1)), (y * TailleTuile) + y_initial - (TailleTuile * (y_taille - 1)));
+    fenetre.draw(sprite);
 }
 
 void Map::implementer_Mures(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre)
@@ -142,40 +161,73 @@ void Map::dessiner_top(sf::RenderWindow& fenetre, const int F_Hauteur, const int
         for (int x = 0; x < T_LARGEUR; ++x)
         {
             // Le reste
-            if (grille[x][y] == M00)
+             if (grille[x][y] == EAU)
+                implementer_Sol(4, 7, 1, 1, x, y, fenetre);
+
+            else if (grille[x][y] == R01)
+                implementer_Sol(3, 5, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == R02)
+                implementer_Sol(3, 7, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == R03)
+                implementer_Sol(1, 7, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == R04)
+                implementer_Sol(1, 5, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == R05)
+                implementer_Sol(5, 5, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == R06)
+                implementer_Sol(5, 6, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == R07)
+                implementer_Sol(4, 6, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == R08)
+                implementer_Sol(4, 5, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == R09)
+                implementer_Sol(2, 5, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == R10)
+                implementer_Sol(3, 6, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == R11)
+                implementer_Sol(2, 7, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == R12)
+                implementer_Sol(1, 6, 1, 1, x, y, fenetre);
+
+            else if (grille[x][y] == M00)
                 implementer_Mures(1, 5.5, 1, 1.5, x, y, fenetre);
             else if (grille[x][y] == M01)
-                implementer_Mures(0, 0, 0, 0, x, y, fenetre);
+                implementer_Mures(1, 7, 1, 1, x, y, fenetre);
             else if (grille[x][y] == M02)
-                implementer_Mures(1, 7.5, 1, 1.5, x, y, fenetre);
+                implementer_Mures(1, 9, 1, 1, x, y, fenetre);
             else if (grille[x][y] == M03)
-                implementer_Mures(0, 0, 0, 0, x, y, fenetre);
+                implementer_Mures(1, 8, 1, 1.5, x, y, fenetre);
             else if (grille[x][y] == M04)
-                implementer_Mures(0, 0, 0, 0, x, y, fenetre);
-            else if (grille[x][y] == M05)
+                implementer_Mures(13, 5, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == M05) //Inexistant
                 implementer_Mures(0, 0, 0, 0, x, y, fenetre);
             else if (grille[x][y] == M06)
-                implementer_Mures(0, 0, 0, 0, x, y, fenetre);
-            else if (grille[x][y] == M07)
-                implementer_Mures(0, 0, 0, 0, x, y, fenetre);
-            else if (grille[x][y] == M08)
-                implementer_Mures(0, 0, 0, 0, x, y, fenetre);
-            else if (grille[x][y] == M09)
-                implementer_Mures(0, 0, 0, 0, x, y, fenetre); 
-            else if (grille[x][y] == M10)
-                implementer_Mures(3, 5.5, 1, 1.5, x, y, fenetre);
-            else if (grille[x][y] == M11)
-                implementer_Mures(0, 0, 0, 0, x, y, fenetre);
-            else if (grille[x][y] == M12)
-                implementer_Mures(0, 0, 0, 0, x, y, fenetre);
+                implementer_Mures(13, 6, 1, 1, x, y, fenetre);
 
+            else if (grille[x][y] == M07)
+                implementer_Mures(2, 5.5, 1, 1.5, x, y, fenetre);
+            else if (grille[x][y] == M08)
+                implementer_Mures(4, 5.5, 1, 1.5, x, y, fenetre);
+            else if (grille[x][y] == M09)
+                implementer_Mures(3, 5.5, 1, 1.5, x, y, fenetre); 
+            else if (grille[x][y] == M10)
+                implementer_Mures(12, 5.5, 1, 1.5, x, y, fenetre);
+            else if (grille[x][y] == M11)
+                implementer_Mures(8, 5.5, 1, 1.5, x, y, fenetre);
+            else if (grille[x][y] == M12)
+                implementer_Mures(9, 5.5, 1, 1.5, x, y, fenetre);
             else if (grille[x][y] == M13)
-                implementer_Mures(5, 9.5, 1, 1.5, x, y, fenetre);
+                implementer_Mures(10, 5.5, 1, 1.5, x, y, fenetre);
             else if (grille[x][y] == M14)
-                implementer_Mures(5, 5.5, 1, 1.5, x, y, fenetre);
+                implementer_Mures(11, 5.5, 1, 1.5, x, y, fenetre);
+
             else if (grille[x][y] == M15)
-                implementer_Mures(7, 5.5, 1, 1.5, x, y, fenetre);
+                implementer_Mures(5, 9.5, 1, 1.5, x, y, fenetre);
             else if (grille[x][y] == M16)
+                implementer_Mures(5, 5.5, 1, 1.5, x, y, fenetre);
+            else if (grille[x][y] == M17)
+                implementer_Mures(7, 5.5, 1, 1.5, x, y, fenetre);
+            else if (grille[x][y] == M18)
                 implementer_Mures(7, 9.5, 1, 1.5, x, y, fenetre);
             
             else if (grille[x][y] == BA1)
@@ -192,34 +244,46 @@ void Map::dessiner_top(sf::RenderWindow& fenetre, const int F_Hauteur, const int
                 implementer_Mures(3, 3, 1, 1, x, y, fenetre);
 
             else if (grille[x][y] == AR1)
-                implementer_Item(0, 0, 0, 0, x, y, fenetre);
+                implementer_Item(1, 1, 1, 2, x, y, fenetre);
             else if (grille[x][y] == AR2)
-                implementer_Item(0, 0, 0, 0, x, y, fenetre);
+                implementer_Item(2, 1, 1, 2, x, y, fenetre);
             else if (grille[x][y] == AR3)
-                implementer_Item(0, 0, 0, 0, x, y, fenetre);
+                implementer_Item(3.5, 1, 2, 2, x, y, fenetre);
             else if (grille[x][y] == BU1)
-                implementer_Item(0, 0, 0, 0, x, y, fenetre);
+                implementer_Item(1, 3, 1, 1, x, y, fenetre);
             else if (grille[x][y] == BU2)
-                implementer_Item(0, 0, 0, 0, x, y, fenetre);
+                implementer_Item(1, 4, 1, 1, x, y, fenetre);
             else if (grille[x][y] == ROG)
-                implementer_Item(0, 0, 0, 0, x, y, fenetre);
+                implementer_Item(2, 3, 2, 2, x, y, fenetre);
             else if (grille[x][y] == RO1)
-                implementer_Item(0, 0, 0, 0, x, y, fenetre);
+                implementer_Item(4, 3, 1, 1, x, y, fenetre);
             else if (grille[x][y] == RO2)
-                implementer_Item(0, 0, 0, 0, x, y, fenetre);
+                implementer_Item(4, 4, 1, 1, x, y, fenetre);
 
             else if (grille[x][y] == P11)
-                implementer_Bridge(0, 0, 0, 0, x, y, fenetre);
+                implementer_Bridge(1, 1, 1, 1, x, y, fenetre);
             else if (grille[x][y] == P12)
-                implementer_Bridge(0, 0, 0, 0, x, y, fenetre);
+                implementer_Bridge(1, 2, 1, 1, x, y, fenetre);
             else if (grille[x][y] == P13)
-                implementer_Bridge(0, 0, 0, 0, x, y, fenetre);
+                implementer_Bridge(1, 3, 1, 1, x, y, fenetre);
             else if (grille[x][y] == P21)
-                implementer_Bridge(0, 0, 0, 0, x, y, fenetre);
+                implementer_Bridge(2, 1, 1, 1, x, y, fenetre);
             else if (grille[x][y] == P22)
-                implementer_Bridge(0, 0, 0, 0, x, y, fenetre);
+                implementer_Bridge(2, 2, 1, 1, x, y, fenetre);
             else if (grille[x][y] == P23)
-                implementer_Bridge(0, 0, 0, 0, x, y, fenetre);
+                implementer_Bridge(2, 3, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == P31)
+                implementer_Bridge(3, 1, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == P32)
+                implementer_Bridge(3, 2, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == P33)
+                implementer_Bridge(3, 3, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == P41)
+                implementer_Bridge(4, 1, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == P42)
+                implementer_Bridge(4, 2, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == P43)
+                implementer_Bridge(4, 3, 1, 1, x, y, fenetre);
         }
     }
 }
@@ -254,13 +318,13 @@ void map_1(Map *map)
         {
             // Coins spécifiques
             if (x == 0 && y == 0) { // Coin nord-ouest
-                map->grille[x][y] = M14;
-            } else if (x == map->T_LARGEUR - 1 && y == 0) { // Coin nord-est
-                map->grille[x][y] = M15;
-            } else if (x == 0 && y == map->T_HAUTEUR - 1) { // Coin sud-ouest
-                map->grille[x][y] = M13;
-            } else if (x == map->T_LARGEUR - 1 && y == map->T_HAUTEUR - 1) { // Coin sud-est
                 map->grille[x][y] = M16;
+            } else if (x == map->T_LARGEUR - 1 && y == 0) { // Coin nord-est
+                map->grille[x][y] = M17;
+            } else if (x == 0 && y == map->T_HAUTEUR - 1) { // Coin sud-ouest
+                map->grille[x][y] = M15;
+            } else if (x == map->T_LARGEUR - 1 && y == map->T_HAUTEUR - 1) { // Coin sud-est
+                map->grille[x][y] = M18;
             // Bords spécifiques
             } else if (y == 0 || y == map->T_HAUTEUR - 1) { // Haut et bas
                 map->grille[x][y] = M10;
@@ -274,8 +338,8 @@ void map_1(Map *map)
 
     map->grille[5][5] = PLA;
 
-    map->grille[3][3] = M00;
-    map->grille[3][4] = M00;
+    map->grille[3] = {M00, M00, M00, M00, M00};
+    /*map->grille[3][4] = M00;
     map->grille[4][3] = M00;
     map->grille[18][3] = M00;
     map->grille[17][3] = M00;
@@ -285,7 +349,7 @@ void map_1(Map *map)
     map->grille[4][18] = M00;
     map->grille[18][18] = M00;
     map->grille[18][17] = M00;
-    map->grille[17][18] = M00;
+    map->grille[17][18] = M00;*/
 }
 
 void map_2(Map *map)
@@ -318,13 +382,13 @@ void map_2(Map *map)
         {
             // Coins spécifiques
             if (x == 0 && y == 0) { // Coin nord-ouest
-                map->grille[x][y] = M14;
-            } else if (x == map->T_LARGEUR - 1 && y == 0) { // Coin nord-est
-                map->grille[x][y] = M15;
-            } else if (x == 0 && y == map->T_HAUTEUR - 1) { // Coin sud-ouest
-                map->grille[x][y] = M13;
-            } else if (x == map->T_LARGEUR - 1 && y == map->T_HAUTEUR - 1) { // Coin sud-est
                 map->grille[x][y] = M16;
+            } else if (x == map->T_LARGEUR - 1 && y == 0) { // Coin nord-est
+                map->grille[x][y] = M17;
+            } else if (x == 0 && y == map->T_HAUTEUR - 1) { // Coin sud-ouest
+                map->grille[x][y] = M15;
+            } else if (x == map->T_LARGEUR - 1 && y == map->T_HAUTEUR - 1) { // Coin sud-est
+                map->grille[x][y] = M18;
             // Bords spécifiques
             } else if (y == 0 || y == map->T_HAUTEUR - 1) { // Haut et bas
                 map->grille[x][y] = M10;
@@ -385,13 +449,13 @@ void map_3(Map *map)
         {
             // Coins spécifiques
             if (x == 0 && y == 0) { // Coin nord-ouest
-                map->grille[x][y] = M14;
-            } else if (x == map->T_LARGEUR - 1 && y == 0) { // Coin nord-est
-                map->grille[x][y] = M15;
-            } else if (x == 0 && y == map->T_HAUTEUR - 1) { // Coin sud-ouest
-                map->grille[x][y] = M13;
-            } else if (x == map->T_LARGEUR - 1 && y == map->T_HAUTEUR - 1) { // Coin sud-est
                 map->grille[x][y] = M16;
+            } else if (x == map->T_LARGEUR - 1 && y == 0) { // Coin nord-est
+                map->grille[x][y] = M17;
+            } else if (x == 0 && y == map->T_HAUTEUR - 1) { // Coin sud-ouest
+                map->grille[x][y] = M15;
+            } else if (x == map->T_LARGEUR - 1 && y == map->T_HAUTEUR - 1) { // Coin sud-est
+                map->grille[x][y] = M18;
             // Bords spécifiques
             } else if (y == 0 || y == map->T_HAUTEUR - 1) { // Haut et bas
                 map->grille[x][y] = M10;
@@ -451,13 +515,13 @@ void map_4(Map *map)
         {
             // Coins spécifiques
             if (x == 0 && y == 0) { // Coin nord-ouest
-                map->grille[x][y] = M14;
-            } else if (x == map->T_LARGEUR - 1 && y == 0) { // Coin nord-est
-                map->grille[x][y] = M15;
-            } else if (x == 0 && y == map->T_HAUTEUR - 1) { // Coin sud-ouest
-                map->grille[x][y] = M13;
-            } else if (x == map->T_LARGEUR - 1 && y == map->T_HAUTEUR - 1) { // Coin sud-est
                 map->grille[x][y] = M16;
+            } else if (x == map->T_LARGEUR - 1 && y == 0) { // Coin nord-est
+                map->grille[x][y] = M17;
+            } else if (x == 0 && y == map->T_HAUTEUR - 1) { // Coin sud-ouest
+                map->grille[x][y] = M15;
+            } else if (x == map->T_LARGEUR - 1 && y == map->T_HAUTEUR - 1) { // Coin sud-est
+                map->grille[x][y] = M18;
             // Bords spécifiques
             } else if (y == 0 || y == map->T_HAUTEUR - 1) { // Haut et bas
                 map->grille[x][y] = M10;
@@ -504,10 +568,13 @@ void map_4(Map *map)
     map->grille[17][18] = Mur;*/
 }
 
+
+
+
 void map_5(Map *map)
 {
-    map->T_LARGEUR = 26;
-    map->T_HAUTEUR = 26;
+    map->T_LARGEUR = 12;
+    map->T_HAUTEUR = 12;
     
     // Ajuster le nombre de lignes
     map->grille.resize(map->T_LARGEUR);
@@ -523,40 +590,26 @@ void map_5(Map *map)
         ligne.resize(map->T_HAUTEUR);
     }
 
-    map->textureMur.loadFromFile(map->TilesetMur);
     map->textureSol.loadFromFile(map->TilesetSol);
-    map->textureSol.loadFromFile(map->TilesetItem);
-    map->textureSol.loadFromFile(map->TilesetBridge);
+    map->textureMur.loadFromFile(map->TilesetMur);
+    map->textureItem.loadFromFile(map->TilesetItem);
+    map->textureBridge.loadFromFile(map->TilesetBridge);
     // Initialisation simple de la grille avec des murs autour et du sol à l'intérieur
 
 
 
-    map->grille[0]  = {EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU};
-    map->grille[1]  = {EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU};
-    map->grille[2]  = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[3]  = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[4]  = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[5]  = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[6]  = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[7]  = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[8]  = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[9]  = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[10] = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[11] = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[12] = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[13] = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[14] = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,PLA,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[15] = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[16] = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[17] = {EAU,EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[18] = {EAU,EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[19] = {EAU,EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[20] = {EAU,EAU,EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[21] = {EAU,EAU,EAU,EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[22] = {EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
-    map->grille[23] = {EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU};
-    map->grille[24] = {EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU};
-    map->grille[25] = {EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU};
+    map->grille[0]  = {EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU};
+    map->grille[1]  = {EAU,R04,R12,R12,R12,R12,R12,R12,R12,R12,R03,EAU};
+    map->grille[2]  = {EAU,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,EAU};
+    map->grille[3]  = {EAU,R09,Sol,Sol,Sol,Sol,Sol,M07,Sol,Sol,R11,EAU};
+    map->grille[4]  = {EAU,R09,Sol,Sol,RO2,Sol,Sol,M17,M02,Sol,R11,EAU};
+    map->grille[5]  = {EAU,R09,Sol,AR1,Sol,Sol,PLA,Sol,Sol,Sol,R11,EAU};
+    map->grille[6]  = {EAU,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,EAU};
+    map->grille[7]  = {EAU,R09,Sol,Sol,Sol,Sol,Sol,BU1,Sol,Sol,R11,EAU};
+    map->grille[8]  = {EAU,R09,Sol,Sol,Sol,Sol,Sol,Sol,AR1,Sol,R11,EAU};
+    map->grille[9]  = {EAU,R09,Sol,BU2,Sol,Sol,Sol,Sol,Sol,Sol,R11,EAU};
+    map->grille[10] = {EAU,R01,R10,R10,R10,R10,R10,R10,R10,R10,R02,EAU};
+    map->grille[11] = {EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU}; 
 }
 
 // NE PAS OUBLIER D'AJOUTER DANS :: Map.hpp -> Fonction au fond, Map.cpp -> generer !!!!!

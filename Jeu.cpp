@@ -15,7 +15,7 @@ void Jeu::initialiserJeu()
         joueur.sprite.setTexture(joueur.textureJoueur);
         float goodsize = static_cast<float>(joueur.TailleSprite) / static_cast<float>(joueur.frameWidth);
         joueur.sprite.setScale(goodsize, goodsize);
-        joueur.sprite.setOrigin(joueur.frameWidth / 2, joueur.frameHeight / 2);
+        joueur.sprite.setOrigin(joueur.frameWidth / 2, (joueur.frameHeight / 2) + 3);
 
         for (int ligne = joueur.frameStartY; ligne <= joueur.frameEndY; ++ligne)
         {

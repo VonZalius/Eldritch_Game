@@ -88,3 +88,65 @@
         jeu->attaques.status = false;
     }
 }*/
+
+
+
+
+
+
+// PROTOTIPE FONCTIONNEL !!!
+/*void map_5(Map *map)
+{
+    map->T_LARGEUR = 26;
+    map->T_HAUTEUR = 26;
+    
+    // Ajuster le nombre de lignes
+    map->grille.resize(map->T_LARGEUR);
+    // Ajuster le nombre de colonnes pour chaque ligne
+    for (auto& ligne : map->grille) {
+        ligne.resize(map->T_HAUTEUR);
+    }
+
+    // Ajuster le nombre de lignes
+    map->grilleRNG.resize(map->T_LARGEUR);
+    // Ajuster le nombre de colonnes pour chaque ligne
+    for (auto& ligne : map->grilleRNG) {
+        ligne.resize(map->T_HAUTEUR);
+    }
+
+    map->textureSol.loadFromFile(map->TilesetSol);
+    map->textureMur.loadFromFile(map->TilesetMur);
+    map->textureItem.loadFromFile(map->TilesetItem);
+    map->textureBridge.loadFromFile(map->TilesetBridge);
+    // Initialisation simple de la grille avec des murs autour et du sol à l'intérieur
+
+
+
+    map->grille[0]  = {EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU};
+    map->grille[1]  = {EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU};
+    map->grille[2]  = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[3]  = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[4]  = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[5]  = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[6]  = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[7]  = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[8]  = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[9]  = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[10] = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[11] = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[12] = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[13] = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[14] = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,PLA,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[15] = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[16] = {EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[17] = {EAU,EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[18] = {EAU,EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[19] = {EAU,EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[20] = {EAU,EAU,EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[21] = {EAU,EAU,EAU,EAU,EAU,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[22] = {EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,AR1,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,EAU,EAU};
+    map->grille[23] = {EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU};
+    map->grille[24] = {EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU};
+    map->grille[25] = {EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU};
+    
+}*/
