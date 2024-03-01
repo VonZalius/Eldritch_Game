@@ -15,7 +15,7 @@ void Jeu::initialiserJeu()
         joueur.sprite.setTexture(joueur.textureJoueur);
         float goodsize = static_cast<float>(joueur.TailleSprite) / static_cast<float>(joueur.frameWidth);
         joueur.sprite.setScale(goodsize, goodsize);
-        joueur.sprite.setOrigin(joueur.frameWidth / 2, (joueur.frameHeight / 2) + 3);
+        joueur.sprite.setOrigin(joueur.frameWidth / 2, (joueur.frameHeight / 2) + 6);
 
         for (int ligne = joueur.frameStartY; ligne <= joueur.frameEndY; ++ligne)
         {
@@ -382,10 +382,10 @@ void Jeu::dessiner()
 
     fenetre.draw(ecranTitre.spriteEcranTitre);
     map.dessiner_bottom(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
-    fenetre.draw(joueur.sprite); // Dessiner le joueur
+    //fenetre.draw(joueur.sprite); // Dessiner le joueur
     gold.afficherGold(this);
     attaques.dessiner_zone(this);
-    map.dessiner_top(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
+    map.dessiner_top(this); // Dessiner la carte
 
     fenetre.display();
 }

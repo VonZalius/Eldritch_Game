@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+class Jeu;
+
 enum TypeTuile
 {
     PLA,            //Player,
@@ -91,7 +93,7 @@ public:
     void implementer_Item(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre);
     void implementer_Bridge(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre);
     void dessiner_bottom(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur);
-    void dessiner_top(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur);
+    void dessiner_top(Jeu *jeu);
     void generer();
 
     std::string TilesetSol = "sprites/fantasy_/forest_/forest_.png";
