@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <unordered_set>
 
 class Jeu;
 
@@ -113,6 +114,22 @@ enum TypeTuile
     RO1,            //Rocher1,
     RO2,            //Rocher2,
 
+    CO1,            //Coffre
+    PAN,            //Panneau
+    TO1,            //Tombe 1
+    TO2,            //Tombe 1
+    TO3,            //Tombe 1
+    FEU,            //Feu de camp éteind
+
+    CH1,            //Champignon Brun NE
+    CH2,            //Champignon Brun SE
+    CH3,            //Champignon Brun SO
+    CH4,            //Champignon Brun NO
+    CH5,            //Champignon Rouge NE
+    CH6,            //Champignon Rouge SE
+    CH7,            //Champignon Rouge SO
+    CH8,            //Champignon Rouge NO
+
 
     P11,            //Pont1_1,
     P12,            //Pont1_2,
@@ -145,6 +162,9 @@ public:
     std::string TilesetMur = "sprites/fantasy_/forest_/forest_ [fencesAndWalls].png";
     std::string TilesetItem = "sprites/fantasy_/forest_/forest_ [resources].png";
     std::string TilesetBridge = "sprites/fantasy_/forest_/forest_ [bridgeVertical].png";
+
+    std::unordered_set<TypeTuile> is_Sol = {Sol, CH1, CH2, CH3, CH4, CH5, CH6, CH7, CH8};
+
     //Zone de jeu
     int T_LARGEUR;
     int T_HAUTEUR;

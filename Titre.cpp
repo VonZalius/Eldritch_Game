@@ -34,7 +34,7 @@ void EcranTitre::demarrage(sf::RenderWindow& fenetre)
     sf::Event evenement;
     sf::Clock timer;
     timer.restart();
-    while (fenetre.isOpen() && timer.getElapsedTime().asSeconds() <= 1)
+    while (fenetre.isOpen() && timer.getElapsedTime().asSeconds() <= 0.5)
     {
         while (fenetre.pollEvent(evenement))
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
@@ -56,7 +56,7 @@ void EcranTitre::demarrage(sf::RenderWindow& fenetre)
         fenetre.display();
     }
     timer.restart();
-    while (fenetre.isOpen() && timer.getElapsedTime().asSeconds() <= 1)
+    while (fenetre.isOpen() && timer.getElapsedTime().asSeconds() <= 1.5)
     {
         while (fenetre.pollEvent(evenement))
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 

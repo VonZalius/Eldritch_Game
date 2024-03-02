@@ -8,7 +8,7 @@ Map::Map()
 void Map::generer()
 {
     //Choix aléatoire de la map
-    int rng = 1;//rand() % 5;
+    int rng = rand() % 2;
     void (*tableAUEAUDeFonctions[])(Map *map) =
         {map_1, map_2, map_3, map_4, map_5};
     (*tableAUEAUDeFonctions[rng])(this);
@@ -341,6 +341,36 @@ void Map::dessiner_top(Jeu *jeu)
             else if (grille[x][y] == RO2)
                 implementer_Item(4, 4, 1, 1, x, y, jeu->fenetre);
 
+            else if (grille[x][y] == CO1)
+                implementer_Item(1, 5.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == PAN)
+                implementer_Item(1, 7.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == TO1)
+                implementer_Item(2, 7.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == TO2)
+                implementer_Item(3, 7.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == TO3)
+                implementer_Item(4, 7.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == FEU)
+                implementer_Item(6, 8, 1, 1, x, y, jeu->fenetre);
+
+            else if (grille[x][y] == CH1)
+                implementer_Item(8, 1, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == CH2)
+                implementer_Item(8, 2, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == CH3)
+                implementer_Item(7, 2, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == CH4)
+                implementer_Item(7, 1, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == CH5)
+                implementer_Item(10, 1, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == CH6)
+                implementer_Item(10, 2, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == CH7)
+                implementer_Item(9, 2, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == CH8)
+                implementer_Item(9, 1, 1, 1, x, y, jeu->fenetre);
+
             else if (grille[x][y] == P11)
                 implementer_Bridge(1, 1, 1, 1, x, y, jeu->fenetre);
             else if (grille[x][y] == P12)
@@ -365,6 +395,9 @@ void Map::dessiner_top(Jeu *jeu)
                 implementer_Bridge(4, 2, 1, 1, x, y, jeu->fenetre);
             else if (grille[x][y] == P43)
                 implementer_Bridge(4, 3, 1, 1, x, y, jeu->fenetre);
+
+            if (jeu->gold.grille[x][y] == true)
+                jeu->gold.afficherGold(jeu);
         }
     }
 }

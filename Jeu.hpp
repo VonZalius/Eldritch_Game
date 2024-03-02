@@ -13,7 +13,7 @@ struct Joueur
     float vitesse = 200.0f; // pixels par seconde
     float vitesseAugmentee = 400.0f;
     static const int TailleSprite = 64;
-    static const int collision_div = 10;
+    static const int collision_div = 15;
     sf::Sprite sprite;
 
 

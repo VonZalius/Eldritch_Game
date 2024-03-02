@@ -114,7 +114,7 @@ void Jeu::initialiserJeu()
     if (ecranTitre.fontDemarrage.loadFromFile("sprites/police.ttf"))
     {
         ecranTitre.texteDemarrage3.setFont(ecranTitre.fontDemarrage); 
-        ecranTitre.texteDemarrage3.setString("3...");
+        ecranTitre.texteDemarrage3.setString("3");
         ecranTitre.texteDemarrage3.setCharacterSize(100); // en pixels
         ecranTitre.texteDemarrage3.setFillColor(sf::Color::White);
         float largeurTexte = ecranTitre.texteDemarrage3.getLocalBounds().width;
@@ -124,7 +124,7 @@ void Jeu::initialiserJeu()
     if (ecranTitre.fontDemarrage.loadFromFile("sprites/police.ttf"))
     {
         ecranTitre.texteDemarrage2.setFont(ecranTitre.fontDemarrage); 
-        ecranTitre.texteDemarrage2.setString("2...");
+        ecranTitre.texteDemarrage2.setString("2");
         ecranTitre.texteDemarrage2.setCharacterSize(100); // en pixels
         ecranTitre.texteDemarrage2.setFillColor(sf::Color::White);
         float largeurTexte = ecranTitre.texteDemarrage2.getLocalBounds().width;
@@ -134,7 +134,7 @@ void Jeu::initialiserJeu()
     if (ecranTitre.fontDemarrage.loadFromFile("sprites/police.ttf"))
     {
         ecranTitre.texteDemarrage1.setFont(ecranTitre.fontDemarrage); 
-        ecranTitre.texteDemarrage1.setString("1...");
+        ecranTitre.texteDemarrage1.setString("1");
         ecranTitre.texteDemarrage1.setCharacterSize(100); // en pixels
         ecranTitre.texteDemarrage1.setFillColor(sf::Color::White);
         float largeurTexte = ecranTitre.texteDemarrage1.getLocalBounds().width;
@@ -367,7 +367,7 @@ bool Jeu::collision(int p, sf::Time deltaTime, float vitesseActuelle)
             gold.getGold(tileX, tileY);
         }
         // Vérification si le point n'est pas sur une tuile 'Sol'
-        if (map.grille[tileX][tileY] != Sol)
+        if (map.is_Sol.find(map.grille[tileX][tileY]) == map.is_Sol.end())
         {
             return false; // Collision détectée
         }
@@ -383,7 +383,7 @@ void Jeu::dessiner()
     fenetre.draw(ecranTitre.spriteEcranTitre);
     map.dessiner_bottom(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
     //fenetre.draw(joueur.sprite); // Dessiner le joueur
-    gold.afficherGold(this);
+    //gold.afficherGold(this);
     attaques.dessiner_zone(this);
     map.dessiner_top(this); // Dessiner la carte
 

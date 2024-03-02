@@ -99,7 +99,7 @@ struct Attaques
     // Position des différent sprite pour l'animation, compter a partir de 0 !!
     static const int TileStartX2 = 0;
     static const int TileStartY2 = 10;
-    static const int TileEndX2 = 4;
+    static const int TileEndX2 = 3;
     static const int TileEndY2 = 10;
 };
 

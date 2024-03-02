@@ -60,7 +60,7 @@ void strike_1(Jeu *jeu)
     jeu->attaques.Time_to.resize(2);
 
     jeu->attaques.Time_to[0] = 1;
-    jeu->attaques.Time_to[1] = 2;
+    jeu->attaques.Time_to[1] = 1.8;
 
     int E_rng;
 
@@ -73,7 +73,7 @@ void strike_1(Jeu *jeu)
             {
                 for (int x = 0; x < jeu->map.T_LARGEUR; ++x)
                 { 
-                    E_rng = rand() % 6;
+                    E_rng = rand() % 8;
                     if (x < jeu->map.T_LARGEUR / 2 && jeu->attaques.grille_degat[x][y] == Normal && E_rng != 0)
                         jeu->attaques.grille_degat[x][y] = Ombré;
                 }
@@ -120,7 +120,7 @@ void strike_2(Jeu *jeu)
     jeu->attaques.Time_to.resize(2);
 
     jeu->attaques.Time_to[0] = 1;
-    jeu->attaques.Time_to[1] = 2;
+    jeu->attaques.Time_to[1] = 1.8;
 
     int E_rng;
 
@@ -133,7 +133,7 @@ void strike_2(Jeu *jeu)
             {
                 for (int x = 0; x < jeu->map.T_LARGEUR; ++x)
                 { 
-                    E_rng = rand() % 6;
+                    E_rng = rand() % 8;
                     if (x >= jeu->map.T_LARGEUR / 2 && jeu->attaques.grille_degat[x][y] == Normal && E_rng != 0)
                         jeu->attaques.grille_degat[x][y] = Ombré;
                 }
@@ -180,7 +180,7 @@ void strike_3(Jeu *jeu)
     jeu->attaques.Time_to.resize(2);
 
     jeu->attaques.Time_to[0] = 1;
-    jeu->attaques.Time_to[1] = 2;
+    jeu->attaques.Time_to[1] = 1.8;
 
     int E_rng;
 
@@ -193,7 +193,7 @@ void strike_3(Jeu *jeu)
             {
                 for (int x = 0; x < jeu->map.T_LARGEUR; ++x)
                 { 
-                    E_rng = rand() % 6;
+                    E_rng = rand() % 8;
                     if (y < jeu->map.T_HAUTEUR / 2 && jeu->attaques.grille_degat[x][y] == Normal && E_rng != 0)
                         jeu->attaques.grille_degat[x][y] = Ombré;
                 }
@@ -240,7 +240,7 @@ void strike_4(Jeu *jeu)
     jeu->attaques.Time_to.resize(2);
 
     jeu->attaques.Time_to[0] = 1;
-    jeu->attaques.Time_to[1] = 2;
+    jeu->attaques.Time_to[1] = 1.8;
 
     int E_rng;
 
@@ -253,7 +253,7 @@ void strike_4(Jeu *jeu)
             {
                 for (int x = 0; x < jeu->map.T_LARGEUR; ++x)
                 { 
-                    E_rng = rand() % 6;
+                    E_rng = rand() % 8;
                     if (y >= jeu->map.T_HAUTEUR / 2 && jeu->attaques.grille_degat[x][y] == Normal && E_rng != 0)
                         jeu->attaques.grille_degat[x][y] = Ombré;
                 }
@@ -300,7 +300,7 @@ void strike_5(Jeu *jeu)
     jeu->attaques.Time_to.resize(2);
 
     jeu->attaques.Time_to[0] = 1;
-    jeu->attaques.Time_to[1] = 2;
+    jeu->attaques.Time_to[1] = 1.8;
 
     int E_rng;
 

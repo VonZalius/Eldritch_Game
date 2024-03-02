@@ -68,7 +68,7 @@ void Gold::gold_rng(Jeu *jeu)
         {
             rngX = rand() % jeu->map.T_LARGEUR;
             rngY = rand() % jeu->map.T_HAUTEUR;
-            if (jeu->map.grille[rngX][rngY] == Sol)
+            if (jeu->map.is_Sol.find(jeu->map.grille[rngX][rngY]) != jeu->map.is_Sol.end())
             {
                 grille[rngX][rngY] = true;
                 status = true;
