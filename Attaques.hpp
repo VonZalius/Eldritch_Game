@@ -58,11 +58,14 @@ struct Attaques
     int paterne_phases;
     std::vector<float> Time_to;
     
-    Paterne A;
+    /*Paterne A;
     Paterne B;
     Paterne C;
-    Paterne D;
+    Paterne D;*/
+
     Paterne E;
+    Paterne F;
+    Paterne G;
 
     //OMBRE
     sf::Sprite sprite;
@@ -103,10 +106,13 @@ struct Attaques
     static const int TileEndY2 = 10;
 };
 
-void strike_1(Jeu *jeu);
+/*void strike_1(Jeu *jeu);
 void strike_2(Jeu *jeu);
 void strike_3(Jeu *jeu);
-void strike_4(Jeu *jeu);
+void strike_4(Jeu *jeu);*/
+
 void strike_5(Jeu *jeu);
+void strike_6(Jeu *jeu);
+void strike_7(Jeu *jeu);
 
 #endif

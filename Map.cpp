@@ -58,7 +58,7 @@ void Map::generer()
 }
 
 
-void Map::implementer_Sol(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre)
+void Map::implementer_Sol(double x_co, double y_co, double x_taille, double y_taille, double x, double y, sf::RenderWindow& fenetre)
 {
     sf::Sprite sprite;
 
@@ -75,7 +75,7 @@ void Map::implementer_Sol(double x_co, double y_co, double x_taille, double y_ta
     fenetre.draw(sprite);
 }
 
-void Map::implementer_Mures(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre)
+void Map::implementer_Mures(double x_co, double y_co, double x_taille, double y_taille, double x, double y, sf::RenderWindow& fenetre)
 {
     sf::Sprite sprite;
 
@@ -92,7 +92,7 @@ void Map::implementer_Mures(double x_co, double y_co, double x_taille, double y_
     fenetre.draw(sprite);
 }
 
-void Map::implementer_Item(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre)
+void Map::implementer_Item(double x_co, double y_co, double x_taille, double y_taille, double x, double y, sf::RenderWindow& fenetre)
 {
     sf::Sprite sprite;
 
@@ -109,7 +109,7 @@ void Map::implementer_Item(double x_co, double y_co, double x_taille, double y_t
     fenetre.draw(sprite);
 }
 
-void Map::implementer_Bridge(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre)
+void Map::implementer_Bridge(double x_co, double y_co, double x_taille, double y_taille, double x, double y, sf::RenderWindow& fenetre)
 {
     sf::Sprite sprite;
 
@@ -120,6 +120,23 @@ void Map::implementer_Bridge(double x_co, double y_co, double x_taille, double y
     sprite.setTexture(textureBridge);
     sprite.setTextureRect(rectBridge);
     float goodsize = static_cast<float>(TailleTuile) / static_cast<float>(TilesetTilesBridgeSIZE);
+    sprite.setScale(goodsize, goodsize);
+
+    sprite.setPosition((x * TailleTuile) + x_initial - (TailleTuile * (x_taille - 1)), (y * TailleTuile) + y_initial - (TailleTuile * (y_taille - 1)));
+    fenetre.draw(sprite);
+}
+
+void Map::implementer_Fontaine(double x_co, double y_co, double x_taille, double y_taille, double x, double y, sf::RenderWindow& fenetre)
+{
+    sf::Sprite sprite;
+
+    rectFontaine.left = x_co * TilesetTilesFontaineSIZE; // Nouvelle position X
+    rectFontaine.top = y_co * TilesetTilesFontaineSIZE; // Nouvelle position Y
+    rectFontaine.width = x_taille * TilesetTilesFontaineSIZE; // Nouvelle largeur
+    rectFontaine.height = y_taille * TilesetTilesFontaineSIZE; // Nouvelle hauteur
+    sprite.setTexture(textureFontaine);
+    sprite.setTextureRect(rectFontaine);
+    float goodsize = static_cast<float>(TailleTuile) / static_cast<float>(TilesetTilesFontaineSIZE);
     sprite.setScale(goodsize, goodsize);
 
     sprite.setPosition((x * TailleTuile) + x_initial - (TailleTuile * (x_taille - 1)), (y * TailleTuile) + y_initial - (TailleTuile * (y_taille - 1)));
@@ -324,22 +341,27 @@ void Map::dessiner_top(Jeu *jeu)
             else if (grille[x][y] == BA6)
                 implementer_Mures(3, 3, 1, 1, x, y, jeu->fenetre);
 
+            else if (grille[x][y] == POT)
+                implementer_Mures(3, 7, 1, 1, x, y, jeu->fenetre);
+
             else if (grille[x][y] == AR1)
                 implementer_Item(1, 1, 1, 2, x, y, jeu->fenetre);
             else if (grille[x][y] == AR2)
                 implementer_Item(2, 1, 1, 2, x, y, jeu->fenetre);
             else if (grille[x][y] == AR3)
-                implementer_Item(3.5, 1, 2, 2, x, y, jeu->fenetre);
+                implementer_Item(3.5, 1, 2, 2, x + 0.5, y, jeu->fenetre);
             else if (grille[x][y] == BU1)
                 implementer_Item(1, 3, 1, 1, x, y, jeu->fenetre);
             else if (grille[x][y] == BU2)
                 implementer_Item(1, 4, 1, 1, x, y, jeu->fenetre);
-            else if (grille[x][y] == ROG)
-                implementer_Item(2, 3, 2, 2, x, y, jeu->fenetre);
             else if (grille[x][y] == RO1)
                 implementer_Item(4, 3, 1, 1, x, y, jeu->fenetre);
             else if (grille[x][y] == RO2)
                 implementer_Item(4, 4, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == RO3)
+                implementer_Item(2, 3, 1, 2, x, y, jeu->fenetre);
+            else if (grille[x][y] == RO4)
+                implementer_Item(3, 3, 1, 2, x, y, jeu->fenetre);
 
             else if (grille[x][y] == CO1)
                 implementer_Item(1, 5.5, 1, 1.5, x, y, jeu->fenetre);
@@ -371,6 +393,23 @@ void Map::dessiner_top(Jeu *jeu)
             else if (grille[x][y] == CH8)
                 implementer_Item(9, 1, 1, 1, x, y, jeu->fenetre);
 
+            else if (grille[x][y] == FL1)
+                implementer_Item(10, 3, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == FL2)
+                implementer_Item(10, 4, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == FL3)
+                implementer_Item(9, 4, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == FL4)
+                implementer_Item(9, 3, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == FL5)
+                implementer_Item(10, 5, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == FL6)
+                implementer_Item(10, 6, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == FL7)
+                implementer_Item(9, 6, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == FL8)
+                implementer_Item(9, 5, 1, 1, x, y, jeu->fenetre);
+
             else if (grille[x][y] == P11)
                 implementer_Bridge(1, 1, 1, 1, x, y, jeu->fenetre);
             else if (grille[x][y] == P12)
@@ -395,6 +434,9 @@ void Map::dessiner_top(Jeu *jeu)
                 implementer_Bridge(4, 2, 1, 1, x, y, jeu->fenetre);
             else if (grille[x][y] == P43)
                 implementer_Bridge(4, 3, 1, 1, x, y, jeu->fenetre);
+
+            else if (grille[x][y] == FON)
+                implementer_Fontaine(1, 0.5, 4, 4.5, x + 3, y + 3, jeu->fenetre);
 
             if (jeu->gold.grille[x][y] == true)
                 jeu->gold.afficherGold(jeu);

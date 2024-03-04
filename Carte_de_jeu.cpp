@@ -4,8 +4,8 @@
 // Petite île
 void map_1(Map *map)
 {
-    map->T_LARGEUR = 14;
-    map->T_HAUTEUR = 14;
+    map->T_LARGEUR = 20;
+    map->T_HAUTEUR = 20;
     
     // Ajuster le nombre de lignes
     map->grille.resize(map->T_LARGEUR);
@@ -25,24 +25,31 @@ void map_1(Map *map)
     map->textureMur.loadFromFile(map->TilesetMur);
     map->textureItem.loadFromFile(map->TilesetItem);
     map->textureBridge.loadFromFile(map->TilesetBridge);
+    map->textureFontaine.loadFromFile(map->TilesetFontaine);
     // Initialisation simple de la grille avec des murs autour et du sol à l'intérieur
 
 
 
-    map->grille[0]  = {F08,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F07};
-    map->grille[1]  = {F11,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,F09};
-    map->grille[2]  = {F11,EAU,R04,R12,R12,R12,R12,R12,R12,R12,R12,R03,EAU,F09};
-    map->grille[3]  = {F11,EAU,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,EAU,F09};
-    map->grille[4]  = {F11,EAU,R09,Sol,Sol,Sol,Sol,Sol,M07,Sol,Sol,R11,EAU,F09};
-    map->grille[5]  = {F11,EAU,R09,Sol,Sol,RO2,Sol,Sol,M17,M02,Sol,R11,EAU,F09};
-    map->grille[6]  = {F11,EAU,R09,Sol,AR1,Sol,Sol,PLA,Sol,Sol,Sol,R11,EAU,F09};
-    map->grille[7]  = {F11,EAU,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,EAU,F09};
-    map->grille[8]  = {F11,EAU,R09,Sol,Sol,Sol,Sol,Sol,BU1,Sol,Sol,R11,EAU,F09};
-    map->grille[9]  = {F11,EAU,R09,Sol,Sol,Sol,Sol,Sol,Sol,AR1,Sol,R11,EAU,F09};
-    map->grille[10] = {F11,EAU,R09,Sol,BU2,Sol,Sol,Sol,Sol,Sol,Sol,R11,EAU,F09};
-    map->grille[11] = {F11,EAU,R01,R10,R10,R10,R10,R10,R10,R10,R10,R02,EAU,F09};
-    map->grille[12] = {F11,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,F09};
-    map->grille[13] = {F05,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F06};
+    map->grille[0]  = {XXX,F08,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F07,XXX};
+    map->grille[1]  = {F08,F02,EAU,EAU,EAU,EAU,EAU,EAU,R04,R12,R12,R12,R12,R12,R03,EAU,EAU,EAU,F01,F07};
+    map->grille[2]  = {F11,EAU,R04,R12,R03,EAU,R04,R12,R06,Sol,Sol,RO1,Sol,Sol,R05,R12,R03,EAU,EAU,F09};
+    map->grille[3]  = {F11,EAU,R09,Sol,R05,R03,R09,AR3,Sol,Sol,Sol,Sol,RO2,Sol,Sol,POT,R11,EAU,EAU,F09};
+    map->grille[4]  = {F11,EAU,R09,Sol,FL3,R11,R09,Sol,Sol,FL2,Sol,Sol,Sol,Sol,FL2,Sol,R05,R03,EAU,F09};
+    map->grille[5]  = {F11,R04,R06,FL1,Sol,R11,R09,RO2,Sol,Sol,POT,Sol,Sol,Sol,AR3,Sol,Sol,R11,EAU,F09};
+    map->grille[6]  = {F11,R09,AR3,Sol,Sol,R05,R06,Sol,Sol,M16,M03,M02,Sol,Sol,Sol,Sol,Sol,R05,R03,F09};
+    map->grille[7]  = {F11,R09,FL2,Sol,Sol,AR3,RO1,Sol,Sol,M09,FL3,Sol,Sol,Sol,Sol,FL6,Sol,Sol,R11,F09};
+    map->grille[8]  = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,AR3,M09,Sol,Sol,BU2,Sol,POT,Sol,Sol,Sol,R11,F09};
+    map->grille[9]  = {F11,R09,Sol,Sol,Sol,FL2,Sol,Sol,Sol,M08,Sol,FON,XXX,XXX,XXX,Sol,Sol,RO2,R11,F09};
+    map->grille[10] = {F11,R09,Sol,AR3,FL1,Sol,Sol,Sol,Sol,Sol,Sol,XXX,XXX,XXX,XXX,PAN,Sol,Sol,R11,F09};
+    map->grille[11] = {F11,R09,FL4,Sol,PLA,Sol,Sol,AR3,Sol,Sol,Sol,XXX,XXX,XXX,XXX,BU2,FL6,Sol,R11,F09};
+    map->grille[12] = {F11,R09,Sol,Sol,Sol,FL3,Sol,Sol,FL1,M07,Sol,XXX,XXX,XXX,XXX,Sol,Sol,Sol,R11,F09};
+    map->grille[13] = {F11,R09,BU1,Sol,Sol,AR3,Sol,Sol,Sol,M09,Sol,Sol,Sol,BU1,Sol,Sol,BU2,FL6,R11,F09};
+    map->grille[14] = {F11,R01,R07,AR3,Sol,Sol,Sol,Sol,Sol,M09,BU1,FL7,Sol,Sol,Sol,Sol,Sol,R08,R02,F09};
+    map->grille[15] = {F11,EAU,R09,Sol,FL4,Sol,Sol,FL4,Sol,M17,M03,M02,BU2,Sol,Sol,FL5,Sol,R11,EAU,F09};
+    map->grille[16] = {F11,EAU,R01,R07,Sol,Sol,AR3,Sol,FL1,Sol,Sol,Sol,FL8,Sol,Sol,BU2,Sol,R11,EAU,F09};
+    map->grille[17] = {F11,EAU,EAU,R01,R10,R10,R07,BU2,Sol,Sol,R08,R10,R07,Sol,BU1,R08,R10,R02,EAU,F09};
+    map->grille[18] = {F05,F03,EAU,EAU,EAU,EAU,R01,R10,R10,R10,R02,EAU,R01,R10,R10,R02,EAU,EAU,F04,F06};
+    map->grille[19] = {XXX,F05,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F06,XXX};
 }
 
 

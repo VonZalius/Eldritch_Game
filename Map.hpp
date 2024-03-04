@@ -104,15 +104,18 @@ enum TypeTuile
     BA5,            //BarriereSO,
     BA6,            //BarriereNO,
 
+    POT,            //pot
+
 
     AR1,            //Arbre1,
     AR2,            //Arbre2,
     AR3,            //Arbre3,
     BU1,            //Buisson1,
     BU2,            //Buisson2,
-    ROG,            //RocherGrand,
     RO1,            //Rocher1,
     RO2,            //Rocher2,
+    RO3,            //RocherGrand,
+    RO4,            //RocherGrand,
 
     CO1,            //Coffre
     PAN,            //Panneau
@@ -130,6 +133,16 @@ enum TypeTuile
     CH7,            //Champignon Rouge SO
     CH8,            //Champignon Rouge NO
 
+    FL1,            //Fleur Rose NE
+    FL2,            //Fleur Rose SE
+    FL3,            //Fleur Rose SO
+    FL4,            //Fleur Rose NO
+    FL5,            //Fleur Bleu clair NE
+    FL6,            //Fleur Bleu clair SE
+    FL7,            //Fleur Bleu clair SO
+    FL8,            //Fleur Bleu clair NO
+
+
 
     P11,            //Pont1_1,
     P12,            //Pont1_2,
@@ -142,18 +155,20 @@ enum TypeTuile
     P33,            //Pont3_3,
     P41,            //Pont4_1,
     P42,            //Pont4_2,
-    P43             //Pont4_3 
+    P43,            //Pont4_3 
 
+    FON            // Fontaine
 };
 
 class Map
 {
 public:
     Map();
-    void implementer_Sol(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre);
-    void implementer_Mures(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre);
-    void implementer_Item(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre);
-    void implementer_Bridge(double x_co, double y_co, double x_taille, double y_taille, int x, int y, sf::RenderWindow& fenetre);
+    void implementer_Sol(double x_co, double y_co, double x_taille, double y_taille, double x, double y, sf::RenderWindow& fenetre);
+    void implementer_Mures(double x_co, double y_co, double x_taille, double y_taille, double x, double y, sf::RenderWindow& fenetre);
+    void implementer_Item(double x_co, double y_co, double x_taille, double y_taille, double x, double y, sf::RenderWindow& fenetre);
+    void implementer_Bridge(double x_co, double y_co, double x_taille, double y_taille, double x, double y, sf::RenderWindow& fenetre);
+    void implementer_Fontaine(double x_co, double y_co, double x_taille, double y_taille, double x, double y, sf::RenderWindow& fenetre);
     void dessiner_bottom(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur);
     void dessiner_top(Jeu *jeu);
     void generer();
@@ -162,14 +177,15 @@ public:
     std::string TilesetMur = "sprites/fantasy_/forest_/forest_ [fencesAndWalls].png";
     std::string TilesetItem = "sprites/fantasy_/forest_/forest_ [resources].png";
     std::string TilesetBridge = "sprites/fantasy_/forest_/forest_ [bridgeVertical].png";
+    std::string TilesetFontaine = "sprites/fantasy_/forest_/forest_ [fountain].png";
 
-    std::unordered_set<TypeTuile> is_Sol = {Sol, CH1, CH2, CH3, CH4, CH5, CH6, CH7, CH8};
+    std::unordered_set<TypeTuile> is_Sol = {Sol, CH1, CH2, CH3, CH4, CH5, CH6, CH7, CH8, FL1, FL2, FL3, FL4, FL5, FL6, FL7, FL8};
 
     //Zone de jeu
     int T_LARGEUR;
     int T_HAUTEUR;
     std::vector<std::vector<TypeTuile>> grille;
-    static const int TailleTuile = 32;
+    static const int TailleTuile = 48;
     int y_initial;
     int x_initial;
     int player_x;
@@ -202,6 +218,11 @@ public:
     static const int TilesetTilesBridgeSIZE = 16;
     sf::Texture textureBridge;
     sf::IntRect rectBridge;
+
+    //Tileset Fontaine
+    static const int TilesetTilesFontaineSIZE = 16;
+    sf::Texture textureFontaine;
+    sf::IntRect rectFontaine;
 
 
     std::vector<std::vector<int>> grilleRNG;

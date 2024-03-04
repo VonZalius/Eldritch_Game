@@ -2,11 +2,9 @@
 
 //950
 Attaques::Attaques() :
-    A(strike_1),
-    B(strike_2),
-    C(strike_3),
-    D(strike_4),
-    E(strike_5)
+    E(strike_5),
+    F(strike_6),
+    G(strike_7)
 {
     if (textureImpact.loadFromFile(impactSprite))
     {
@@ -74,12 +72,12 @@ void Attaques::attaques_rng(Jeu *jeu)
     if (status == true)
     {
         void (*tableauDeFonctions[])(Jeu *jeu) =
-            {A.degatZone, B.degatZone, C.degatZone, D.degatZone, E.degatZone};
+            {E.degatZone, F.degatZone, G.degatZone};
         (*tableauDeFonctions[rng])(jeu);
     }
     else if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() >= 1)
     {
-        rng = rand() % 5;
+        rng = rand() % 3;
         status = true;
         attaqueTimer.restart();
         currentFrame = 0;

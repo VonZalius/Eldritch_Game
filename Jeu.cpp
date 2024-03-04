@@ -48,37 +48,37 @@ void Jeu::initialiserJeu()
     if (sound.musique1.openFromFile(sound.musiqueFile1))
     {
         sound.musique1.setLoop(true);
-        //sound.musique1.setVolume(sound.volume1);
+        sound.musique1.setVolume(sound.volume1);
     }
 
     if (sound.musique2.openFromFile(sound.musiqueFile2))
     {
         sound.musique2.setLoop(true);
-        //sound.musique2.setVolume(sound.volume2);
+        sound.musique2.setVolume(sound.volume2);
     }   
 
     if (sound.buffer1.loadFromFile(sound.SoundFile1))
     {
         sound.sound1.setBuffer(sound.buffer1);
-        //sound.sound1.setVolume(sound.soundVolume1);
+        sound.sound1.setVolume(sound.soundVolume1);
     }
 
     if (sound.buffer2.loadFromFile(sound.SoundFile2))
     {
         sound.sound2.setBuffer(sound.buffer2);
-        //sound.sound2.setVolume(sound.soundVolume2);
+        sound.sound2.setVolume(sound.soundVolume2);
     }
 
     if (sound.buffer3.loadFromFile(sound.SoundFile3))
     {
         sound.sound3.setBuffer(sound.buffer3);
-        //sound.sound3.setVolume(sound.soundVolume3);
+        sound.sound3.setVolume(sound.soundVolume3);
     }
 
     if (sound.buffer4.loadFromFile(sound.SoundFile4))
     {
         sound.sound4.setBuffer(sound.buffer4);
-        //sound.sound4.setVolume(sound.soundVolume4);
+        sound.sound4.setVolume(sound.soundVolume4);
     }
 
 
@@ -108,7 +108,7 @@ void Jeu::initialiserJeu()
         ecranTitre.texteTitre.setCharacterSize(50); // en pixels
         ecranTitre.texteTitre.setFillColor(sf::Color::White);
         float largeurTexte = ecranTitre.texteTitre.getLocalBounds().width;
-        ecranTitre.texteTitre.setPosition((F_Largeur / 2) - (largeurTexte / 2), 550); // Ajustez selon vos besoins
+        ecranTitre.texteTitre.setPosition((F_Largeur / 2) - (largeurTexte / 2), 700); // Ajustez selon vos besoins
     }
 
     if (ecranTitre.fontDemarrage.loadFromFile("sprites/police.ttf"))

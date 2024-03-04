@@ -12,7 +12,7 @@ struct Joueur
     sf::Vector2f position;
     float vitesse = 200.0f; // pixels par seconde
     float vitesseAugmentee = 400.0f;
-    static const int TailleSprite = 64;
+    static const int TailleSprite = 96;
     static const int collision_div = 15;
     sf::Sprite sprite;
 
@@ -73,31 +73,31 @@ struct Sound
 {
     std::string musiqueFile1 = "music/Pixel Music Pack/Ogg/Pixel 3.ogg";
     sf::Music musique1;
-    static const int volume1 = 10;
+    static const int volume1 = 5;
 
     std::string musiqueFile2 = "music/Pixel Music Pack/Ogg/Pixel 1.ogg";
     sf::Music musique2;
-    static const int volume2 = 10;
+    static const int volume2 = 5;
 
     std::string SoundFile1 = "music/FreeSFX/GameSFX/Magic/Retro Magic 11.wav";
     sf::SoundBuffer buffer1;
     sf::Sound sound1;
-    static const int soundVolume1 = 10;
+    static const int soundVolume1 = 5;
 
     std::string SoundFile2 = "music/FreeSFX/GameSFX/Explosion/Retro Explosion Swoshes 04.wav";
     sf::SoundBuffer buffer2;
     sf::Sound sound2;
-    static const int soundVolume2 = 10;
+    static const int soundVolume2 = 5;
 
     std::string SoundFile3 = "music/FreeSFX/GameSFX/Impact/Retro Impact 20.wav";
     sf::SoundBuffer buffer3;
     sf::Sound sound3;
-    static const int soundVolume3 = 10;
+    static const int soundVolume3 = 5;
 
     std::string SoundFile4 = "music/FreeSFX/GameSFX/FootStep/Retro FootStep Grass 01.wav";
     sf::SoundBuffer buffer4;
     sf::Sound sound4;
-    static const int soundVolume4 = 10;
+    static const int soundVolume4 = 5;
     sf::Clock soundClock4;
 };
 
@@ -117,7 +117,7 @@ struct Gold
     int GoldCount;
 
     sf::Sprite sprite;
-    static const int TailleSprite = 32;
+    static const int TailleSprite = 48;
 
     // Taille originelle du Sprite
     static const int Width = 16;
@@ -143,7 +143,7 @@ struct Gold
     std::string SoundFile1 = "music/FreeSFX/GameSFX/PickUp/Retro PickUp Coin 04.wav";
     sf::SoundBuffer buffer1;
     sf::Sound sound1;
-    static const int soundVolume1 = 10;
+    static const int soundVolume1 = 5;
 };
 
 class Jeu
