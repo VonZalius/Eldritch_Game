@@ -1,12 +1,12 @@
 # Name of the program.
-NAME     := Game
+NAME     := Game.exe
 
 # Sources and objects.
 SRCS     := main.cpp Jeu.cpp Map.cpp Titre.cpp Attaques.cpp Gold.cpp Carte_de_jeu.cpp Paternes.cpp
 OBJS     := $(SRCS:.cpp=.o)
 
 # Define all the compiling flags.
-CXX      := g++
+CXX      := x86_64-w64-mingw32-g++
 CXXFLAGS := -Wall -Werror -Wextra
 
 # Compile and create everything.
@@ -14,7 +14,7 @@ all: $(NAME)
 
 # Compile the program with the objects.
 $(NAME): $(OBJS)
-	@$(CXX) $(OBJS) -o $@ -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+	@$(CXX) $(OBJS) -o $@ -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -static
 
 # This won't run if the source files don't exist or are not modified.
 %.o: %.cpp

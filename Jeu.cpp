@@ -1,6 +1,6 @@
 #include "Jeu.hpp"
 
-Jeu::Jeu() : fenetre(sf::VideoMode(F_Largeur, F_Hauteur), "Eldritch"/*, sf::Style::None | sf::Style::Fullscreen*/)
+Jeu::Jeu() : fenetre(sf::VideoMode(F_Largeur, F_Hauteur), "Eldritch", sf::Style::None | sf::Style::Fullscreen)
 {
     initialiserJeu();
 }
