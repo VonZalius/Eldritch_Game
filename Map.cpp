@@ -8,9 +8,9 @@ Map::Map()
 void Map::generer()
 {
     //Choix aléatoire de la map
-    int rng = rand() % 2;
+    int rng = rand() % 3;
     void (*tableAUEAUDeFonctions[])(Map *map) =
-        {map_1, map_2, map_3, map_4, map_5};
+        {map_1, map_2, map_3};
     (*tableAUEAUDeFonctions[rng])(this);
 
     // Limites du rectangle spécifié (en termes de ligne et colonne)
@@ -218,6 +218,15 @@ void Map::dessiner_bottom(sf::RenderWindow& fenetre, const int F_Hauteur, const 
             else if (grille[x][y] == F28)
                 implementer_Sol(21, 3, 1, 1, x, y, fenetre);
 
+            else if (grille[x][y] == F29)
+                implementer_Bridge(9, 5, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F30)
+                implementer_Bridge(9, 6, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F31)
+                implementer_Bridge(8, 6, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == F32)
+                implementer_Bridge(8, 5, 1, 1, x, y, fenetre);
+
             else if (grille[x][y] == R01)
                 implementer_Sol(3, 5, 1, 1, x, y, fenetre);
             else if (grille[x][y] == R02)
@@ -242,6 +251,17 @@ void Map::dessiner_bottom(sf::RenderWindow& fenetre, const int F_Hauteur, const 
                 implementer_Sol(2, 7, 1, 1, x, y, fenetre);
             else if (grille[x][y] == R12)
                 implementer_Sol(1, 6, 1, 1, x, y, fenetre);
+
+            else if (grille[x][y] == P02)
+                implementer_Bridge(1, 2, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == P05)
+                implementer_Bridge(2, 2, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == P08)
+                implementer_Bridge(3, 2, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == P11)
+                implementer_Bridge(7, 2, 1, 1, x, y, fenetre);
+            else if (grille[x][y] == P14)
+                implementer_Bridge(8, 2, 1, 1, x, y, fenetre);
 
             // Sol partout !
             else
@@ -327,19 +347,37 @@ void Map::dessiner_top(Jeu *jeu)
                 implementer_Mures(5, 7.5, 1, 1.5, x, y, jeu->fenetre);
             else if (grille[x][y] == M23)
                 implementer_Mures(6, 7.5, 1, 1.5, x, y, jeu->fenetre);
+
+            else if (grille[x][y] == M24)
+                implementer_Mures(11, 8, 1, 2, x, y, jeu->fenetre);
+            else if (grille[x][y] == M25)
+                implementer_Mures(12.5, 7.5, 1.5, 2.5, x, y, jeu->fenetre);
             
-            else if (grille[x][y] == BA1)
+            else if (grille[x][y] == BA0)
                 implementer_Mures(4, 2, 1, 1, x, y, jeu->fenetre);
-            else if (grille[x][y] == BA2)
+            else if (grille[x][y] == BA1)
                 implementer_Mures(2, 4, 1, 1, x, y, jeu->fenetre);
-            else if (grille[x][y] == BA3)
+            else if (grille[x][y] == BA2)
                 implementer_Mures(1, 3, 1, 1, x, y, jeu->fenetre);
-            else if (grille[x][y] == BA4)
+            else if (grille[x][y] == BA3)
                 implementer_Mures(1, 1, 1, 1, x, y, jeu->fenetre);
-            else if (grille[x][y] == BA5)
+            else if (grille[x][y] == BA4)
                 implementer_Mures(3, 1, 1, 1, x, y, jeu->fenetre);
-            else if (grille[x][y] == BA6)
+            else if (grille[x][y] == BA5)
                 implementer_Mures(3, 3, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == BA6)
+                implementer_Mures(4, 1, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == BA7)
+                implementer_Mures(3, 4, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == BA8)
+                implementer_Mures(4, 3, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == BA9)
+                implementer_Mures(1, 4, 1, 1, x, y, jeu->fenetre);
+
+            else if (grille[x][y] == PO1)
+                implementer_Mures(5, 1.5, 2, 2.5, x + 1, y, jeu->fenetre);
+            else if (grille[x][y] == PO2)
+                implementer_Mures(7, 1.5, 1, 2.5, x, y, jeu->fenetre);
 
             else if (grille[x][y] == POT)
                 implementer_Mures(3, 7, 1, 1, x, y, jeu->fenetre);
@@ -350,6 +388,8 @@ void Map::dessiner_top(Jeu *jeu)
                 implementer_Item(2, 1, 1, 2, x, y, jeu->fenetre);
             else if (grille[x][y] == AR3)
                 implementer_Item(3.5, 1, 2, 2, x + 0.5, y, jeu->fenetre);
+            else if (grille[x][y] == AR4)
+                implementer_Item(6, 1, 1, 2, x, y, jeu->fenetre);
             else if (grille[x][y] == BU1)
                 implementer_Item(1, 3, 1, 1, x, y, jeu->fenetre);
             else if (grille[x][y] == BU2)
@@ -410,30 +450,31 @@ void Map::dessiner_top(Jeu *jeu)
             else if (grille[x][y] == FL8)
                 implementer_Item(9, 5, 1, 1, x, y, jeu->fenetre);
 
-            else if (grille[x][y] == P11)
-                implementer_Bridge(1, 1, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == P01)
+                implementer_Bridge(1, 0.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == P03)
+                implementer_Bridge(1, 3.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == P04)
+                implementer_Bridge(2, 0.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == P06)
+                implementer_Bridge(2, 3.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == P07)
+                implementer_Bridge(3, 0.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == P09)
+                implementer_Bridge(3, 3.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == P10)
+                implementer_Bridge(7, 0.5, 1, 1.5, x, y, jeu->fenetre);
             else if (grille[x][y] == P12)
-                implementer_Bridge(1, 2, 1, 1, x, y, jeu->fenetre);
+                implementer_Bridge(7, 3.5, 1, 1.5, x, y, jeu->fenetre);
             else if (grille[x][y] == P13)
-                implementer_Bridge(1, 3, 1, 1, x, y, jeu->fenetre);
-            else if (grille[x][y] == P21)
-                implementer_Bridge(2, 1, 1, 1, x, y, jeu->fenetre);
-            else if (grille[x][y] == P22)
-                implementer_Bridge(2, 2, 1, 1, x, y, jeu->fenetre);
-            else if (grille[x][y] == P23)
-                implementer_Bridge(2, 3, 1, 1, x, y, jeu->fenetre);
-            else if (grille[x][y] == P31)
-                implementer_Bridge(3, 1, 1, 1, x, y, jeu->fenetre);
-            else if (grille[x][y] == P32)
-                implementer_Bridge(3, 2, 1, 1, x, y, jeu->fenetre);
-            else if (grille[x][y] == P33)
-                implementer_Bridge(3, 3, 1, 1, x, y, jeu->fenetre);
-            else if (grille[x][y] == P41)
-                implementer_Bridge(4, 1, 1, 1, x, y, jeu->fenetre);
-            else if (grille[x][y] == P42)
-                implementer_Bridge(4, 2, 1, 1, x, y, jeu->fenetre);
-            else if (grille[x][y] == P43)
-                implementer_Bridge(4, 3, 1, 1, x, y, jeu->fenetre);
+                implementer_Bridge(8, 0.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == P15)
+                implementer_Bridge(8, 3.5, 1, 1.5, x, y, jeu->fenetre);
+            else if (grille[x][y] == P16)
+                implementer_Bridge(2, 5, 1, 1, x, y, jeu->fenetre);
+            else if (grille[x][y] == P17)
+                implementer_Bridge(7, 5, 1, 1, x, y, jeu->fenetre);
+
 
             else if (grille[x][y] == FON)
                 implementer_Fontaine(1, 0.5, 4, 4.5, x + 3, y + 3, jeu->fenetre);

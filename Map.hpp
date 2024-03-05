@@ -97,12 +97,24 @@ enum TypeTuile
     M22,            //Mur croisement xO,
     M23,            //Mur croisement tout,
 
-    BA1,            //BarriereNS,
-    BA2,            //BarriereEO,
-    BA3,            //BarriereNE,
-    BA4,            //BarriereSE,
-    BA5,            //BarriereSO,
-    BA6,            //BarriereNO,
+    M24,            //Mur grand 1
+    M25,            //Mur grand 2
+
+    BA0,            //BarriereNS,
+    BA1,            //BarriereEO,
+    BA2,            //BarriereNE,
+    BA3,            //BarriereSE,
+    BA4,            //BarriereSO,
+    BA5,            //BarriereNO,
+
+    BA6,            //Barriere fin N,
+    BA7,            //Barriere fin E,
+    BA8,            //Barriere fin S,
+    BA9,            //Barriere fin O,
+
+    PO1,            //Portique 1
+    PO2,            //Portique 2
+
 
     POT,            //pot
 
@@ -110,6 +122,7 @@ enum TypeTuile
     AR1,            //Arbre1,
     AR2,            //Arbre2,
     AR3,            //Arbre3,
+    AR4,            //Arbre4,
     BU1,            //Buisson1,
     BU2,            //Buisson2,
     RO1,            //Rocher1,
@@ -144,18 +157,28 @@ enum TypeTuile
 
 
 
-    P11,            //Pont1_1,
-    P12,            //Pont1_2,
-    P13,            //Pont1_3,
-    P21,            //Pont2_1,
-    P22,            //Pont2_2,
-    P23,            //Pont2_3 
-    P31,            //Pont3_1,
-    P32,            //Pont3_2,
-    P33,            //Pont3_3,
-    P41,            //Pont4_1,
-    P42,            //Pont4_2,
-    P43,            //Pont4_3 
+    P01,            //Pont ligne 1 - 1
+    P02,            //Pont ligne 1 - 2
+    P03,            //Pont ligne 1 - 3
+    P04,            //Pont ligne 2 - 1
+    P05,            //Pont ligne 2 - 2
+    P06,            //Pont ligne 2 - 3
+    P07,            //Pont ligne 3 - 1
+    P08,            //Pont ligne 3 - 2
+    P09,            //Pont ligne 3 - 3
+    P10,            //Pont ligne 4 - 1
+    P11,            //Pont ligne 4 - 2
+    P12,            //Pont ligne 4 - 3
+    P13,            //Pont ligne 5 - 1
+    P14,            //Pont ligne 5 - 2
+    P15,            //Pont ligne 5 - 3
+    P16,            //Pont support O
+    P17,            //Pont support E
+
+    F29,            //Fin eau/terre NE
+    F30,            //Fin eau/terre SE
+    F31,            //Fin eau/terre SO
+    F32,            //Fin eau/terre NO
 
     FON            // Fontaine
 };
@@ -176,10 +199,10 @@ public:
     std::string TilesetSol = "sprites/fantasy_/forest_/forest_.png";
     std::string TilesetMur = "sprites/fantasy_/forest_/forest_ [fencesAndWalls].png";
     std::string TilesetItem = "sprites/fantasy_/forest_/forest_ [resources].png";
-    std::string TilesetBridge = "sprites/fantasy_/forest_/forest_ [bridgeVertical].png";
+    std::string TilesetBridge = "sprites/fantasy_/forest_/forest_ [bridgeHorizontal].png";
     std::string TilesetFontaine = "sprites/fantasy_/forest_/forest_ [fountain].png";
 
-    std::unordered_set<TypeTuile> is_Sol = {Sol, CH1, CH2, CH3, CH4, CH5, CH6, CH7, CH8, FL1, FL2, FL3, FL4, FL5, FL6, FL7, FL8};
+    std::unordered_set<TypeTuile> is_Sol = {Sol, CH1, CH2, CH3, CH4, CH5, CH6, CH7, CH8, FL1, FL2, FL3, FL4, FL5, FL6, FL7, FL8, P02, P05, P08, P11, P14};
 
     //Zone de jeu
     int T_LARGEUR;
@@ -232,7 +255,5 @@ public:
 void map_1(Map *map);
 void map_2(Map *map);
 void map_3(Map *map);
-void map_4(Map *map);
-void map_5(Map *map);
 
 #endif
