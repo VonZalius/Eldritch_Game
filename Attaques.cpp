@@ -29,8 +29,8 @@ Attaques::Attaques() :
     if (textureImpact2.loadFromFile(impactSprite2))
     {
         sprite2.setTexture(textureImpact2);
-        float goodsize = static_cast<float>(TailleSprite2) / static_cast<float>(Width2);
-        sprite2.setScale(goodsize, goodsize);
+        float goodsize2 = static_cast<float>(TailleSprite2) / static_cast<float>(Width2);
+        sprite2.setScale(goodsize2, goodsize2);
         //sprite.setOrigin(Width2 / 2, Height2 / 2);
         for (int ligne = TileStartY2; ligne <= TileEndY2; ++ligne)
         {

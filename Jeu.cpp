@@ -394,7 +394,7 @@ void Jeu::dessiner()
     map.dessiner_bottom(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
     //fenetre.draw(joueur.sprite); // Dessiner le joueur
     //gold.afficherGold(this);
-    attaques.dessiner_zone(this);
+    //attaques.dessiner_zone(this);
     map.dessiner_top(this); // Dessiner la carte
 
     gold.texteCount.setString(std::to_string(gold.GoldCount));

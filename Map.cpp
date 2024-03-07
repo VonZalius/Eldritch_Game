@@ -479,6 +479,33 @@ void Map::dessiner_top(Jeu *jeu)
             else if (grille[x][y] == FON)
                 implementer_Fontaine(1, 0.5, 4, 4.5, x + 3, y + 3, jeu->fenetre);
 
+            
+
+            if (jeu->attaques.grille_degat[x][y] == Ombre && is_Sol.find(grille[x][y]) != is_Sol.end())
+            {
+                if (jeu->attaques.animationTimer.getElapsedTime().asSeconds() > ((jeu->attaques.Time_to[jeu->attaques.paterne_phases - 1] - jeu->attaques.Time_to[jeu->attaques.paterne_phases - 2]) / jeu->attaques.framesImpact.size()))
+                {
+                    jeu->attaques.sprite.setTextureRect(jeu->attaques.framesImpact[jeu->attaques.currentFrame]);
+                    jeu->attaques.currentFrame = (jeu->attaques.currentFrame + 1) % jeu->attaques.framesImpact.size() ;
+                    jeu->attaques.animationTimer.restart();
+                }
+                jeu->attaques.sprite.setPosition((x * TailleTuile) + x_initial, (y * TailleTuile) + y_initial);
+                jeu->fenetre.draw(jeu->attaques.sprite);
+            }
+            else if (jeu->attaques.grille_degat[x][y] == Explose && is_Sol.find(grille[x][y]) != is_Sol.end())
+            {
+                if (jeu->attaques.animationTimer.getElapsedTime().asSeconds() > ((jeu->attaques.Time_to[jeu->attaques.paterne_phases - 1] - jeu->attaques.Time_to[jeu->attaques.paterne_phases - 2]) / jeu->attaques.framesImpact2.size()) )
+                {
+                    jeu->attaques.sprite2.setTextureRect(jeu->attaques.framesImpact2[jeu->attaques.currentFrame2]);
+                    jeu->attaques.currentFrame2 = (jeu->attaques.currentFrame2 + 1) % jeu->attaques.framesImpact2.size() ;
+                    jeu->attaques.animationTimer.restart();
+                }
+                jeu->attaques.sprite2.setPosition((x * TailleTuile) + x_initial - (jeu->attaques.Width2 / 2), (y * TailleTuile) + y_initial - (jeu->attaques.Height2 / 2));
+                jeu->fenetre.draw(jeu->attaques.sprite2);
+            }
+
+
+            
             if (jeu->gold.grille[x][y] == true)
                 jeu->gold.afficherGold(jeu);
         }
