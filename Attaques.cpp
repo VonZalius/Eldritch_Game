@@ -97,7 +97,7 @@ void Attaques::dessiner_zone(Jeu *jeu)
         for (int x = 0; x < jeu->map.T_LARGEUR; ++x)
         {
             // Sol partout !
-            if (grille_degat[x][y] == Ombré && jeu->map.is_Sol.find(jeu->map.grille[x][y]) != jeu->map.is_Sol.end())
+            if (grille_degat[x][y] == Ombre && jeu->map.is_Sol.find(jeu->map.grille[x][y]) != jeu->map.is_Sol.end())
             {
                 if (animationTimer.getElapsedTime().asSeconds() > ((Time_to[paterne_phases - 1] - Time_to[paterne_phases - 2]) / framesImpact.size()))
                 {
@@ -108,7 +108,7 @@ void Attaques::dessiner_zone(Jeu *jeu)
                 sprite.setPosition((x * jeu->map.TailleTuile) + jeu->map.x_initial, (y * jeu->map.TailleTuile) + jeu->map.y_initial);
                 jeu->fenetre.draw(sprite);
             }
-            else if (grille_degat[x][y] == Explosé && jeu->map.is_Sol.find(jeu->map.grille[x][y]) != jeu->map.is_Sol.end())
+            else if (grille_degat[x][y] == Explose && jeu->map.is_Sol.find(jeu->map.grille[x][y]) != jeu->map.is_Sol.end())
             {
                 if (animationTimer.getElapsedTime().asSeconds() > ((Time_to[paterne_phases - 1] - Time_to[paterne_phases - 2]) / framesImpact2.size()) )
                 {

@@ -111,6 +111,17 @@ void Jeu::initialiserJeu()
         ecranTitre.texteTitre.setPosition((F_Largeur / 2) - (largeurTexte / 2), 700); // Ajustez selon vos besoins
     }
 
+    if (ecranTitre.fontVersion.loadFromFile("sprites/police.ttf"))
+    {
+        ecranTitre.texteVersion.setFont(ecranTitre.font); 
+        ecranTitre.texteVersion.setString(ecranTitre.Version);
+        ecranTitre.texteVersion.setCharacterSize(50); // en pixels
+        ecranTitre.texteVersion.setFillColor(sf::Color::White);
+        //float largeurTexte = ecranTitre.texteVersion.getLocalBounds().width;
+        //float hauteurTexte = ecranTitre.texteVersion.getLocalBounds().height;
+        ecranTitre.texteVersion.setPosition(50, F_Hauteur - 100); // Ajustez selon vos besoins
+    }
+
     if (ecranTitre.fontDemarrage.loadFromFile("sprites/police.ttf"))
     {
         ecranTitre.texteDemarrage3.setFont(ecranTitre.fontDemarrage); 
@@ -181,7 +192,6 @@ void Jeu::executer()
 
         sf::Clock horloge;
         attaques.attaqueTimer.restart();
-        gold.goldTimer.restart();
         map.generer();
         attaques.generer(map.T_LARGEUR, map.T_HAUTEUR);
         gold.generer(map.T_LARGEUR, map.T_HAUTEUR);
@@ -386,6 +396,9 @@ void Jeu::dessiner()
     //gold.afficherGold(this);
     attaques.dessiner_zone(this);
     map.dessiner_top(this); // Dessiner la carte
+
+    gold.texteCount.setString(std::to_string(gold.GoldCount));
+    fenetre.draw(gold.texteCount);
 
     fenetre.display();
 }

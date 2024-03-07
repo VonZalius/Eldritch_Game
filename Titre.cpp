@@ -25,6 +25,7 @@ void EcranTitre::afficherEcranTitre(sf::RenderWindow& fenetre)
         fenetre.draw(spriteEcranTitre);
         fenetre.draw(spriteEldritch);
         fenetre.draw(texteTitre);
+        fenetre.draw(texteVersion);
         fenetre.display();
     }
 }
@@ -73,11 +74,15 @@ void EcranTitre::killed(Jeu *jeu)
     sf::Event evenement;
     sf::Clock timer;
     timer.restart();
-    while (jeu->fenetre.isOpen() && timer.getElapsedTime().asSeconds() <= 3)
+    while (jeu->fenetre.isOpen())
     {
         while (jeu->fenetre.pollEvent(evenement))
+        {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
                 jeu->fenetre.close();
+            else if (evenement.type == sf::Event::KeyPressed && timer.getElapsedTime().asSeconds() > 1) 
+                return;
+        }
         texteKilled.setString("Vous etes mort...\nScore : " + std::to_string(jeu->gold.GoldCount));
         float largeurTexte = texteKilled.getLocalBounds().width;
         float hauteurTexte = texteKilled.getLocalBounds().height;
@@ -85,6 +90,7 @@ void EcranTitre::killed(Jeu *jeu)
         jeu->fenetre.clear();
         jeu->fenetre.draw(spriteEcranTitre);
         jeu->fenetre.draw(texteKilled);
+        jeu->fenetre.draw(texteVersion);
         jeu->fenetre.display();
     }
 }

@@ -22,8 +22,8 @@ enum ZoneDegats
 enum Zones
 {
     Normal,
-    Ombré,
-    Explosé
+    Ombre,
+    Explose
 };
 
 typedef void (*FonctionPtr)(Jeu*);

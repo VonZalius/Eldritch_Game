@@ -35,7 +35,7 @@ Gold::Gold()
     if (buffer1.loadFromFile(SoundFile1))
     {
         sound1.setBuffer(buffer1);
-        //sound3.setVolume(soundVolume3);
+        sound1.setVolume(soundVolume1);
     }
 
     status = false;
@@ -62,17 +62,14 @@ void Gold::generer(int T_LARGEUR, int T_HAUTEUR)
 void Gold::gold_rng(Jeu *jeu)
 {
 
-    if (goldTimer.getElapsedTime().asSeconds() >= 1)
+    while (status == false)
     {
-        while (status == false)
+        rngX = rand() % jeu->map.T_LARGEUR;
+        rngY = rand() % jeu->map.T_HAUTEUR;
+        if (jeu->map.is_Sol.find(jeu->map.grille[rngX][rngY]) != jeu->map.is_Sol.end())
         {
-            rngX = rand() % jeu->map.T_LARGEUR;
-            rngY = rand() % jeu->map.T_HAUTEUR;
-            if (jeu->map.is_Sol.find(jeu->map.grille[rngX][rngY]) != jeu->map.is_Sol.end())
-            {
-                grille[rngX][rngY] = true;
-                status = true;
-            }
+            grille[rngX][rngY] = true;
+            status = true;
         }
     }
 }
@@ -91,9 +88,6 @@ void Gold::afficherGold(Jeu *jeu)
             }
         }
     }
-
-    texteCount.setString(std::to_string(GoldCount));
-    jeu->fenetre.draw(texteCount);
 }
 
 void Gold::getGold(int x, int y)
@@ -102,5 +96,4 @@ void Gold::getGold(int x, int y)
     grille[x][y] = false;
     status = false;
     GoldCount++;
-    goldTimer.restart();
 }

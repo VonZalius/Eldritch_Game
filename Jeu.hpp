@@ -60,6 +60,10 @@ struct EcranTitre
     sf::Font font;
     sf::Text texteTitre;
 
+    sf::Font fontVersion;
+    sf::Text texteVersion;
+    std::string Version = "Alpha : 0.1.1";
+
     sf::Font fontDemarrage;
     sf::Text texteDemarrage3;
     sf::Text texteDemarrage2;
@@ -113,7 +117,6 @@ struct Gold
     bool status;
     int rngX;
     int rngY;
-    sf::Clock goldTimer;
     int GoldCount;
 
     sf::Sprite sprite;

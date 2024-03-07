@@ -32,7 +32,7 @@ bool KO_checker(Jeu *jeu)
         int tileY = y / jeu->map.TailleTuile;
 
         // Vérification si le point n'est pas sur une tuile 'Sol'
-        if (jeu->attaques.grille_degat[tileX][tileY] == Explosé)
+        if (jeu->attaques.grille_degat[tileX][tileY] == Explose)
         {
             return true; // Collision détectée
         }
@@ -47,7 +47,7 @@ void OK_reset(Jeu *jeu)
     {
         for (int x = 0; x < jeu->map.T_LARGEUR; ++x)
         { 
-            if (jeu->attaques.grille_degat[x][y] == Explosé)
+            if (jeu->attaques.grille_degat[x][y] == Explose)
             jeu->attaques.grille_degat[x][y] = Normal;
         }
     }
@@ -64,7 +64,7 @@ void OK_reset(Jeu *jeu)
 
     int E_rng;
 
-    //Phases Ombrée
+    //Phases Ombree
     if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() < jeu->attaques.Time_to[0])
     {
         if (jeu->attaques.paterne_phases == 0)
@@ -75,7 +75,7 @@ void OK_reset(Jeu *jeu)
                 { 
                     E_rng = rand() % 8;
                     if (x < jeu->map.T_LARGEUR / 2 && jeu->attaques.grille_degat[x][y] == Normal && E_rng != 0)
-                        jeu->attaques.grille_degat[x][y] = Ombré;
+                        jeu->attaques.grille_degat[x][y] = Ombre;
                 }
             }
             jeu->attaques.paterne_phases++;
@@ -92,8 +92,8 @@ void OK_reset(Jeu *jeu)
                 for (int x = 0; x < jeu->map.T_LARGEUR; ++x)
                 { 
                     //Explosion
-                    if (jeu->attaques.grille_degat[x][y] == Ombré)
-                        jeu->attaques.grille_degat[x][y] = Explosé;
+                    if (jeu->attaques.grille_degat[x][y] == Ombre)
+                        jeu->attaques.grille_degat[x][y] = Explose;
                 }
             }
             jeu->sound.sound3.play();
@@ -124,7 +124,7 @@ void strike_2(Jeu *jeu)
 
     int E_rng;
 
-    //Phases Ombrée
+    //Phases Ombree
     if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() < jeu->attaques.Time_to[0])
     {
         if (jeu->attaques.paterne_phases == 0)
@@ -135,7 +135,7 @@ void strike_2(Jeu *jeu)
                 { 
                     E_rng = rand() % 8;
                     if (x >= jeu->map.T_LARGEUR / 2 && jeu->attaques.grille_degat[x][y] == Normal && E_rng != 0)
-                        jeu->attaques.grille_degat[x][y] = Ombré;
+                        jeu->attaques.grille_degat[x][y] = Ombre;
                 }
             }
             jeu->attaques.paterne_phases++;
@@ -152,8 +152,8 @@ void strike_2(Jeu *jeu)
                 for (int x = 0; x < jeu->map.T_LARGEUR; ++x)
                 { 
                     //Explosion
-                    if (jeu->attaques.grille_degat[x][y] == Ombré)
-                        jeu->attaques.grille_degat[x][y] = Explosé;
+                    if (jeu->attaques.grille_degat[x][y] == Ombre)
+                        jeu->attaques.grille_degat[x][y] = Explose;
                 }
             }
             jeu->sound.sound3.play();
@@ -184,7 +184,7 @@ void strike_3(Jeu *jeu)
 
     int E_rng;
 
-    //Phases Ombrée
+    //Phases Ombree
     if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() < jeu->attaques.Time_to[0])
     {
         if (jeu->attaques.paterne_phases == 0)
@@ -195,7 +195,7 @@ void strike_3(Jeu *jeu)
                 { 
                     E_rng = rand() % 8;
                     if (y < jeu->map.T_HAUTEUR / 2 && jeu->attaques.grille_degat[x][y] == Normal && E_rng != 0)
-                        jeu->attaques.grille_degat[x][y] = Ombré;
+                        jeu->attaques.grille_degat[x][y] = Ombre;
                 }
             }
             jeu->attaques.paterne_phases++;
@@ -212,8 +212,8 @@ void strike_3(Jeu *jeu)
                 for (int x = 0; x < jeu->map.T_LARGEUR; ++x)
                 { 
                     //Explosion
-                    if (jeu->attaques.grille_degat[x][y] == Ombré)
-                        jeu->attaques.grille_degat[x][y] = Explosé;
+                    if (jeu->attaques.grille_degat[x][y] == Ombre)
+                        jeu->attaques.grille_degat[x][y] = Explose;
                 }
             }
             jeu->sound.sound3.play();
@@ -244,7 +244,7 @@ void strike_4(Jeu *jeu)
 
     int E_rng;
 
-    //Phases Ombrée
+    //Phases Ombree
     if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() < jeu->attaques.Time_to[0])
     {
         if (jeu->attaques.paterne_phases == 0)
@@ -255,7 +255,7 @@ void strike_4(Jeu *jeu)
                 { 
                     E_rng = rand() % 8;
                     if (y >= jeu->map.T_HAUTEUR / 2 && jeu->attaques.grille_degat[x][y] == Normal && E_rng != 0)
-                        jeu->attaques.grille_degat[x][y] = Ombré;
+                        jeu->attaques.grille_degat[x][y] = Ombre;
                 }
             }
             jeu->attaques.paterne_phases++;
@@ -272,8 +272,8 @@ void strike_4(Jeu *jeu)
                 for (int x = 0; x < jeu->map.T_LARGEUR; ++x)
                 { 
                     //Explosion
-                    if (jeu->attaques.grille_degat[x][y] == Ombré)
-                        jeu->attaques.grille_degat[x][y] = Explosé;
+                    if (jeu->attaques.grille_degat[x][y] == Ombre)
+                        jeu->attaques.grille_degat[x][y] = Explose;
                 }
             }
             jeu->sound.sound3.play();
@@ -297,15 +297,16 @@ void strike_4(Jeu *jeu)
 //Case aléatoire 1/2
 void strike_5(Jeu *jeu)
 {
-    jeu->attaques.Time_to.resize(2);
+    jeu->attaques.Time_to.resize(3);
 
     jeu->attaques.Time_to[0] = 1;
     jeu->attaques.Time_to[1] = 1.8;
+    jeu->attaques.Time_to[2] = 1.2;
 
     int E_rng;
 
 
-    //Phases Ombrée
+    //Phases Ombree
     if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() < jeu->attaques.Time_to[0])
     {
         if (jeu->attaques.paterne_phases == 0)
@@ -316,7 +317,7 @@ void strike_5(Jeu *jeu)
                 { 
                     E_rng = rand() % 2;
                     if (E_rng == 0 && jeu->attaques.grille_degat[x][y] == Normal)
-                        jeu->attaques.grille_degat[x][y] = Ombré;
+                        jeu->attaques.grille_degat[x][y] = Ombre;
                 }
             }
             jeu->attaques.paterne_phases++;
@@ -333,15 +334,15 @@ void strike_5(Jeu *jeu)
                 for (int x = 0; x < jeu->map.T_LARGEUR; ++x)
                 { 
                     //Explosion
-                    if (jeu->attaques.grille_degat[x][y] == Ombré)
-                        jeu->attaques.grille_degat[x][y] = Explosé;
+                    if (jeu->attaques.grille_degat[x][y] == Ombre)
+                        jeu->attaques.grille_degat[x][y] = Explose;
                 }
             }
             jeu->sound.sound3.play();
             jeu->attaques.paterne_phases++;
         }
 
-        if (KO_checker(jeu))
+        if (KO_checker(jeu) && jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() < jeu->attaques.Time_to[2])
             jeu->killedStatus = true;   
     }
 
@@ -358,14 +359,15 @@ void strike_5(Jeu *jeu)
 //Patche aléatoire
 void strike_6(Jeu *jeu)
 {
-    jeu->attaques.Time_to.resize(2);
+    jeu->attaques.Time_to.resize(3);
 
     jeu->attaques.Time_to[0] = 1;
     jeu->attaques.Time_to[1] = 1.8;
+    jeu->attaques.Time_to[2] = 1.2;
     int rayon = 9; // Définir le rayon d'action
     int E_rng;
 
-    //Phases Ombrée
+    //Phases Ombree
     if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() < jeu->attaques.Time_to[0])
     {
         if (jeu->attaques.paterne_phases == 0)
@@ -385,9 +387,9 @@ void strike_6(Jeu *jeu)
                         if (std::sqrt(std::pow(x - X_rng, 2) + std::pow(y - Y_rng, 2)) <= rayon)
                         {
                             E_rng = rand() % 8;
-                            // Si la case est "Normal", la changer en "Ombré"
+                            // Si la case est "Normal", la changer en "Ombre"
                             if (jeu->attaques.grille_degat[x][y] == Normal && E_rng != 0)
-                                jeu->attaques.grille_degat[x][y] = Ombré;
+                                jeu->attaques.grille_degat[x][y] = Ombre;
                         }
                     }
                 }
@@ -407,15 +409,15 @@ void strike_6(Jeu *jeu)
                 for (int x = 0; x < jeu->map.T_LARGEUR; ++x)
                 { 
                     //Explosion
-                    if (jeu->attaques.grille_degat[x][y] == Ombré)
-                        jeu->attaques.grille_degat[x][y] = Explosé;
+                    if (jeu->attaques.grille_degat[x][y] == Ombre)
+                        jeu->attaques.grille_degat[x][y] = Explose;
                 }
             }
             jeu->sound.sound3.play();
             jeu->attaques.paterne_phases++;
         }
 
-        if (KO_checker(jeu))
+        if (KO_checker(jeu) && jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() < jeu->attaques.Time_to[2])
             jeu->killedStatus = true;   
     }
 
@@ -432,15 +434,16 @@ void strike_6(Jeu *jeu)
 //3 petit patche aléatoire
 void strike_7(Jeu *jeu)
 {
-    jeu->attaques.Time_to.resize(2);
+    jeu->attaques.Time_to.resize(3);
 
     jeu->attaques.Time_to[0] = 1;
     jeu->attaques.Time_to[1] = 1.8;
+    jeu->attaques.Time_to[2] = 1.2;
     int rayon = 3; // Définir le rayon d'action
     int nbr_patche = 7;
     //int E_rng;
 
-    //Phases Ombrée
+    //Phases Ombree
     if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() < jeu->attaques.Time_to[0])
     {
         if (jeu->attaques.paterne_phases == 0)
@@ -462,9 +465,9 @@ void strike_7(Jeu *jeu)
                             if (std::sqrt(std::pow(x - X_rng, 2) + std::pow(y - Y_rng, 2)) <= rayon)
                             {
                                 //E_rng = rand() % 8;
-                                // Si la case est "Normal", la changer en "Ombré"
+                                // Si la case est "Normal", la changer en "Ombre"
                                 if (jeu->attaques.grille_degat[x][y] == Normal /*&& E_rng != 0*/)
-                                    jeu->attaques.grille_degat[x][y] = Ombré;
+                                    jeu->attaques.grille_degat[x][y] = Ombre;
                             }
                         }
                     }
@@ -484,15 +487,15 @@ void strike_7(Jeu *jeu)
                 for (int x = 0; x < jeu->map.T_LARGEUR; ++x)
                 { 
                     //Explosion
-                    if (jeu->attaques.grille_degat[x][y] == Ombré)
-                        jeu->attaques.grille_degat[x][y] = Explosé;
+                    if (jeu->attaques.grille_degat[x][y] == Ombre)
+                        jeu->attaques.grille_degat[x][y] = Explose;
                 }
             }
             jeu->sound.sound3.play();
             jeu->attaques.paterne_phases++;
         }
 
-        if (KO_checker(jeu))
+        if (KO_checker(jeu) && jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() < jeu->attaques.Time_to[2])
             jeu->killedStatus = true;   
     }
 
