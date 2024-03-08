@@ -292,8 +292,6 @@ void Map::dessiner_top(Jeu *jeu)
     {
         for (int x = 0; x < T_LARGEUR; ++x)
         {
-            if (jeu->joueur.position.y > (y * TailleTuile) + y_initial)
-                jeu->fenetre.draw(jeu->joueur.sprite);
 
 
             if (grille[x][y] == M00)
@@ -480,6 +478,8 @@ void Map::dessiner_top(Jeu *jeu)
                 implementer_Fontaine(1, 0.5, 4, 4.5, x + 3, y + 3, jeu->fenetre);
 
             
+            if (jeu->joueur.position.y > (y * TailleTuile) + y_initial && jeu->joueur.position.x > (x * TailleTuile) + x_initial )
+                jeu->fenetre.draw(jeu->joueur.sprite);
 
             if (jeu->attaques.grille_degat[x][y] == Ombre && is_Sol.find(grille[x][y]) != is_Sol.end())
             {
@@ -503,7 +503,6 @@ void Map::dessiner_top(Jeu *jeu)
                 jeu->attaques.sprite2.setPosition((x * TailleTuile) + x_initial - (jeu->attaques.Width2 / 2), (y * TailleTuile) + y_initial - (jeu->attaques.Height2 / 2));
                 jeu->fenetre.draw(jeu->attaques.sprite2);
             }
-
 
             
             if (jeu->gold.grille[x][y] == true)

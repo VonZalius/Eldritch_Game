@@ -316,7 +316,7 @@ void strike_5(Jeu *jeu)
                 for (int x = 0; x < jeu->map.T_LARGEUR; ++x)
                 { 
                     E_rng = rand() % 2;
-                    if (E_rng == 0 && jeu->attaques.grille_degat[x][y] == Normal)
+                    if (E_rng == 0 && jeu->gold.grille[x][y] == false && jeu->attaques.grille_degat[x][y] == Normal)
                         jeu->attaques.grille_degat[x][y] = Ombre;
                 }
             }
@@ -356,7 +356,7 @@ void strike_5(Jeu *jeu)
     }
 }
 
-//Patche aléatoire
+//Patche aléatoire sur un coté
 void strike_6(Jeu *jeu)
 {
     jeu->attaques.Time_to.resize(3);
@@ -364,16 +364,37 @@ void strike_6(Jeu *jeu)
     jeu->attaques.Time_to[0] = 1;
     jeu->attaques.Time_to[1] = 1.8;
     jeu->attaques.Time_to[2] = 1.2;
-    int rayon = 9; // Définir le rayon d'action
+    int rayon = 10; // Définir le rayon d'action
     int E_rng;
+    int X_rng;
+    int Y_rng;
 
     //Phases Ombree
     if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() < jeu->attaques.Time_to[0])
     {
         if (jeu->attaques.paterne_phases == 0)
         {
-            int X_rng = rand() % jeu->map.T_LARGEUR;
-            int Y_rng = rand() % jeu->map.T_HAUTEUR;
+            int side = rand() % 4;
+            if (side == 0)
+            {
+                X_rng = rand() % jeu->map.T_LARGEUR;
+                Y_rng = 0;
+            }
+            else if (side == 1)
+            {
+                X_rng = rand() % jeu->map.T_LARGEUR;
+                Y_rng = jeu->map.T_HAUTEUR - 1;
+            }
+            else if (side == 2)
+            {
+                X_rng = 0;
+                Y_rng = rand() % jeu->map.T_HAUTEUR;
+            }
+            else if (side == 3)
+            {
+                X_rng = jeu->map.T_LARGEUR - 1;
+                Y_rng = rand() % jeu->map.T_HAUTEUR;
+            }
             // Parcourir les cases dans le rayon autour de (X_rng, Y_rng)
             for (int x = X_rng - rayon; x <= X_rng + rayon; ++x)
             {
@@ -386,9 +407,9 @@ void strike_6(Jeu *jeu)
                         // Vérifier si la case est à une distance de 5 ou moins de (X_rng, Y_rng)
                         if (std::sqrt(std::pow(x - X_rng, 2) + std::pow(y - Y_rng, 2)) <= rayon)
                         {
-                            E_rng = rand() % 8;
+                            E_rng = rand() % 7;
                             // Si la case est "Normal", la changer en "Ombre"
-                            if (jeu->attaques.grille_degat[x][y] == Normal && E_rng != 0)
+                            if (jeu->attaques.grille_degat[x][y] == Normal && E_rng != 0 && jeu->gold.grille[x][y] == false )
                                 jeu->attaques.grille_degat[x][y] = Ombre;
                         }
                     }
@@ -466,7 +487,7 @@ void strike_7(Jeu *jeu)
                             {
                                 //E_rng = rand() % 8;
                                 // Si la case est "Normal", la changer en "Ombre"
-                                if (jeu->attaques.grille_degat[x][y] == Normal /*&& E_rng != 0*/)
+                                if (jeu->attaques.grille_degat[x][y] == Normal && jeu->gold.grille[x][y] == false )
                                     jeu->attaques.grille_degat[x][y] = Ombre;
                             }
                         }
