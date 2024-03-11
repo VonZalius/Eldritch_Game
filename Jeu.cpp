@@ -183,21 +183,45 @@ void Jeu::executer()
 {
     while (fenetre.isOpen())
     {
+        //Home
         sound.musique1.play();
         ecranTitre.afficherEcranTitre(fenetre);
+        sound.sound1.play();
+
+        //HUb
+        sf::Clock horloge;
+        map.hub();
+        attaques.generer(map.T_LARGEUR, map.T_HAUTEUR);
+        gold.generer(map.T_LARGEUR, map.T_HAUTEUR);
+        joueur.position = sf::Vector2f((F_Largeur / 2) - ((map.TailleTuile * map.T_LARGEUR) / 2) + map.player_x + map.TailleTuile / 2,
+                                        (F_Hauteur / 2) - ((map.TailleTuile * map.T_HAUTEUR) / 2) + map.player_y + map.TailleTuile / 2);
+        while (fenetre.isOpen())
+        {
+            //std::cout << joueur.position.x << " , " << joueur.position.y << std::endl;
+            sf::Time deltaTime = horloge.restart();
+            traiterEvenements();
+            mettreAJour(deltaTime);
+            if(killedStatus == true)
+            {
+                break;
+            }
+            dessiner_hub();
+        }
+        reinitialiser();
+
+        //Transition
         sound.musique1.stop();
         sound.sound1.play();
         ecranTitre.demarrage(fenetre);
         sound.musique2.play();
 
-        sf::Clock horloge;
+        //Jeu
         attaques.attaqueTimer.restart();
         map.generer();
         attaques.generer(map.T_LARGEUR, map.T_HAUTEUR);
         gold.generer(map.T_LARGEUR, map.T_HAUTEUR);
         joueur.position = sf::Vector2f((F_Largeur / 2) - ((map.TailleTuile * map.T_LARGEUR) / 2) + map.player_x + map.TailleTuile / 2,
                                         (F_Hauteur / 2) - ((map.TailleTuile * map.T_HAUTEUR) / 2) + map.player_y + map.TailleTuile / 2);
-
         while (fenetre.isOpen())
         {
             //std::cout << joueur.position.x << " , " << joueur.position.y << std::endl;
@@ -356,10 +380,15 @@ bool Jeu::collision(int p, sf::Time deltaTime, float vitesseActuelle)
         {jpx - rayon, jpy}, // Gauche
         {jpx, jpy - rayon}, // Haut
         {jpx, jpy + rayon}, // Bas
-        {static_cast<int>(jpx + rayon / sqrt(2)), static_cast<int>(jpy + rayon / sqrt(2))}, // Bas-droite
+        {jpx + rayon, jpy + rayon}, 
+        {jpx - rayon, jpy + rayon}, 
+        {jpx + rayon, jpy - rayon}, 
+        {jpx - rayon, jpy - rayon} 
+
+        /*{static_cast<int>(jpx + rayon / sqrt(2)), static_cast<int>(jpy + rayon / sqrt(2))}, // Bas-droite
         {static_cast<int>(jpx - rayon / sqrt(2)), static_cast<int>(jpy + rayon / sqrt(2))}, // Bas-gauche
         {static_cast<int>(jpx + rayon / sqrt(2)), static_cast<int>(jpy - rayon / sqrt(2))}, // Haut-droite
-        {static_cast<int>(jpx - rayon / sqrt(2)), static_cast<int>(jpy - rayon / sqrt(2))}  // Haut-gauche
+        {static_cast<int>(jpx - rayon / sqrt(2)), static_cast<int>(jpy - rayon / sqrt(2))}  // Haut-gauche*/
     };
 
     // Vérification de chaque point
@@ -386,15 +415,23 @@ bool Jeu::collision(int p, sf::Time deltaTime, float vitesseActuelle)
     return true; // Aucune collision détectée
 }
 
+void Jeu::dessiner_hub()
+{
+    fenetre.clear();
+
+    fenetre.draw(ecranTitre.spriteEcranTitre);
+    map.dessiner_bottom(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
+    map.dessiner_top(this); // Dessiner la carte
+
+    fenetre.display();
+}
+
 void Jeu::dessiner()
 {
     fenetre.clear();
 
     fenetre.draw(ecranTitre.spriteEcranTitre);
     map.dessiner_bottom(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
-    //fenetre.draw(joueur.sprite); // Dessiner le joueur
-    //gold.afficherGold(this);
-    //attaques.dessiner_zone(this);
     map.dessiner_top(this); // Dessiner la carte
 
     gold.texteCount.setString(std::to_string(gold.GoldCount));

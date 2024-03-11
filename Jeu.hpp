@@ -62,7 +62,7 @@ struct EcranTitre
 
     sf::Font fontVersion;
     sf::Text texteVersion;
-    std::string Version = "Alpha : 0.1.1";
+    std::string Version = "Alpha : 0.2.0";
 
     sf::Font fontDemarrage;
     sf::Text texteDemarrage3;
@@ -176,6 +176,7 @@ public:
     void traiterEvenements();
     void mettreAJour(sf::Time deltaTime);
     bool collision(int p, sf::Time deltaTime, float vitesseActuelle);
+    void dessiner_hub();
     void dessiner();
     void reinitialiser();
 };

@@ -1,7 +1,58 @@
 #include "Map.hpp"
 #include "Jeu.hpp"
 
-// Petite île
+//Hub
+void hub_1(Map *map)
+{
+    map->T_LARGEUR = 20;
+    map->T_HAUTEUR = 20;
+    
+    // Ajuster le nombre de lignes
+    map->grille.resize(map->T_LARGEUR);
+    // Ajuster le nombre de colonnes pour chaque ligne
+    for (auto& ligne : map->grille) {
+        ligne.resize(map->T_HAUTEUR);
+    }
+
+    // Ajuster le nombre de lignes
+    map->grilleRNG.resize(map->T_LARGEUR);
+    // Ajuster le nombre de colonnes pour chaque ligne
+    for (auto& ligne : map->grilleRNG) {
+        ligne.resize(map->T_HAUTEUR);
+    }
+
+    map->textureSol.loadFromFile(map->TilesetSol);
+    map->textureMur.loadFromFile(map->TilesetMur);
+    map->textureItem.loadFromFile(map->TilesetItem);
+    map->textureBridge.loadFromFile(map->TilesetBridge);
+    map->textureFontaine.loadFromFile(map->TilesetFontaine);
+    // Initialisation simple de la grille avec des murs autour et du sol à l'intérieur
+
+
+
+    map->grille[0]  = {XXX,F08,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F07,XXX};
+    map->grille[1]  = {F08,F02,EAU,EAU,EAU,EAU,EAU,EAU,R04,R12,R12,R12,R12,R12,R03,EAU,EAU,EAU,F01,F07};
+    map->grille[2]  = {F11,EAU,R04,R12,R03,EAU,R04,R12,R06,Sol,Sol,RO1,Sol,Sol,R05,R12,R03,EAU,EAU,F09};
+    map->grille[3]  = {F11,EAU,R09,Sol,R05,R03,R09,AR3,Sol,Sol,Sol,Sol,RO2,Sol,Sol,POT,R11,EAU,EAU,F09};
+    map->grille[4]  = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
+    map->grille[5]  = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
+    map->grille[6]  = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
+    map->grille[7]  = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
+    map->grille[8]  = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
+    map->grille[9]  = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,PLA,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
+    map->grille[10] = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
+    map->grille[11] = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
+    map->grille[12] = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
+    map->grille[13] = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
+    map->grille[14] = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
+    map->grille[15] = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
+    map->grille[16] = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
+    map->grille[17] = {F11,EAU,EAU,R01,R10,R10,R07,BU2,Sol,Sol,R08,R10,R07,Sol,BU1,R08,R10,R02,EAU,F09};
+    map->grille[18] = {F05,F03,EAU,EAU,EAU,EAU,R01,R10,R10,R10,R02,EAU,R01,R10,R10,R02,EAU,EAU,F04,F06};
+    map->grille[19] = {XXX,F05,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F06,XXX};
+}
+
+//Sanctuaire
 void map_1(Map *map)
 {
     map->T_LARGEUR = 20;
@@ -53,7 +104,7 @@ void map_1(Map *map)
 }
 
 
-//Château
+//Ruines
 void map_2(Map *map)
 {
     map->T_LARGEUR = 20;
@@ -103,6 +154,7 @@ void map_2(Map *map)
     map->grille[19] = {XXX,F19,F26,F26,F26,F26,F26,F26,F26,F26,F26,F26,F26,F26,F26,F26,F26,F26,F20,XXX};
 }
 
+//Canal
 void map_3(Map *map)
 {
     map->T_LARGEUR = 20;

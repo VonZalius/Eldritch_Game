@@ -194,6 +194,7 @@ public:
     void implementer_Fontaine(double x_co, double y_co, double x_taille, double y_taille, double x, double y, sf::RenderWindow& fenetre);
     void dessiner_bottom(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur);
     void dessiner_top(Jeu *jeu);
+    void hub();
     void generer();
 
     std::string TilesetSol = "sprites/fantasy_/forest_/forest_.png";
@@ -252,6 +253,7 @@ public:
 
 };
 
+void hub_1(Map *map);
 void map_1(Map *map);
 void map_2(Map *map);
 void map_3(Map *map);

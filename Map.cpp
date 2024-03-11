@@ -5,6 +5,53 @@ Map::Map()
 {
 }
 
+void Map::hub()
+{
+    hub_1(this);
+    // Limites du rectangle spécifié (en termes de ligne et colonne)
+    int debutColonne = TilesetTilesStartX, finColonne = TilesetTilesEndX;
+    int debutLigne = TilesetTilesStartY, finLigne = TilesetTilesEndY;
+    // Calcul des indices linéaires du sous-rectangle
+    std::vector<int> indicesRectangle;
+    for (int ligne = debutLigne; ligne <= finLigne; ++ligne)
+    {
+        for (int colonne = debutColonne; colonne <= finColonne; ++colonne)
+        {
+            int indiceLineaire = ligne * (TilesetTilesX + 1) + colonne;
+            indicesRectangle.push_back(indiceLineaire);
+        }
+    }
+
+    // Assignation aléatoire du sol
+    for (int y = 0; y < (T_HAUTEUR + 0); ++y)
+    {
+        for (int x = 0 ; x < (T_LARGEUR + 0); ++x)
+        {
+
+            // Générer un indice aléatoire parmi les indices du rectangle
+            grilleRNG[x][y] = indicesRectangle[rand() % indicesRectangle.size()];
+            //std::cout << grilleRNG[x][y] << " , ";
+            //EXEPTIONS
+            if (grilleRNG[x][y] == 77 || grilleRNG[x][y] == 78 || grilleRNG[x][y] == 100 || grilleRNG[x][y] == 101)
+                x--;
+        }
+    }
+
+    //Position départ du joueur
+    for (int y = 0; y < T_HAUTEUR; ++y)
+    {
+        for (int x = 0; x < T_LARGEUR; ++x)
+        {
+            if (grille[x][y] == PLA)
+            {
+                player_x = (x * TailleTuile);
+                player_y = (y * TailleTuile);
+                grille[x][y] = Sol;
+            }
+        }
+    }
+}
+
 void Map::generer()
 {
     //Choix aléatoire de la map
@@ -473,12 +520,11 @@ void Map::dessiner_top(Jeu *jeu)
             else if (grille[x][y] == P17)
                 implementer_Bridge(7, 5, 1, 1, x, y, jeu->fenetre);
 
-
             else if (grille[x][y] == FON)
                 implementer_Fontaine(1, 0.5, 4, 4.5, x + 3, y + 3, jeu->fenetre);
 
             
-            if (jeu->joueur.position.y > (y * TailleTuile) + y_initial && jeu->joueur.position.x > (x * TailleTuile) + x_initial )
+            if (jeu->joueur.position.y > (y * TailleTuile) + y_initial)
                 jeu->fenetre.draw(jeu->joueur.sprite);
 
             if (jeu->attaques.grille_degat[x][y] == Ombre && is_Sol.find(grille[x][y]) != is_Sol.end())
