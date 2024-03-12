@@ -55,10 +55,9 @@ void Map::hub()
 void Map::generer()
 {
     //Choix aléatoire de la map
-    int rng = rand() % 3;
     void (*tableAUEAUDeFonctions[])(Map *map) =
         {map_1, map_2, map_3};
-    (*tableAUEAUDeFonctions[rng])(this);
+    (*tableAUEAUDeFonctions[map_select])(this);
 
     // Limites du rectangle spécifié (en termes de ligne et colonne)
     int debutColonne = TilesetTilesStartX, finColonne = TilesetTilesEndX;

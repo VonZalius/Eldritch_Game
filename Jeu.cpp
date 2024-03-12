@@ -200,7 +200,7 @@ void Jeu::executer()
             //std::cout << joueur.position.x << " , " << joueur.position.y << std::endl;
             sf::Time deltaTime = horloge.restart();
             traiterEvenements();
-            mettreAJour(deltaTime);
+            mettreAJour_hub(deltaTime);
             if(killedStatus == true)
             {
                 break;
@@ -251,6 +251,120 @@ void Jeu::traiterEvenements()
         if (evenement.type == sf::Event::Closed)
             fenetre.close();
     }
+}
+
+void Jeu::mettreAJour_hub(sf::Time deltaTime)
+{
+    // Mise à jour de l'animation
+    bool mouvement = false;
+
+    // Détermination de la direction du déplacement
+    float deplacementX = 0.0f;
+    float deplacementY = 0.0f;
+
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) && collision(1, deltaTime, joueur.vitesse))
+    {
+        float goodsize = static_cast<float>(joueur.TailleSprite) / static_cast<float>(joueur.frameWidth);
+        joueur.sprite.setScale(-goodsize, goodsize); // Inverse horizontalement
+        deplacementX -= 1.0f;
+        mouvement = true;
+    }
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) && collision(2, deltaTime, joueur.vitesse))
+    {
+        float goodsize = static_cast<float>(joueur.TailleSprite) / static_cast<float>(joueur.frameWidth);
+        joueur.sprite.setScale(goodsize, goodsize); // Inverse horizontalement
+        deplacementX += 1.0f;
+        mouvement = true;
+    }
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && collision(3, deltaTime, joueur.vitesse))
+    {
+        deplacementY -= 1.0f;
+        mouvement = true;
+    }
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) && collision(4, deltaTime, joueur.vitesse))
+    {
+        deplacementY += 1.0f;
+        mouvement = true;
+    }
+
+    // Mise à jour de l'animation partie 2
+    if (joueur.animationClock.getElapsedTime().asSeconds() > 0.1f && mouvement == false)
+    { // 0.1s par frame, ajustez selon le besoin
+        joueur.currentFrame = (joueur.currentFrame + 1) % joueur.framesJoueur.size();
+        joueur.sprite.setTextureRect(joueur.framesJoueur[joueur.currentFrame]);
+        joueur.animationClock.restart();
+    }
+    else if (joueur.animationClock.getElapsedTime().asSeconds() > 0.1f && mouvement == true)
+    { // 0.1s par frame, ajustez selon le besoin
+        joueur.currentFrame = (joueur.currentFrame + 1) % joueur.framesJoueur_2.size();
+        joueur.sprite.setTextureRect(joueur.framesJoueur_2[joueur.currentFrame]);
+        joueur.animationClock.restart();
+    }
+    if (gold.animationTimer.getElapsedTime().asSeconds() > 0.1f)
+    { // 0.1s par frame, ajustez selon le besoin
+        gold.currentFrame = (gold.currentFrame + 1) % gold.framesGold.size();
+        gold.sprite.setTextureRect(gold.framesGold[gold.currentFrame]);
+        gold.animationTimer.restart();
+    }
+
+    // Normalisation du vecteur de déplacement si nécessaire
+    float magnitude = sqrt(deplacementX * deplacementX + deplacementY * deplacementY);
+    if (magnitude > 0.0f) // Pour éviter la division par zéro
+    {
+        deplacementX /= magnitude;
+        deplacementY /= magnitude;
+    }
+
+    // Application de la vitesse
+    float vitesseActuelle;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    {
+        vitesseActuelle = joueur.vitesseAugmentee;
+        // Son de déplacement
+        if (sound.soundClock4.getElapsedTime().asSeconds() > 0.15f && mouvement == true)
+        {
+            sound.sound4.play();
+            sound.soundClock4.restart();
+        }
+    }
+    else
+    {
+        vitesseActuelle = joueur.vitesse;
+
+        // Son de déplacement
+        if (sound.soundClock4.getElapsedTime().asSeconds() > 0.3f && mouvement == true)
+        {
+            sound.sound4.play();
+            sound.soundClock4.restart();
+        }
+    }
+
+
+    joueur.position.x += deplacementX * vitesseActuelle * deltaTime.asSeconds();
+    joueur.position.y += deplacementY * vitesseActuelle * deltaTime.asSeconds();
+    // Mise à jour de la position du sprite du joueur
+    joueur.sprite.setPosition(joueur.position);
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) 
+    {
+        map.map_select = 0;
+        killedStatus = true;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) 
+    {
+        map.map_select = 1;
+        killedStatus = true;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) 
+    {
+        map.map_select = 2;
+        killedStatus = true;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
+    {
+        this->fenetre.close();
+    }
+
 }
 
 void Jeu::mettreAJour(sf::Time deltaTime)

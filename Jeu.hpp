@@ -174,6 +174,7 @@ public:
 
     void initialiserJeu();
     void traiterEvenements();
+    void mettreAJour_hub(sf::Time deltaTime);
     void mettreAJour(sf::Time deltaTime);
     bool collision(int p, sf::Time deltaTime, float vitesseActuelle);
     void dessiner_hub();

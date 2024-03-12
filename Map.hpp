@@ -205,6 +205,8 @@ public:
 
     std::unordered_set<TypeTuile> is_Sol = {Sol, CH1, CH2, CH3, CH4, CH5, CH6, CH7, CH8, FL1, FL2, FL3, FL4, FL5, FL6, FL7, FL8, P02, P05, P08, P11, P14};
 
+    int map_select;
+
     //Zone de jeu
     int T_LARGEUR;
     int T_HAUTEUR;

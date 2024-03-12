@@ -30,25 +30,25 @@ void hub_1(Map *map)
 
 
 
-    map->grille[0]  = {XXX,F08,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F10,F07,XXX};
-    map->grille[1]  = {F08,F02,EAU,EAU,EAU,EAU,EAU,EAU,R04,R12,R12,R12,R12,R12,R03,EAU,EAU,EAU,F01,F07};
-    map->grille[2]  = {F11,EAU,R04,R12,R03,EAU,R04,R12,R06,Sol,Sol,RO1,Sol,Sol,R05,R12,R03,EAU,EAU,F09};
-    map->grille[3]  = {F11,EAU,R09,Sol,R05,R03,R09,AR3,Sol,Sol,Sol,Sol,RO2,Sol,Sol,POT,R11,EAU,EAU,F09};
-    map->grille[4]  = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
-    map->grille[5]  = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
-    map->grille[6]  = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
-    map->grille[7]  = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
-    map->grille[8]  = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
-    map->grille[9]  = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,PLA,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
-    map->grille[10] = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
-    map->grille[11] = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
-    map->grille[12] = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
-    map->grille[13] = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
-    map->grille[14] = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
-    map->grille[15] = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
-    map->grille[16] = {F11,R09,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
-    map->grille[17] = {F11,EAU,EAU,R01,R10,R10,R07,BU2,Sol,Sol,R08,R10,R07,Sol,BU1,R08,R10,R02,EAU,F09};
-    map->grille[18] = {F05,F03,EAU,EAU,EAU,EAU,R01,R10,R10,R10,R02,EAU,R01,R10,R10,R02,EAU,EAU,F04,F06};
+    map->grille[0]  = {XXX,F22,F24,F24,F24,F24,F24,F24,F24,F24,F24,F24,F24,F24,F24,F24,F24,F24,F21,XXX};
+    map->grille[1]  = {F22,F16,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,F15,F21};
+    map->grille[2]  = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,F23};
+    map->grille[3]  = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,F23};
+    map->grille[4]  = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,PLA,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,F23};
+    map->grille[5]  = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,F23};
+    map->grille[6]  = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,F23};
+    map->grille[7]  = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R08,F30};
+    map->grille[8]  = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
+    map->grille[9]  = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R08,R02,F09};
+    map->grille[10] = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R08,R10,R10,R02,EAU,F09};
+    map->grille[11] = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R08,R10,R10,R02,EAU,EAU,EAU,EAU,F09};
+    map->grille[12] = {F29,R07,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,EAU,EAU,EAU,EAU,EAU,EAU,EAU,F09};
+    map->grille[13] = {F11,R01,R10,R07,Sol,Sol,R08,R10,R10,R10,R10,R02,EAU,EAU,R04,R12,R12,R03,EAU,F09};
+    map->grille[14] = {F11,EAU,EAU,R01,R10,R10,R02,EAU,EAU,EAU,EAU,EAU,R04,R12,R06,Sol,Sol,R11,EAU,F09};
+    map->grille[15] = {F11,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,R09,Sol,Sol,Sol,Sol,R11,EAU,F09};
+    map->grille[16] = {F11,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,R01,R07,Sol,Sol,R08,R02,EAU,F09};
+    map->grille[17] = {F11,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,R09,Sol,R08,R02,EAU,EAU,F09};
+    map->grille[18] = {F05,F03,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,R01,R10,R02,EAU,EAU,F04,F06};
     map->grille[19] = {XXX,F05,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F06,XXX};
 }
 
