@@ -22,6 +22,7 @@ struct EcranTitre
 {
     void afficherEcranTitre(Jeu *jeu);
     void demarrage(Jeu *jeu);
+    void paused(Jeu *jeu);
     void killed(Jeu *jeu);
 
     sf::Texture textureEcranTitre;
@@ -44,6 +45,12 @@ struct EcranTitre
 
     sf::Font fontKilled;
     sf::Text texteKilled;
+
+    sf::Font fontPaused;
+    sf::Text textePaused;
+
+    sf::Font fontScore;
+    sf::Text texteScore;
 
     sf::Font fontMap1;
     sf::Text texteMap1;

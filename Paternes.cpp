@@ -34,6 +34,20 @@ bool KO_checker(Jeu *jeu)
         // Vérification si le point n'est pas sur une tuile 'Sol'
         if (jeu->attaques.grille_degat[tileX][tileY] == Explose)
         {
+            //jeu->TotalScore += jeu->gold.GoldCount;
+            if(jeu->map.map_select == 0 && jeu->gold.GoldCount > jeu->HighScore1)
+                jeu->HighScore1 = jeu->gold.GoldCount;
+            if(jeu->map.map_select == 1 && jeu->gold.GoldCount > jeu->HighScore2)
+                jeu->HighScore2 = jeu->gold.GoldCount;
+            if(jeu->map.map_select == 2 && jeu->gold.GoldCount > jeu->HighScore3)
+                jeu->HighScore3 = jeu->gold.GoldCount;
+
+            std::ofstream fichierOut("data/Score.txt"); // Crée un objet ofstream et ouvre le fichier
+            if (fichierOut.is_open())
+            {
+                fichierOut << jeu->TotalScore << std::endl << jeu->HighScore1 << std::endl << jeu->HighScore2 << std::endl << jeu->HighScore3 << std::endl; // Écrit dans le fichier
+                fichierOut.close(); // Ferme le fichier
+            }
             return true; // Collision détectée
         }
     }

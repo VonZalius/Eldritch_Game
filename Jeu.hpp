@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <cmath>
+#include <fstream>
+#include <iostream>
 #include "Map.hpp"
 #include "Attaques.hpp"
 #include "Titre.hpp"
@@ -56,10 +58,10 @@ struct Sound
     sf::Music musique2;
     static const int volume2 = 5;
 
-    std::string SoundFile1 = "music/FreeSFX/GameSFX/Magic/Retro Magic 11.wav";
+    std::string SoundFile1 = "music/FreeSFX/GameSFX/Magic/Retro Magic 54.wav";
     sf::SoundBuffer buffer1;
     sf::Sound sound1;
-    static const int soundVolume1 = 5;
+    static const int soundVolume1 = 3;
 
     std::string SoundFile2 = "music/FreeSFX/GameSFX/Explosion/Retro Explosion Swoshes 04.wav";
     sf::SoundBuffer buffer2;
@@ -76,6 +78,12 @@ struct Sound
     sf::Sound sound4;
     static const int soundVolume4 = 5;
     sf::Clock soundClock4;
+
+    std::string SoundFile5 = "music/FreeSFX/GameSFX/Blops/Retro Blop 22.wav";
+    sf::SoundBuffer buffer5;
+    sf::Sound sound5;
+    static const int soundVolume5 = 5;
+    sf::Clock soundClock5;
 };
 
 struct Gold
@@ -132,6 +140,11 @@ public:
     static const int F_Hauteur = 1080;
     static const int F_Largeur = 1920;
     bool killedStatus = false;
+    bool backStatus = false;
+    int TotalScore;
+    int HighScore1;
+    int HighScore2;
+    int HighScore3;
 
     Joueur joueur;
 

@@ -73,7 +73,10 @@ void EcranTitre::afficherEcranTitre(Jeu *jeu)
                     if (btn.isMouseOver(jeu->fenetre))
                         return;
                     if (btn2.isMouseOver(jeu->fenetre))
+                    {
+                        jeu->sound.sound5.play();
                         jeu->fenetre.close();
+                    }
                 }
             }
             else if (evenement.type == sf::Event::Closed)
@@ -95,14 +98,10 @@ void EcranTitre::afficherEcranTitre(Jeu *jeu)
 
 void EcranTitre::demarrage(Jeu *jeu)
 {
-    sf::Event evenement;
     sf::Clock timer;
     timer.restart();
     while (jeu->fenetre.isOpen() && timer.getElapsedTime().asSeconds() <= 0.5)
     {
-        while (jeu->fenetre.pollEvent(evenement))
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
-                jeu->fenetre.close();
         jeu->fenetre.clear();
         jeu->fenetre.draw(spriteEcranTitre);
         jeu->fenetre.draw(texteDemarrage3);
@@ -117,9 +116,6 @@ void EcranTitre::demarrage(Jeu *jeu)
     timer.restart();
     while (jeu->fenetre.isOpen() && timer.getElapsedTime().asSeconds() <= 1)
     {
-        while (jeu->fenetre.pollEvent(evenement))
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
-                jeu->fenetre.close();
         jeu->fenetre.clear();
         jeu->fenetre.draw(spriteEcranTitre);
         jeu->fenetre.draw(texteDemarrage2);
@@ -134,12 +130,63 @@ void EcranTitre::demarrage(Jeu *jeu)
     timer.restart();
     while (jeu->fenetre.isOpen() && timer.getElapsedTime().asSeconds() <= 1.5)
     {
-        while (jeu->fenetre.pollEvent(evenement))
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
-                jeu->fenetre.close();
         jeu->fenetre.clear();
         jeu->fenetre.draw(spriteEcranTitre);
         jeu->fenetre.draw(texteDemarrage1);
+        if(jeu->map.map_select == 0)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap1);
+        else if(jeu->map.map_select == 1)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap2);
+        else if(jeu->map.map_select == 2)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap3);
+        jeu->fenetre.display();
+    }
+}
+
+void EcranTitre::paused(Jeu *jeu)
+{
+    sf::Event evenement;
+
+    Button btn;
+    Button btn2;
+    if (!font.loadFromFile("sprites/police.ttf"))
+        return;
+    btn.btn_create((jeu->F_Largeur / 2) - 200, 450, 400, 100, 60, font, "Reprendre");
+    btn2.btn_create((jeu->F_Largeur / 2) - 210, 600, 420, 100, 60, font, "Abandonner");
+
+    jeu->sound.sound5.play();
+    while (jeu->fenetre.isOpen())
+    {
+        while (jeu->fenetre.pollEvent(evenement))
+        {
+            if (evenement.type == sf::Event::MouseButtonPressed)
+            {
+                if (evenement.mouseButton.button == sf::Mouse::Left)
+                {
+                    if (btn.isMouseOver(jeu->fenetre))
+                    {             
+                        jeu->sound.sound5.play();
+                        return;
+                    }
+                    if (btn2.isMouseOver(jeu->fenetre))
+                    {
+                        jeu->sound.sound5.play();
+                        jeu->backStatus = true;
+                        return;
+                    }
+                }
+            }
+        }
+        textePaused.setString("Pause");
+        float largeurTexte = textePaused.getLocalBounds().width;
+        textePaused.setPosition((jeu->F_Largeur / 2) - (largeurTexte / 2), 200);
+        jeu->fenetre.clear();
+        jeu->fenetre.draw(spriteEcranTitre);
+        jeu->fenetre.draw(textePaused);
+        jeu->fenetre.draw(jeu->gold.texteCount);
+        btn.drawTo(jeu->fenetre);
+        btn2.drawTo(jeu->fenetre);
+        jeu->fenetre.draw(texteVersion);
         if(jeu->map.map_select == 0)
             jeu->fenetre.draw(jeu->ecranTitre.texteMap1);
         else if(jeu->map.map_select == 1)
@@ -159,9 +206,7 @@ void EcranTitre::killed(Jeu *jeu)
     {
         while (jeu->fenetre.pollEvent(evenement))
         {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
-                jeu->fenetre.close();
-            else if (evenement.type == sf::Event::KeyPressed && timer.getElapsedTime().asSeconds() > 1) 
+            if (evenement.type == sf::Event::KeyPressed && timer.getElapsedTime().asSeconds() > 1) 
                 return;
         }
         texteKilled.setString("Vous etes mort...\nScore : " + std::to_string(jeu->gold.GoldCount));

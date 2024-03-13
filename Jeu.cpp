@@ -9,6 +9,24 @@ void Jeu::initialiserJeu()
 {
     srand(time(0));
 
+
+    //SAUVEGARDE CHARGE
+    std::ifstream fichierIn("data/Score.txt"); // Crée un objet ifstream et ouvre le fichier
+    std::string ligne;
+
+    if (fichierIn.is_open())
+    {
+        getline(fichierIn, ligne);
+        TotalScore = atoi(ligne.c_str());
+        getline(fichierIn, ligne);
+        HighScore1 = atoi(ligne.c_str());
+        getline(fichierIn, ligne);
+        HighScore2 = atoi(ligne.c_str());
+        getline(fichierIn, ligne);
+        HighScore3 = atoi(ligne.c_str());
+        fichierIn.close(); // Ferme le fichier
+    }
+
     //JOUEUR
     if (joueur.textureJoueur.loadFromFile(joueur.joueurSprite))
     {
@@ -79,6 +97,12 @@ void Jeu::initialiserJeu()
     {
         sound.sound4.setBuffer(sound.buffer4);
         sound.sound4.setVolume(sound.soundVolume4);
+    }
+
+    if (sound.buffer5.loadFromFile(sound.SoundFile5))
+    {
+        sound.sound5.setBuffer(sound.buffer5);
+        sound.sound5.setVolume(sound.soundVolume5);
     }
 
 
@@ -153,6 +177,12 @@ void Jeu::initialiserJeu()
         float hauteurTexte = ecranTitre.texteDemarrage1.getLocalBounds().height;
         ecranTitre.texteDemarrage1.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte));
     }
+    if (ecranTitre.fontPaused.loadFromFile("sprites/police.ttf"))
+    {
+        ecranTitre.textePaused.setFont(ecranTitre.fontPaused); 
+        ecranTitre.textePaused.setCharacterSize(100); // en pixels
+        ecranTitre.textePaused.setFillColor(sf::Color::White);
+    }
     if (ecranTitre.fontKilled.loadFromFile("sprites/police.ttf"))
     {
         ecranTitre.texteKilled.setFont(ecranTitre.fontKilled); 
@@ -162,6 +192,15 @@ void Jeu::initialiserJeu()
         /*float largeurTexte = ecranTitre.texteKilled.getLocalBounds().width;
         float hauteurTexte = ecranTitre.texteKilled.getLocalBounds().height;
         ecranTitre.texteKilled.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte));*/
+    }
+
+    if (ecranTitre.fontScore.loadFromFile("sprites/police.ttf"))
+    {
+        ecranTitre.texteScore.setFont(ecranTitre.fontScore); 
+        ecranTitre.texteScore.setString("Meilleur score :");
+        ecranTitre.texteScore.setCharacterSize(70); // en pixels
+        ecranTitre.texteScore.setFillColor(sf::Color::White);
+        ecranTitre.texteScore.setPosition(50, 50);
     }
 
     if (ecranTitre.fontMap1.loadFromFile("sprites/police.ttf"))
@@ -207,13 +246,16 @@ void Jeu::reinitialiser()
 
 void Jeu::executer()
 {
-    //Home
-    sound.musique1.play();
-    ecranTitre.afficherEcranTitre(this);
-    sound.sound1.play();
 
+    //Home
+    if (sound.musique1.getStatus() != sf::SoundSource::Playing)
+        sound.musique1.play();
+    ecranTitre.afficherEcranTitre(this);
+    sound.sound5.play();
+    backStatus = false;
     while (fenetre.isOpen())
     {
+
         //HUb
         sf::Clock horloge;
         map.hub();
@@ -227,17 +269,17 @@ void Jeu::executer()
             sf::Time deltaTime = horloge.restart();
             traiterEvenements();
             mettreAJour_hub(deltaTime);
-            if(killedStatus == true)
-            {
+            if(killedStatus == true || backStatus == true)
                 break;
-            }
             dessiner_hub();
         }
         reinitialiser();
+        if(backStatus == true)
+            break;
 
         //Transition
-        sound.musique1.stop();
         sound.sound1.play();
+        sound.musique1.stop();
         ecranTitre.demarrage(this);
         sound.musique2.play();
 
@@ -256,6 +298,11 @@ void Jeu::executer()
             mettreAJour(deltaTime);
             gold.gold_rng(this);
             attaques.attaques_rng(this);
+            if(backStatus == true)
+            {
+                sound.musique2.stop();
+                break;
+            }
             if(killedStatus == true)
             {
                 sound.musique2.stop();
@@ -266,6 +313,8 @@ void Jeu::executer()
             dessiner();
         }
         reinitialiser();
+        if(backStatus == true)
+            break;
         sound.musique1.play();
         sound.sound1.play();
     }
@@ -390,7 +439,7 @@ void Jeu::mettreAJour_hub(sf::Time deltaTime)
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
     {
-        this->fenetre.close();
+        ecranTitre.paused(this);
     }
 }
 
@@ -492,7 +541,7 @@ void Jeu::mettreAJour(sf::Time deltaTime)
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
     {
-        this->fenetre.close();
+        ecranTitre.paused(this);
     }
 
 }
@@ -578,6 +627,9 @@ void Jeu::dessiner_hub()
     fenetre.draw(ecranTitre.spriteEcranTitre);
     map.dessiner_bottom(fenetre, F_Hauteur, F_Largeur); // Dessiner la carte
     map.dessiner_top(this); // Dessiner la carte
+    //fenetre.draw(gold.texteCount);
+    ecranTitre.texteScore.setString("Meilleurs scores\n\nSanctuaire : " + std::to_string(HighScore1) + "\nRuines : "  + std::to_string(HighScore2) + "\nCanal : "  + std::to_string(HighScore3));
+    fenetre.draw(ecranTitre.texteScore);
 
     fenetre.display();
 }

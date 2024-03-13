@@ -45,6 +45,7 @@ Attaques::Attaques() :
             }
         }
     }
+
 }
 
 Paterne::Paterne(FonctionPtr ptr) : degatZone(ptr)
@@ -75,7 +76,7 @@ void Attaques::attaques_rng(Jeu *jeu)
             {E.degatZone, F.degatZone, G.degatZone};
         (*tableauDeFonctions[rng])(jeu);
     }
-    else if (jeu->attaques.attaqueTimer.getElapsedTime().asSeconds() >= 1)
+    else if (attaqueTimer.getElapsedTime().asSeconds() >= 1)
     {
         rng = rand() % 3;
         status = true;

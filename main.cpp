@@ -4,7 +4,7 @@
 int main()
 {
     Jeu jeu;
-    jeu.executer();
-
+    while (jeu.fenetre.isOpen())
+        jeu.executer();
     return 0;
 }
