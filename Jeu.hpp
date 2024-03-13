@@ -6,6 +6,7 @@
 #include <cmath>
 #include "Map.hpp"
 #include "Attaques.hpp"
+#include "Titre.hpp"
 
 struct Joueur
 {
@@ -43,34 +44,6 @@ struct Joueur
 
     sf::Clock animationClock;
     int currentFrame = 0;
-};
-
-struct EcranTitre
-{
-    void afficherEcranTitre(sf::RenderWindow& fenetre);
-    void demarrage(sf::RenderWindow& fenetre);
-    void killed(Jeu *jeu);
-
-    sf::Texture textureEcranTitre;
-    sf::Sprite spriteEcranTitre;
-
-    sf::Texture textureEldritch;
-    sf::Sprite spriteEldritch;
-
-    sf::Font font;
-    sf::Text texteTitre;
-
-    sf::Font fontVersion;
-    sf::Text texteVersion;
-    std::string Version = "Alpha : 0.2.0";
-
-    sf::Font fontDemarrage;
-    sf::Text texteDemarrage3;
-    sf::Text texteDemarrage2;
-    sf::Text texteDemarrage1;
-
-    sf::Font fontKilled;
-    sf::Text texteKilled;
 };
 
 struct Sound

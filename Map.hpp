@@ -13,6 +13,9 @@ enum TypeTuile
 
     PLA,            //Player,
     Sol,            //Sol
+    MP1,            //map 1
+    MP2,            //map 2
+    MP3,            //map 3
 
     EAU,            //Eau
 
@@ -203,7 +206,7 @@ public:
     std::string TilesetBridge = "sprites/fantasy_/forest_/forest_ [bridgeHorizontal].png";
     std::string TilesetFontaine = "sprites/fantasy_/forest_/forest_ [fountain].png";
 
-    std::unordered_set<TypeTuile> is_Sol = {Sol, CH1, CH2, CH3, CH4, CH5, CH6, CH7, CH8, FL1, FL2, FL3, FL4, FL5, FL6, FL7, FL8, P02, P05, P08, P11, P14};
+    std::unordered_set<TypeTuile> is_Sol = {Sol, MP1, MP2, MP3, CH1, CH2, CH3, CH4, CH5, CH6, CH7, CH8, FL1, FL2, FL3, FL4, FL5, FL6, FL7, FL8, P02, P05, P08, P11, P14};
 
     int map_select;
 

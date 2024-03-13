@@ -29,7 +29,7 @@ Gold::Gold()
         texteCount.setCharacterSize(200); // en pixels
         texteCount.setFillColor(sf::Color::White);
         //float largeurTexte = texteCount.getLocalBounds().width;
-        texteCount.setPosition(50, 50); // Ajustez selon vos besoins
+        texteCount.setPosition(50, 150); // Ajustez selon vos besoins
     }
 
     if (buffer1.loadFromFile(SoundFile1))

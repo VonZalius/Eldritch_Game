@@ -1,71 +1,152 @@
+#include "Titre.hpp"
 #include "Jeu.hpp"
 
-void EcranTitre::afficherEcranTitre(sf::RenderWindow& fenetre)
+Button::Button()
+{}
+
+void Button::btn_create(float x, float y, float width, float height, float size, sf::Font& font, std::string text)
+{
+    // Définit la forme du bouton
+    shape.setSize(sf::Vector2f(width, height));
+    shape.setPosition(x, y);
+
+    // Définit la couleur de fond à transparent
+    shape.setFillColor(sf::Color::Transparent);
+        
+    // Définit le pourtour en blanc avec une épaisseur de 2 pixels
+    shape.setOutlineThickness(4.f);
+    shape.setOutlineColor(sf::Color::White);
+
+    // Définit le texte du bouton
+    this->text.setFont(font);
+    this->text.setString(text);
+    this->text.setCharacterSize(size); // Taille de la police
+    this->text.setFillColor(sf::Color::White); // Couleur du texte
+    // Positionne le texte au centre du bouton
+    sf::FloatRect textRect = this->text.getLocalBounds();
+    this->text.setOrigin(textRect.left + textRect.width/2.0f, textRect.top  + textRect.height/2.0f);
+    this->text.setPosition(sf::Vector2f(x+width/2.0f, y+height/2.0f));
+}
+
+void Button::drawTo(sf::RenderWindow &window)
+{
+    window.draw(this->shape);
+    window.draw(this->text);
+}
+
+    // Vérifie si la souris est sur le bouton
+bool Button::isMouseOver(sf::RenderWindow &window)
+{
+    float mouseX = sf::Mouse::getPosition(window).x;
+    float mouseY = sf::Mouse::getPosition(window).y;
+
+    float btnPosX = shape.getPosition().x;
+    float btnPosY = shape.getPosition().y;
+
+    float btnxPosWidth = shape.getPosition().x + shape.getLocalBounds().width;
+    float btnyPosHeight = shape.getPosition().y + shape.getLocalBounds().height;
+
+    if (mouseX < btnxPosWidth && mouseX > btnPosX && mouseY < btnyPosHeight && mouseY > btnPosY)
+        return true;
+    return false;
+}
+
+void EcranTitre::afficherEcranTitre(Jeu *jeu)
 {
     sf::Event evenement;
-    while (fenetre.isOpen())
+    Button btn;
+    Button btn2;
+
+    if (!font.loadFromFile("sprites/police.ttf"))
+        return;
+    btn.btn_create((jeu->F_Largeur / 2) - 200, 650, 400, 100, 60, font, "Commencer la partie");
+    btn2.btn_create((jeu->F_Largeur / 2) - 100, 800, 200, 100, 60, font, "Quitter");
+
+    while (jeu->fenetre.isOpen())
     {
-        while (fenetre.pollEvent(evenement))
+        while (jeu->fenetre.pollEvent(evenement))
         {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
+            if (evenement.type == sf::Event::MouseButtonPressed)
             {
-                fenetre.close();
-            }
-            if (evenement.type == sf::Event::KeyPressed)
-            {
-                return; // Quitte l'écran titre lorsque n'importe quelle touche est pressée
+                if (evenement.mouseButton.button == sf::Mouse::Left)
+                {
+                    if (btn.isMouseOver(jeu->fenetre))
+                        return;
+                    if (btn2.isMouseOver(jeu->fenetre))
+                        jeu->fenetre.close();
+                }
             }
             else if (evenement.type == sf::Event::Closed)
             {
-                fenetre.close();
+                jeu->fenetre.close();
             }
         }
 
-        fenetre.clear();
-        fenetre.draw(spriteEcranTitre);
-        fenetre.draw(spriteEldritch);
-        fenetre.draw(texteTitre);
-        fenetre.draw(texteVersion);
-        fenetre.display();
+        jeu->fenetre.clear();
+        jeu->fenetre.draw(spriteEcranTitre);
+        jeu->fenetre.draw(spriteEldritch);
+        jeu->fenetre.draw(texteTitre);
+        jeu->fenetre.draw(texteVersion);
+        btn.drawTo(jeu->fenetre);
+        btn2.drawTo(jeu->fenetre);
+        jeu->fenetre.display();
     }
 }
 
-void EcranTitre::demarrage(sf::RenderWindow& fenetre)
+void EcranTitre::demarrage(Jeu *jeu)
 {
     sf::Event evenement;
     sf::Clock timer;
     timer.restart();
-    while (fenetre.isOpen() && timer.getElapsedTime().asSeconds() <= 0.5)
+    while (jeu->fenetre.isOpen() && timer.getElapsedTime().asSeconds() <= 0.5)
     {
-        while (fenetre.pollEvent(evenement))
+        while (jeu->fenetre.pollEvent(evenement))
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
-                fenetre.close();
-        fenetre.clear();
-        fenetre.draw(spriteEcranTitre);
-        fenetre.draw(texteDemarrage3);
-        fenetre.display();
+                jeu->fenetre.close();
+        jeu->fenetre.clear();
+        jeu->fenetre.draw(spriteEcranTitre);
+        jeu->fenetre.draw(texteDemarrage3);
+        if(jeu->map.map_select == 0)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap1);
+        else if(jeu->map.map_select == 1)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap2);
+        else if(jeu->map.map_select == 2)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap3);
+        jeu->fenetre.display();
     }
     timer.restart();
-    while (fenetre.isOpen() && timer.getElapsedTime().asSeconds() <= 1)
+    while (jeu->fenetre.isOpen() && timer.getElapsedTime().asSeconds() <= 1)
     {
-        while (fenetre.pollEvent(evenement))
+        while (jeu->fenetre.pollEvent(evenement))
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
-                fenetre.close();
-        fenetre.clear();
-        fenetre.draw(spriteEcranTitre);
-        fenetre.draw(texteDemarrage2);
-        fenetre.display();
+                jeu->fenetre.close();
+        jeu->fenetre.clear();
+        jeu->fenetre.draw(spriteEcranTitre);
+        jeu->fenetre.draw(texteDemarrage2);
+        if(jeu->map.map_select == 0)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap1);
+        else if(jeu->map.map_select == 1)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap2);
+        else if(jeu->map.map_select == 2)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap3);
+        jeu->fenetre.display();
     }
     timer.restart();
-    while (fenetre.isOpen() && timer.getElapsedTime().asSeconds() <= 1.5)
+    while (jeu->fenetre.isOpen() && timer.getElapsedTime().asSeconds() <= 1.5)
     {
-        while (fenetre.pollEvent(evenement))
+        while (jeu->fenetre.pollEvent(evenement))
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
-                fenetre.close();
-        fenetre.clear();
-        fenetre.draw(spriteEcranTitre);
-        fenetre.draw(texteDemarrage1);
-        fenetre.display();
+                jeu->fenetre.close();
+        jeu->fenetre.clear();
+        jeu->fenetre.draw(spriteEcranTitre);
+        jeu->fenetre.draw(texteDemarrage1);
+        if(jeu->map.map_select == 0)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap1);
+        else if(jeu->map.map_select == 1)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap2);
+        else if(jeu->map.map_select == 2)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap3);
+        jeu->fenetre.display();
     }
 }
 
@@ -91,6 +172,12 @@ void EcranTitre::killed(Jeu *jeu)
         jeu->fenetre.draw(spriteEcranTitre);
         jeu->fenetre.draw(texteKilled);
         jeu->fenetre.draw(texteVersion);
+        if(jeu->map.map_select == 0)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap1);
+        else if(jeu->map.map_select == 1)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap2);
+        else if(jeu->map.map_select == 2)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap3);
         jeu->fenetre.display();
     }
 }

@@ -31,23 +31,23 @@ void hub_1(Map *map)
 
 
     map->grille[0]  = {XXX,F22,F24,F24,F24,F24,F24,F24,F24,F24,F24,F24,F24,F24,F24,F24,F24,F24,F21,XXX};
-    map->grille[1]  = {F22,F16,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,F15,F21};
-    map->grille[2]  = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,F23};
-    map->grille[3]  = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,F23};
-    map->grille[4]  = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,PLA,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,F23};
-    map->grille[5]  = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,F23};
-    map->grille[6]  = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,F23};
-    map->grille[7]  = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R08,F30};
-    map->grille[8]  = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,F09};
-    map->grille[9]  = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R08,R02,F09};
-    map->grille[10] = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R08,R10,R10,R02,EAU,F09};
-    map->grille[11] = {F25,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R08,R10,R10,R02,EAU,EAU,EAU,EAU,F09};
-    map->grille[12] = {F29,R07,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,R11,EAU,EAU,EAU,EAU,EAU,EAU,EAU,F09};
-    map->grille[13] = {F11,R01,R10,R07,Sol,Sol,R08,R10,R10,R10,R10,R02,EAU,EAU,R04,R12,R12,R03,EAU,F09};
-    map->grille[14] = {F11,EAU,EAU,R01,R10,R10,R02,EAU,EAU,EAU,EAU,EAU,R04,R12,R06,Sol,Sol,R11,EAU,F09};
-    map->grille[15] = {F11,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,R09,Sol,Sol,Sol,Sol,R11,EAU,F09};
-    map->grille[16] = {F11,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,R01,R07,Sol,Sol,R08,R02,EAU,F09};
-    map->grille[17] = {F11,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,R09,Sol,R08,R02,EAU,EAU,F09};
+    map->grille[1]  = {F22,F16,Sol,Sol,RO2,Sol,Sol,Sol,AR1,M07,BU2,Sol,Sol,CH5,M07,TO1,Sol,AR2,F15,F21};
+    map->grille[2]  = {F25,Sol,Sol,CH1,Sol,Sol,Sol,Sol,Sol,M12,Sol,MP2,Sol,Sol,M24,Sol,Sol,TO3,Sol,F23};
+    map->grille[3]  = {F25,CH3,Sol,AR4,Sol,Sol,Sol,AR1,Sol,M12,CO1,Sol,Sol,Sol,RO1,Sol,TO2,Sol,Sol,F23};
+    map->grille[4]  = {F25,AR4,Sol,Sol,Sol,Sol,Sol,Sol,CH8,M17,M02,BU1,Sol,Sol,Sol,Sol,Sol,Sol,AR2,F23};
+    map->grille[5]  = {F25,Sol,AR4,Sol,Sol,Sol,Sol,Sol,Sol,Sol,AR1,Sol,Sol,Sol,Sol,Sol,AR2,Sol,RO2,F23};
+    map->grille[6]  = {F25,Sol,PO1,Sol,CH4,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,F23};
+    map->grille[7]  = {F25,Sol,MP3,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,F23};
+    map->grille[8]  = {F25,Sol,PO2,Sol,Sol,Sol,BU2,Sol,Sol,PLA,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,Sol,F23};
+    map->grille[9]  = {F25,CH2,Sol,AR4,Sol,BA6,BA0,BA2,Sol,Sol,Sol,Sol,FL2,Sol,Sol,Sol,Sol,RO1,R08,F30};
+    map->grille[10] = {F25,AR4,Sol,Sol,Sol,Sol,Sol,BA1,Sol,Sol,Sol,Sol,AR3,FL1,P01,P02,P03,Sol,R11,F09};
+    map->grille[11] = {F25,RO1,Sol,Sol,Sol,Sol,Sol,BA1,Sol,Sol,FL4,R08,R10,R10,P04,P05,P06,P16,R02,F09};
+    map->grille[12] = {F29,R07,AR4,RO2,Sol,Sol,AR4,BA7,Sol,Sol,AR3,R11,EAU,EAU,P07,P08,P09,EAU,EAU,F09};
+    map->grille[13] = {F11,R01,R10,R07,RO1,Sol,R08,R10,R10,R10,R10,R02,EAU,EAU,P10,P11,P12,P17,R03,F09};
+    map->grille[14] = {F11,EAU,EAU,R01,R10,R10,R02,EAU,EAU,EAU,EAU,EAU,R04,R12,P13,P14,P15,AR3,R11,F09};
+    map->grille[15] = {F11,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,R09,AR3,FL4,MP1,Sol,FL1,R11,F09};
+    map->grille[16] = {F11,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,R09,FL1,Sol,Sol,R08,R10,R02,F09};
+    map->grille[17] = {F11,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,R01,R07,RO2,R08,R02,EAU,EAU,F09};
     map->grille[18] = {F05,F03,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,EAU,R01,R10,R02,EAU,EAU,F04,F06};
     map->grille[19] = {XXX,F05,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F12,F06,XXX};
 }

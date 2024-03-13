@@ -552,6 +552,12 @@ void Map::dessiner_top(Jeu *jeu)
             
             if (jeu->gold.grille[x][y] == true)
                 jeu->gold.afficherGold(jeu);
+            if (grille[x][y] == MP1 || grille[x][y] == MP2 || grille[x][y] == MP3)
+            {
+                jeu->gold.sprite.setPosition((x * jeu->map.TailleTuile) + jeu->map.x_initial, (y * jeu->map.TailleTuile) + jeu->map.y_initial);
+                jeu->fenetre.draw(jeu->gold.sprite);
+            }
+
         }
     }
 }

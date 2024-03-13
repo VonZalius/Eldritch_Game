@@ -101,7 +101,7 @@ void Jeu::initialiserJeu()
         ecranTitre.spriteEldritch.setPosition((F_Largeur / 2) - (largeurEldritch / 2), 200);
     }
 
-    if (ecranTitre.font.loadFromFile("sprites/police.ttf"))
+    /*if (ecranTitre.font.loadFromFile("sprites/police.ttf"))
     {
         ecranTitre.texteTitre.setFont(ecranTitre.font); 
         ecranTitre.texteTitre.setString("Appuyez sur une touche pour commencer");
@@ -109,7 +109,8 @@ void Jeu::initialiserJeu()
         ecranTitre.texteTitre.setFillColor(sf::Color::White);
         float largeurTexte = ecranTitre.texteTitre.getLocalBounds().width;
         ecranTitre.texteTitre.setPosition((F_Largeur / 2) - (largeurTexte / 2), 700); // Ajustez selon vos besoins
-    }
+    }*/
+
 
     if (ecranTitre.fontVersion.loadFromFile("sprites/police.ttf"))
     {
@@ -162,6 +163,31 @@ void Jeu::initialiserJeu()
         float hauteurTexte = ecranTitre.texteKilled.getLocalBounds().height;
         ecranTitre.texteKilled.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte));*/
     }
+
+    if (ecranTitre.fontMap1.loadFromFile("sprites/police.ttf"))
+    {
+        ecranTitre.texteMap1.setFont(ecranTitre.fontMap1); 
+        ecranTitre.texteMap1.setString("Sanctuaire");
+        ecranTitre.texteMap1.setCharacterSize(120); // en pixels
+        ecranTitre.texteMap1.setFillColor(sf::Color::White);
+        ecranTitre.texteMap1.setPosition(50, 50);
+    }
+    if (ecranTitre.fontMap2.loadFromFile("sprites/police.ttf"))
+    {
+        ecranTitre.texteMap2.setFont(ecranTitre.fontMap2); 
+        ecranTitre.texteMap2.setString("Ruines");
+        ecranTitre.texteMap2.setCharacterSize(120); // en pixels
+        ecranTitre.texteMap2.setFillColor(sf::Color::White);
+        ecranTitre.texteMap2.setPosition(50, 50);
+    }
+    if (ecranTitre.fontMap3.loadFromFile("sprites/police.ttf"))
+    {
+        ecranTitre.texteMap3.setFont(ecranTitre.fontMap3); 
+        ecranTitre.texteMap3.setString("Canal");
+        ecranTitre.texteMap3.setCharacterSize(120); // en pixels
+        ecranTitre.texteMap3.setFillColor(sf::Color::White);
+        ecranTitre.texteMap3.setPosition(50, 50);
+    }
 }
 
 void Jeu::reinitialiser()
@@ -181,13 +207,13 @@ void Jeu::reinitialiser()
 
 void Jeu::executer()
 {
+    //Home
+    sound.musique1.play();
+    ecranTitre.afficherEcranTitre(this);
+    sound.sound1.play();
+
     while (fenetre.isOpen())
     {
-        //Home
-        sound.musique1.play();
-        ecranTitre.afficherEcranTitre(fenetre);
-        sound.sound1.play();
-
         //HUb
         sf::Clock horloge;
         map.hub();
@@ -212,7 +238,7 @@ void Jeu::executer()
         //Transition
         sound.musique1.stop();
         sound.sound1.play();
-        ecranTitre.demarrage(fenetre);
+        ecranTitre.demarrage(this);
         sound.musique2.play();
 
         //Jeu
@@ -240,6 +266,8 @@ void Jeu::executer()
             dessiner();
         }
         reinitialiser();
+        sound.musique1.play();
+        sound.sound1.play();
     }
 }
 
@@ -364,7 +392,6 @@ void Jeu::mettreAJour_hub(sf::Time deltaTime)
     {
         this->fenetre.close();
     }
-
 }
 
 void Jeu::mettreAJour(sf::Time deltaTime)
@@ -519,6 +546,21 @@ bool Jeu::collision(int p, sf::Time deltaTime, float vitesseActuelle)
         {
             gold.getGold(tileX, tileY);
         }
+        if (map.grille[tileX][tileY] == MP1)
+        {
+            map.map_select = 0;
+            killedStatus = true;
+        }
+        if (map.grille[tileX][tileY] == MP2)
+        {
+            map.map_select = 1;
+            killedStatus = true;
+        }
+        if (map.grille[tileX][tileY] == MP3)
+        {
+            map.map_select = 2;
+            killedStatus = true;
+        }
         // Vérification si le point n'est pas sur une tuile 'Sol'
         if (map.is_Sol.find(map.grille[tileX][tileY]) == map.is_Sol.end())
         {
@@ -550,6 +592,12 @@ void Jeu::dessiner()
 
     gold.texteCount.setString(std::to_string(gold.GoldCount));
     fenetre.draw(gold.texteCount);
+    if(map.map_select == 0)
+        fenetre.draw(ecranTitre.texteMap1);
+    else if(map.map_select == 1)
+        fenetre.draw(ecranTitre.texteMap2);
+    else if(map.map_select == 2)
+        fenetre.draw(ecranTitre.texteMap3);
 
     fenetre.display();
 }
