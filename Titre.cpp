@@ -145,6 +145,7 @@ void EcranTitre::demarrage(Jeu *jeu)
 
 void EcranTitre::paused(Jeu *jeu)
 {
+
     sf::Event evenement;
 
     Button btn;
@@ -199,24 +200,43 @@ void EcranTitre::paused(Jeu *jeu)
 
 void EcranTitre::killed(Jeu *jeu)
 {
+    Button btn;
+
     sf::Event evenement;
-    sf::Clock timer;
-    timer.restart();
+
+    if (!font.loadFromFile("sprites/police.ttf"))
+        return;
+    btn.btn_create((jeu->F_Largeur / 2) - 200, 600, 400, 100, 60, font, "Retourner au camp");
+
     while (jeu->fenetre.isOpen())
     {
         while (jeu->fenetre.pollEvent(evenement))
         {
-            if (evenement.type == sf::Event::KeyPressed && timer.getElapsedTime().asSeconds() > 1) 
-                return;
+            if (evenement.type == sf::Event::MouseButtonPressed)
+            {
+                if (evenement.mouseButton.button == sf::Mouse::Left)
+                {
+                    if (btn.isMouseOver(jeu->fenetre))
+                    {             
+                        jeu->sound.sound5.play();
+                        return;
+                    }
+                }
+            }
         }
-        texteKilled.setString("Vous etes mort...\nScore : " + std::to_string(jeu->gold.GoldCount));
+        texteKilled.setString("Vous vous etes pris un sacre coup !");
+        texteKilled2.setString("Score : " + std::to_string(jeu->gold.GoldCount));
         float largeurTexte = texteKilled.getLocalBounds().width;
         float hauteurTexte = texteKilled.getLocalBounds().height;
-        texteKilled.setPosition((jeu->F_Largeur / 2) - (largeurTexte / 2), (jeu->F_Hauteur / 2) - (hauteurTexte));
+        texteKilled.setPosition((jeu->F_Largeur / 2) - (largeurTexte / 2), 300);
+        float largeurTexte2 = texteKilled2.getLocalBounds().width;
+        texteKilled2.setPosition((jeu->F_Largeur / 2) - (largeurTexte2 / 2), 350 + hauteurTexte);
         jeu->fenetre.clear();
         jeu->fenetre.draw(spriteEcranTitre);
         jeu->fenetre.draw(texteKilled);
+        jeu->fenetre.draw(texteKilled2);
         jeu->fenetre.draw(texteVersion);
+        btn.drawTo(jeu->fenetre);
         if(jeu->map.map_select == 0)
             jeu->fenetre.draw(jeu->ecranTitre.texteMap1);
         else if(jeu->map.map_select == 1)

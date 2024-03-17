@@ -45,6 +45,7 @@ struct EcranTitre
 
     sf::Font fontKilled;
     sf::Text texteKilled;
+    sf::Text texteKilled2;
 
     sf::Font fontPaused;
     sf::Text textePaused;

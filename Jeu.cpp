@@ -186,12 +186,12 @@ void Jeu::initialiserJeu()
     if (ecranTitre.fontKilled.loadFromFile("sprites/police.ttf"))
     {
         ecranTitre.texteKilled.setFont(ecranTitre.fontKilled); 
-        //ecranTitre.texteKilled.setString("Vous etes mort...\nFin de partie !");
         ecranTitre.texteKilled.setCharacterSize(100); // en pixels
         ecranTitre.texteKilled.setFillColor(sf::Color::White);
-        /*float largeurTexte = ecranTitre.texteKilled.getLocalBounds().width;
-        float hauteurTexte = ecranTitre.texteKilled.getLocalBounds().height;
-        ecranTitre.texteKilled.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur / 2) - (hauteurTexte));*/
+
+        ecranTitre.texteKilled2.setFont(ecranTitre.fontKilled); 
+        ecranTitre.texteKilled2.setCharacterSize(100); // en pixels
+        ecranTitre.texteKilled2.setFillColor(sf::Color::White);
     }
 
     if (ecranTitre.fontScore.loadFromFile("sprites/police.ttf"))
