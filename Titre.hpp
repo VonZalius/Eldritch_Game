@@ -22,6 +22,7 @@ struct EcranTitre
 {
     void afficherEcranTitre(Jeu *jeu);
     void demarrage(Jeu *jeu);
+    void shop(Jeu *jeu);
     void paused(Jeu *jeu);
     void killed(Jeu *jeu);
 

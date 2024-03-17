@@ -263,6 +263,9 @@ void Jeu::executer()
         gold.generer(map.T_LARGEUR, map.T_HAUTEUR);
         joueur.position = sf::Vector2f((F_Largeur / 2) - ((map.TailleTuile * map.T_LARGEUR) / 2) + map.player_x + map.TailleTuile / 2,
                                         (F_Hauteur / 2) - ((map.TailleTuile * map.T_HAUTEUR) / 2) + map.player_y + map.TailleTuile / 2);
+        if (!ecranTitre.font.loadFromFile("sprites/police.ttf"))
+            return;
+        shop.btn_create(50, 600, 300, 100, 60, ecranTitre.font, "Personnages");
         while (fenetre.isOpen())
         {
             //std::cout << joueur.position.x << " , " << joueur.position.y << std::endl;
@@ -327,6 +330,17 @@ void Jeu::traiterEvenements()
     {
         if (evenement.type == sf::Event::Closed)
             fenetre.close();
+        if (evenement.type == sf::Event::MouseButtonPressed)
+        {
+            if (evenement.mouseButton.button == sf::Mouse::Left)
+            {
+                if (shop.isMouseOver(fenetre))
+                {             
+                    sound.sound5.play();
+                    ecranTitre.shop(this);
+                }
+            }
+        }
     }
 }
 
@@ -422,21 +436,6 @@ void Jeu::mettreAJour_hub(sf::Time deltaTime)
     // Mise à jour de la position du sprite du joueur
     joueur.sprite.setPosition(joueur.position);
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) 
-    {
-        map.map_select = 0;
-        killedStatus = true;
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) 
-    {
-        map.map_select = 1;
-        killedStatus = true;
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) 
-    {
-        map.map_select = 2;
-        killedStatus = true;
-    }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
     {
         ecranTitre.paused(this);
@@ -630,6 +629,7 @@ void Jeu::dessiner_hub()
     //fenetre.draw(gold.texteCount);
     ecranTitre.texteScore.setString("Meilleurs scores\n\nSanctuaire : " + std::to_string(HighScore1) + "\nRuines : "  + std::to_string(HighScore2) + "\nCanal : "  + std::to_string(HighScore3));
     fenetre.draw(ecranTitre.texteScore);
+    shop.drawTo(fenetre);
 
     fenetre.display();
 }

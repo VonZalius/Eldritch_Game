@@ -143,6 +143,185 @@ void EcranTitre::demarrage(Jeu *jeu)
     }
 }
 
+void EcranTitre::shop(Jeu *jeu)
+{
+
+    sf::Event evenement;
+
+    Button btn;
+    Button btn2;
+    Button btn3;
+    Button btn4;
+    Button btn5;
+    Button btn6;
+    Button btn7;
+    Button btn8;
+    Button btn9;
+    Button btn10;
+    Button btn11;
+
+    int skin = 0;
+
+    if (!font.loadFromFile("sprites/police.ttf"))
+        return;
+    btn.btn_create(100, 100, 400, 100, 60, font, "L'Inconnu");
+    btn2.btn_create(600, 100, 420, 100, 60, font, "Sir Tonivar");
+    btn3.btn_create(100, 250, 400, 100, 60, font, "L'Enchanteresse");
+    btn4.btn_create(600, 250, 420, 100, 60, font, "Mage Barbe-Tordu");
+    btn5.btn_create(100, 400, 400, 100, 60, font, "Sir Valan");
+    btn6.btn_create(600, 400, 420, 100, 60, font, "Dame d'Autrefois");
+    btn7.btn_create(100, 550, 400, 100, 60, font, "Seigneur dechu");
+    btn8.btn_create(600, 550, 420, 100, 60, font, "Sir Kerwin");
+    btn9.btn_create(100, 700, 400, 100, 60, font, "Cadet Geufroid");
+    btn10.btn_create(600, 700, 420, 100, 60, font, "Balthazar Griffe-de-Lion");
+    btn11.btn_create(1100, 100, 400, 100, 60, font, "Reprendre");
+
+    jeu->sound.sound5.play();
+    while (jeu->fenetre.isOpen())
+    {
+        while (jeu->fenetre.pollEvent(evenement))
+        {
+            if (evenement.type == sf::Event::MouseButtonPressed)
+            {
+                if (evenement.mouseButton.button == sf::Mouse::Left)
+                {
+                    if (btn.isMouseOver(jeu->fenetre))
+                    {             
+                        jeu->sound.sound5.play();
+                        if (jeu->joueur.textureJoueur.loadFromFile(jeu->joueur.joueurSprite))
+                            jeu->joueur.sprite.setTexture(jeu->joueur.textureJoueur);
+                        textePaused.setString("Un aventurier perdu au loin des Vrakens...");
+                        skin = 0;
+                    }
+                    else if (btn2.isMouseOver(jeu->fenetre))
+                    {             
+                        jeu->sound.sound5.play();
+                        if (jeu->joueur.textureJoueur.loadFromFile(jeu->joueur.joueurSprite2))
+                            jeu->joueur.sprite.setTexture(jeu->joueur.textureJoueur);
+                        textePaused.setString("Trouvez 30 pieces au Sanctuaire");
+                        skin = 1;
+                    }
+                    else if (btn3.isMouseOver(jeu->fenetre))
+                    {             
+                        jeu->sound.sound5.play();
+                        if (jeu->joueur.textureJoueur.loadFromFile(jeu->joueur.joueurSprite3))
+                            jeu->joueur.sprite.setTexture(jeu->joueur.textureJoueur);
+                        textePaused.setString("Trouvez 60 pieces au Sanctuaire");
+                        skin = 2;
+                    }
+                    else if (btn4.isMouseOver(jeu->fenetre))
+                    {             
+                        jeu->sound.sound5.play();
+                        if (jeu->joueur.textureJoueur.loadFromFile(jeu->joueur.joueurSprite4))
+                            jeu->joueur.sprite.setTexture(jeu->joueur.textureJoueur);
+                        textePaused.setString("Trouvez 100 pieces au Sanctuaire");
+                        skin = 3;
+                    }
+                    else if (btn5.isMouseOver(jeu->fenetre))
+                    {             
+                        jeu->sound.sound5.play();
+                        if (jeu->joueur.textureJoueur.loadFromFile(jeu->joueur.joueurSprite5))
+                            jeu->joueur.sprite.setTexture(jeu->joueur.textureJoueur);
+                        textePaused.setString("Trouvez 30 pieces aux Ruines");
+                        skin = 4;
+                    }
+                    else if (btn6.isMouseOver(jeu->fenetre))
+                    {             
+                        jeu->sound.sound5.play();
+                        if (jeu->joueur.textureJoueur.loadFromFile(jeu->joueur.joueurSprite6))
+                            jeu->joueur.sprite.setTexture(jeu->joueur.textureJoueur);
+                        textePaused.setString("Trouvez 60 pieces aux Ruines");
+                        skin = 5;
+                    }
+                    else if (btn7.isMouseOver(jeu->fenetre))
+                    {             
+                        jeu->sound.sound5.play();
+                        if (jeu->joueur.textureJoueur.loadFromFile(jeu->joueur.joueurSprite7))
+                            jeu->joueur.sprite.setTexture(jeu->joueur.textureJoueur);
+                        textePaused.setString("Trouvez 100 pieces aux Ruines");
+                        skin = 6;
+                    }
+                    else if (btn8.isMouseOver(jeu->fenetre))
+                    {             
+                        jeu->sound.sound5.play();
+                        if (jeu->joueur.textureJoueur.loadFromFile(jeu->joueur.joueurSprite8))
+                            jeu->joueur.sprite.setTexture(jeu->joueur.textureJoueur);
+                        textePaused.setString("Trouvez 30 pieces au Canal");
+                        skin = 7;
+                    }
+                    else if (btn9.isMouseOver(jeu->fenetre))
+                    {             
+                        jeu->sound.sound5.play();
+                        if (jeu->joueur.textureJoueur.loadFromFile(jeu->joueur.joueurSprite9))
+                            jeu->joueur.sprite.setTexture(jeu->joueur.textureJoueur);
+                        textePaused.setString("Trouvez 60 pieces au Canal");
+                        skin = 8;
+                    }
+                    else if (btn10.isMouseOver(jeu->fenetre))
+                    {             
+                        jeu->sound.sound5.play();
+                        if (jeu->joueur.textureJoueur.loadFromFile(jeu->joueur.joueurSprite0))
+                            jeu->joueur.sprite.setTexture(jeu->joueur.textureJoueur);
+                        textePaused.setString("Trouvez 100 pieces au Canal");
+                        skin = 9;
+                    }
+                    else if (btn11.isMouseOver(jeu->fenetre))
+                    {             
+                        jeu->sound.sound5.play();
+                        if ((skin == 1 && jeu->HighScore1 < 30) ||
+                            (skin == 2 && jeu->HighScore1 < 60) ||
+                            (skin == 3 && jeu->HighScore1 < 100) ||
+                            (skin == 4 && jeu->HighScore2 < 30) ||
+                            (skin == 5 && jeu->HighScore2 < 60) ||
+                            (skin == 6 && jeu->HighScore2 < 100) ||
+                            (skin == 7 && jeu->HighScore3 < 30) ||
+                            (skin == 8 && jeu->HighScore3 < 60) ||
+                            (skin == 9 && jeu->HighScore3 < 100) )
+                        {
+                            if (jeu->joueur.textureJoueur.loadFromFile(jeu->joueur.joueurSprite))
+                                jeu->joueur.sprite.setTexture(jeu->joueur.textureJoueur);
+                        }
+
+                        float goodsize = static_cast<float>(jeu->joueur.TailleSprite) / static_cast<float>(jeu->joueur.frameWidth);
+                        jeu->joueur.sprite.setScale(goodsize, goodsize);
+                        jeu->joueur.sprite.setOrigin(jeu->joueur.frameWidth / 2, (jeu->joueur.frameHeight / 2) + 6);
+                        return;
+                    }
+                }
+            }
+        }
+        float goodsize = static_cast<float>(jeu->joueur.TailleSprite) / static_cast<float>(jeu->joueur.frameWidth);
+        jeu->joueur.sprite.setScale(goodsize * -10, goodsize * 10);
+        jeu->joueur.sprite.setPosition(1400, 630);
+        jeu->joueur.sprite.setTextureRect(jeu->joueur.framesJoueur[0]);
+
+        float largeurTexte = textePaused.getLocalBounds().width;
+        textePaused.setPosition((jeu->F_Largeur / 2) - (largeurTexte / 2), 850);
+        jeu->fenetre.clear();
+        jeu->fenetre.draw(spriteEcranTitre);
+        jeu->fenetre.draw(textePaused);
+        btn.drawTo(jeu->fenetre);
+        btn2.drawTo(jeu->fenetre);
+        btn3.drawTo(jeu->fenetre);
+        btn4.drawTo(jeu->fenetre);
+        btn5.drawTo(jeu->fenetre);
+        btn6.drawTo(jeu->fenetre);
+        btn7.drawTo(jeu->fenetre);
+        btn8.drawTo(jeu->fenetre);
+        btn9.drawTo(jeu->fenetre);
+        btn10.drawTo(jeu->fenetre);
+        btn11.drawTo(jeu->fenetre);
+        jeu->fenetre.draw(jeu->joueur.sprite);
+        if(jeu->map.map_select == 0)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap1);
+        else if(jeu->map.map_select == 1)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap2);
+        else if(jeu->map.map_select == 2)
+            jeu->fenetre.draw(jeu->ecranTitre.texteMap3);
+        jeu->fenetre.display();
+    }
+}
+
 void EcranTitre::paused(Jeu *jeu)
 {
 

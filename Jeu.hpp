@@ -25,7 +25,24 @@ struct Joueur
     static const int frameHeight = 32;
 
     // Texture principale
-    std::string joueurSprite = "sprites/camelot_/percival_.png";
+    std::string joueurSprite = "sprites/camelot_/mordred_.png";
+
+
+
+    std::string joueurSprite2 = "sprites/camelot_/percival_.png";
+    std::string joueurSprite3 = "sprites/camelot_/guinevere_.png";
+    std::string joueurSprite4 = "sprites/camelot_/merlin_.png";  // Sanctuaire
+
+    std::string joueurSprite5 = "sprites/camelot_/lancelot_.png";
+    std::string joueurSprite6 = "sprites/camelot_/ladyOfTheLake_.png";
+    std::string joueurSprite7 = "sprites/camelot_/fisherKing_.png"; //Ruines
+
+    std::string joueurSprite8 = "sprites/camelot_/gawain_.png";
+    std::string joueurSprite9 = "sprites/camelot_/morganLeFay_.png";
+    std::string joueurSprite0 = "sprites/camelot_/arthurPendragon_.png"; // Canal
+
+
+
     sf::Texture textureJoueur; // Ajout pour gérer la texture du sprite du joueur
     std::vector<sf::IntRect> framesJoueur;
     // Position des différent sprite pour l'animation, compter a partir de 0 !!
@@ -35,7 +52,7 @@ struct Joueur
     static const int frameEndY = 0;
 
     // Texture secondaire
-    std::string joueurSprite_2 = "sprites/camelot_/percival_.png";
+    //std::string joueurSprite_2 = "sprites/camelot_/percival_.png";
     sf::Texture textureJoueur_2; // Ajout pour gérer la texture du sprite du joueur
     std::vector<sf::IntRect> framesJoueur_2;
     // Position des différent sprite pour l'animation, compter a partir de 0 !!
@@ -145,6 +162,7 @@ public:
     int HighScore1;
     int HighScore2;
     int HighScore3;
+    Button shop;
 
     Joueur joueur;
 
