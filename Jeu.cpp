@@ -24,11 +24,33 @@ void Jeu::initialiserJeu()
         HighScore2 = atoi(ligne.c_str());
         getline(fichierIn, ligne);
         HighScore3 = atoi(ligne.c_str());
+        getline(fichierIn, ligne);
+        sprite_reminder = atoi(ligne.c_str());
         fichierIn.close(); // Ferme le fichier
     }
+    if (sprite_reminder == 0)
+        sprite_reminder_str = joueur.joueurSprite;
+    if (sprite_reminder == 1)
+        sprite_reminder_str = joueur.joueurSprite2;
+    if (sprite_reminder == 2)
+        sprite_reminder_str = joueur.joueurSprite3;
+    if (sprite_reminder == 3)
+        sprite_reminder_str = joueur.joueurSprite4;
+    if (sprite_reminder == 4)
+        sprite_reminder_str = joueur.joueurSprite5;
+    if (sprite_reminder == 5)
+        sprite_reminder_str = joueur.joueurSprite6;
+    if (sprite_reminder == 6)
+        sprite_reminder_str = joueur.joueurSprite7;
+    if (sprite_reminder == 7)
+        sprite_reminder_str = joueur.joueurSprite8;
+    if (sprite_reminder == 8)
+        sprite_reminder_str = joueur.joueurSprite9;
+    if (sprite_reminder == 9)
+        sprite_reminder_str = joueur.joueurSprite0;
 
     //JOUEUR
-    if (joueur.textureJoueur.loadFromFile(joueur.joueurSprite))
+    if (joueur.textureJoueur.loadFromFile(sprite_reminder_str))
     {
         joueur.sprite.setTexture(joueur.textureJoueur);
         float goodsize = static_cast<float>(joueur.TailleSprite) / static_cast<float>(joueur.frameWidth);
@@ -183,6 +205,12 @@ void Jeu::initialiserJeu()
         ecranTitre.textePaused.setCharacterSize(100); // en pixels
         ecranTitre.textePaused.setFillColor(sf::Color::White);
     }
+    if (ecranTitre.fontPaused2.loadFromFile("sprites/police.ttf"))
+    {
+        ecranTitre.textePaused2.setFont(ecranTitre.fontPaused2); 
+        ecranTitre.textePaused2.setCharacterSize(100); // en pixels
+        ecranTitre.textePaused2.setFillColor(sf::Color::White);
+    }
     if (ecranTitre.fontKilled.loadFromFile("sprites/police.ttf"))
     {
         ecranTitre.texteKilled.setFont(ecranTitre.fontKilled); 
@@ -258,9 +286,11 @@ void Jeu::executer()
 
         //HUb
         sf::Clock horloge;
-        map.hub();
+        map.hub(this);
         attaques.generer(map.T_LARGEUR, map.T_HAUTEUR);
         gold.generer(map.T_LARGEUR, map.T_HAUTEUR);
+        float goodsize = static_cast<float>(joueur.TailleSprite) / static_cast<float>(joueur.frameWidth);
+        joueur.sprite.setScale(goodsize, goodsize);
         joueur.position = sf::Vector2f((F_Largeur / 2) - ((map.TailleTuile * map.T_LARGEUR) / 2) + map.player_x + map.TailleTuile / 2,
                                         (F_Hauteur / 2) - ((map.TailleTuile * map.T_HAUTEUR) / 2) + map.player_y + map.TailleTuile / 2);
         if (!ecranTitre.font.loadFromFile("sprites/police.ttf"))
@@ -288,7 +318,7 @@ void Jeu::executer()
 
         //Jeu
         attaques.attaqueTimer.restart();
-        map.generer();
+        map.generer(this);
         attaques.generer(map.T_LARGEUR, map.T_HAUTEUR);
         gold.generer(map.T_LARGEUR, map.T_HAUTEUR);
         joueur.position = sf::Vector2f((F_Largeur / 2) - ((map.TailleTuile * map.T_LARGEUR) / 2) + map.player_x + map.TailleTuile / 2,

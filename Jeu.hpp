@@ -13,9 +13,11 @@
 struct Joueur
 {
     sf::Vector2f position;
-    float vitesse = 200.0f; // pixels par seconde
-    float vitesseAugmentee = 400.0f;
-    static const int TailleSprite = 96;
+    float vitesse; // pixels par seconde
+    float vitesseAugmentee;
+    float vitesse_modifier = 4.2;
+    int TailleSprite;
+    float Taille_modifier = 2;
     static const int collision_div = 15;
     sf::Sprite sprite;
 
@@ -118,7 +120,8 @@ struct Gold
     int GoldCount;
 
     sf::Sprite sprite;
-    static const int TailleSprite = 48;
+    int TailleSprite;
+    float Taille_modifier = 1;
 
     // Taille originelle du Sprite
     static const int Width = 16;
@@ -154,14 +157,17 @@ public:
     void executer();
 
     sf::RenderWindow fenetre;
-    static const int F_Hauteur = 1080;
-    static const int F_Largeur = 1920;
+    static const int F_Hauteur = 1440;
+    static const int F_Largeur = 2560;
     bool killedStatus = false;
     bool backStatus = false;
     int TotalScore;
     int HighScore1;
     int HighScore2;
     int HighScore3;
+    int sprite_reminder;
+    std::string sprite_reminder_str;
+    
     Button shop;
 
     Joueur joueur;

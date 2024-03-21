@@ -5,9 +5,24 @@ Map::Map()
 {
 }
 
-void Map::hub()
+void set_size(Jeu *jeu)
+{
+    jeu->map.TailleTuile = (jeu->F_Hauteur / (jeu->map.T_HAUTEUR / 0.8)) * jeu->map.Taille_modifier;
+    jeu->gold.TailleSprite = jeu->map.TailleTuile * jeu->gold.Taille_modifier;
+    jeu->joueur.TailleSprite = jeu->map.TailleTuile * jeu->joueur.Taille_modifier;
+    jeu->attaques.TailleSprite = jeu->map.TailleTuile * jeu->attaques.Taille_modifier;
+    jeu->attaques.TailleSprite2 = jeu->map.TailleTuile * jeu->attaques.Taille_modifier2;
+    jeu->joueur.vitesse = jeu->map.TailleTuile * jeu->joueur.vitesse_modifier;
+    jeu->joueur.vitesseAugmentee = jeu->joueur.vitesse * 2;
+}
+
+void Map::hub(Jeu *jeu)
 {
     hub_1(this);
+
+    // taille
+    set_size(jeu);
+
     // Limites du rectangle spécifié (en termes de ligne et colonne)
     int debutColonne = TilesetTilesStartX, finColonne = TilesetTilesEndX;
     int debutLigne = TilesetTilesStartY, finLigne = TilesetTilesEndY;
@@ -52,12 +67,15 @@ void Map::hub()
     }
 }
 
-void Map::generer()
+void Map::generer(Jeu *jeu)
 {
     //Choix aléatoire de la map
     void (*tableAUEAUDeFonctions[])(Map *map) =
         {map_1, map_2, map_3};
     (*tableAUEAUDeFonctions[map_select])(this);
+
+    // taille
+    set_size(jeu);
 
     // Limites du rectangle spécifié (en termes de ligne et colonne)
     int debutColonne = TilesetTilesStartX, finColonne = TilesetTilesEndX;

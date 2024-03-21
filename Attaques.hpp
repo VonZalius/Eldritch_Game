@@ -69,7 +69,8 @@ struct Attaques
 
     //OMBRE
     sf::Sprite sprite;
-    static const int TailleSprite = 48;
+    int TailleSprite;
+    float Taille_modifier = 1;
 
     // Taille originelle du Sprite
     static const int Width = 16;
@@ -89,7 +90,8 @@ struct Attaques
 
     //IMPACT
     sf::Sprite sprite2;
-    static const int TailleSprite2 = 78;
+    int TailleSprite2;
+    float Taille_modifier2 = 1.8;
 
     // Taille originelle du Sprite
     static const int Width2 = 32;

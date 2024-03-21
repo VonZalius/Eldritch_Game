@@ -197,8 +197,8 @@ public:
     void implementer_Fontaine(double x_co, double y_co, double x_taille, double y_taille, double x, double y, sf::RenderWindow& fenetre);
     void dessiner_bottom(sf::RenderWindow& fenetre, const int F_Hauteur, const int F_Largeur);
     void dessiner_top(Jeu *jeu);
-    void hub();
-    void generer();
+    void hub(Jeu *jeu);
+    void generer(Jeu *jeu);
 
     std::string TilesetSol = "sprites/fantasy_/forest_/forest_.png";
     std::string TilesetMur = "sprites/fantasy_/forest_/forest_ [fencesAndWalls].png";
@@ -214,7 +214,8 @@ public:
     int T_LARGEUR;
     int T_HAUTEUR;
     std::vector<std::vector<TypeTuile>> grille;
-    static const int TailleTuile = 48;
+    int TailleTuile;
+    float Taille_modifier = 1;
     int y_initial;
     int x_initial;
     int player_x;

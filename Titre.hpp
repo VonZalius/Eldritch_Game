@@ -37,7 +37,7 @@ struct EcranTitre
 
     sf::Font fontVersion;
     sf::Text texteVersion;
-    std::string Version = "Alpha : 0.2.0";
+    std::string Version = "Alpha : 0.2.1";
 
     sf::Font fontDemarrage;
     sf::Text texteDemarrage3;
@@ -50,6 +50,9 @@ struct EcranTitre
 
     sf::Font fontPaused;
     sf::Text textePaused;
+
+    sf::Font fontPaused2;
+    sf::Text textePaused2;
 
     sf::Font fontScore;
     sf::Text texteScore;

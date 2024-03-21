@@ -9,8 +9,6 @@ Attaques::Attaques() :
     if (textureImpact.loadFromFile(impactSprite))
     {
         sprite.setTexture(textureImpact);
-        float goodsize = static_cast<float>(TailleSprite) / static_cast<float>(Width);
-        sprite.setScale(goodsize, goodsize);
         //sprite.setOrigin(Width / 2, Height / 2);
         for (int ligne = TileStartY; ligne <= TileEndY; ++ligne)
         {
@@ -29,8 +27,6 @@ Attaques::Attaques() :
     if (textureImpact2.loadFromFile(impactSprite2))
     {
         sprite2.setTexture(textureImpact2);
-        float goodsize2 = static_cast<float>(TailleSprite2) / static_cast<float>(Width2);
-        sprite2.setScale(goodsize2, goodsize2);
         //sprite.setOrigin(Width2 / 2, Height2 / 2);
         for (int ligne = TileStartY2; ligne <= TileEndY2; ++ligne)
         {
@@ -53,6 +49,10 @@ Paterne::Paterne(FonctionPtr ptr) : degatZone(ptr)
 
 void Attaques::generer(int T_LARGEUR, int T_HAUTEUR)
 {
+    float goodsize = static_cast<float>(TailleSprite) / static_cast<float>(Width);
+    sprite.setScale(goodsize, goodsize);
+    float goodsize2 = static_cast<float>(TailleSprite2) / static_cast<float>(Width2);
+    sprite2.setScale(goodsize2, goodsize2);
     // Ajuster le nombre de lignes
     grille_degat.resize(T_LARGEUR);
     // Ajuster le nombre de colonnes pour chaque ligne

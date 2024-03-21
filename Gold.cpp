@@ -5,8 +5,6 @@ Gold::Gold()
     if (textureGold.loadFromFile(goldSprite))
     {
         sprite.setTexture(textureGold);
-        float goodsize = static_cast<float>(TailleSprite) / static_cast<float>(Width);
-        sprite.setScale(goodsize, goodsize);
         //sprite.setOrigin(Width / 2, Height / 2);
         for (int ligne = TileStartY; ligne <= TileEndY; ++ligne)
         {
@@ -43,6 +41,8 @@ Gold::Gold()
 
 void Gold::generer(int T_LARGEUR, int T_HAUTEUR)
 {
+    float goodsize = static_cast<float>(TailleSprite) / static_cast<float>(Width);
+    sprite.setScale(goodsize, goodsize);
     // Ajuster le nombre de lignes
     grille.resize(T_LARGEUR);
     // Ajuster le nombre de colonnes pour chaque ligne
