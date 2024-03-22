@@ -459,7 +459,7 @@ void Jeu::mettreAJour_hub(sf::Time deltaTime)
 
     // Application de la vitesse
     float vitesseActuelle;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Joystick::isButtonPressed(0, 1))
     {
         vitesseActuelle = joueur.vitesseAugmentee;
         // Son de déplacement
@@ -487,7 +487,7 @@ void Jeu::mettreAJour_hub(sf::Time deltaTime)
     // Mise à jour de la position du sprite du joueur
     joueur.sprite.setPosition(joueur.position);
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) || sf::Joystick::isButtonPressed(0, 7)) 
     {
         ecranTitre.paused(this);
     }
@@ -565,7 +565,7 @@ void Jeu::mettreAJour(sf::Time deltaTime)
 
     // Application de la vitesse
     float vitesseActuelle;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Joystick::isButtonPressed(0, 1))
     {
         vitesseActuelle = joueur.vitesseAugmentee;
         // Son de déplacement
@@ -598,7 +598,7 @@ void Jeu::mettreAJour(sf::Time deltaTime)
         killedStatus = true;
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) || sf::Joystick::isButtonPressed(0, 7)) 
     {
         want_to_pause = true;
     }
