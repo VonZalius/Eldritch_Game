@@ -396,26 +396,34 @@ void Jeu::mettreAJour_hub(sf::Time deltaTime)
     float deplacementX = 0.0f;
     float deplacementY = 0.0f;
 
-    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) && collision(1, deltaTime, joueur.vitesse))
+    // Ajout de la prise en charge de la manette
+    float joystickThreshold = 15.0f; // Seuil pour ignorer les faibles mouvements du joystick
+    float joystickX = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+    float joystickY = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+
+    // Déplacement gauche/droite avec le clavier ou le stick
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A) || joystickX < -joystickThreshold) && collision(1, deltaTime, joueur.vitesse))
     {
         float goodsize = static_cast<float>(joueur.TailleSprite) / static_cast<float>(joueur.frameWidth);
         joueur.sprite.setScale(-goodsize, goodsize); // Inverse horizontalement
         deplacementX -= 1.0f;
         mouvement = true;
     }
-    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) && collision(2, deltaTime, joueur.vitesse))
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D) || joystickX > joystickThreshold) && collision(2, deltaTime, joueur.vitesse))
     {
         float goodsize = static_cast<float>(joueur.TailleSprite) / static_cast<float>(joueur.frameWidth);
-        joueur.sprite.setScale(goodsize, goodsize); // Inverse horizontalement
+        joueur.sprite.setScale(goodsize, goodsize);
         deplacementX += 1.0f;
         mouvement = true;
     }
-    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && collision(3, deltaTime, joueur.vitesse))
+
+    // Déplacement haut/bas avec le clavier ou le stick
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W) || joystickY < -joystickThreshold) && collision(3, deltaTime, joueur.vitesse))
     {
         deplacementY -= 1.0f;
         mouvement = true;
     }
-    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) && collision(4, deltaTime, joueur.vitesse))
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S) || joystickY > joystickThreshold) && collision(4, deltaTime, joueur.vitesse))
     {
         deplacementY += 1.0f;
         mouvement = true;
@@ -494,26 +502,34 @@ void Jeu::mettreAJour(sf::Time deltaTime)
     float deplacementX = 0.0f;
     float deplacementY = 0.0f;
 
-    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) && collision(1, deltaTime, joueur.vitesse))
+    // Ajout de la prise en charge de la manette
+    float joystickThreshold = 15.0f; // Seuil pour ignorer les faibles mouvements du joystick
+    float joystickX = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+    float joystickY = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+
+    // Déplacement gauche/droite avec le clavier ou le stick
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A) || joystickX < -joystickThreshold) && collision(1, deltaTime, joueur.vitesse))
     {
         float goodsize = static_cast<float>(joueur.TailleSprite) / static_cast<float>(joueur.frameWidth);
         joueur.sprite.setScale(-goodsize, goodsize); // Inverse horizontalement
         deplacementX -= 1.0f;
         mouvement = true;
     }
-    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) && collision(2, deltaTime, joueur.vitesse))
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D) || joystickX > joystickThreshold) && collision(2, deltaTime, joueur.vitesse))
     {
         float goodsize = static_cast<float>(joueur.TailleSprite) / static_cast<float>(joueur.frameWidth);
-        joueur.sprite.setScale(goodsize, goodsize); // Inverse horizontalement
+        joueur.sprite.setScale(goodsize, goodsize);
         deplacementX += 1.0f;
         mouvement = true;
     }
-    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && collision(3, deltaTime, joueur.vitesse))
+
+    // Déplacement haut/bas avec le clavier ou le stick
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W) || joystickY < -joystickThreshold) && collision(3, deltaTime, joueur.vitesse))
     {
         deplacementY -= 1.0f;
         mouvement = true;
     }
-    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) && collision(4, deltaTime, joueur.vitesse))
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S) || joystickY > joystickThreshold) && collision(4, deltaTime, joueur.vitesse))
     {
         deplacementY += 1.0f;
         mouvement = true;
