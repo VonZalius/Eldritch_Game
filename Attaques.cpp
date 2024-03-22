@@ -78,6 +78,7 @@ void Attaques::attaques_rng(Jeu *jeu)
     }
     else if (attaqueTimer.getElapsedTime().asSeconds() >= 1)
     {
+        std::cout << "salut\n";
         rng = rand() % 3;
         status = true;
         attaqueTimer.restart();

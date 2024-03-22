@@ -357,6 +357,8 @@ void EcranTitre::shop(Jeu *jeu)
 void EcranTitre::paused(Jeu *jeu)
 {
 
+    jeu->attaques.status = false;
+
     sf::Event evenement;
 
     Button btn;
@@ -378,6 +380,7 @@ void EcranTitre::paused(Jeu *jeu)
                     if (btn.isMouseOver(jeu->fenetre))
                     {             
                         jeu->sound.sound5.play();
+                        jeu->attaques.attaqueTimer.restart();
                         return;
                     }
                     if (btn2.isMouseOver(jeu->fenetre))

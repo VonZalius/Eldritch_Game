@@ -255,6 +255,17 @@ void Jeu::initialiserJeu()
         ecranTitre.texteMap3.setFillColor(sf::Color::White);
         ecranTitre.texteMap3.setPosition(50, 50);
     }
+
+    if (font_wtp.loadFromFile("sprites/police.ttf"))
+    {
+        texte_wtp.setFont(font_wtp); 
+        texte_wtp.setString("Le jeu sera mis en pause a la fin de l'attaque.");
+        texte_wtp.setCharacterSize(100); // en pixels
+        texte_wtp.setFillColor(sf::Color::White);
+        float largeurTexte = texte_wtp.getLocalBounds().width;
+        float hauteurTexte = texte_wtp.getLocalBounds().height;
+        texte_wtp.setPosition((F_Largeur / 2) - (largeurTexte / 2), (F_Hauteur) - (hauteurTexte * 2));
+    }
 }
 
 void Jeu::reinitialiser()
@@ -269,6 +280,8 @@ void Jeu::reinitialiser()
 
     killedStatus = false;
     gold.status = false;
+
+    want_to_pause = false;
     //joueur.position = sf::Vector2f(joueur.X_Initial, joueur.Y_Initial);
 }
 
@@ -568,11 +581,16 @@ void Jeu::mettreAJour(sf::Time deltaTime)
     {
         killedStatus = true;
     }
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
     {
+        want_to_pause = true;
+    }
+    if(want_to_pause == true && attaques.status == false)
+    {
+        want_to_pause = false;
         ecranTitre.paused(this);
     }
-
 }
 
 bool Jeu::collision(int p, sf::Time deltaTime, float vitesseActuelle)
@@ -680,6 +698,9 @@ void Jeu::dessiner()
         fenetre.draw(ecranTitre.texteMap2);
     else if(map.map_select == 2)
         fenetre.draw(ecranTitre.texteMap3);
+
+    if(want_to_pause == true)
+        fenetre.draw(texte_wtp);
 
     fenetre.display();
 }

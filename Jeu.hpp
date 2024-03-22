@@ -167,6 +167,10 @@ public:
     int HighScore3;
     int sprite_reminder;
     std::string sprite_reminder_str;
+
+    bool want_to_pause = false;
+    sf::Font font_wtp;
+    sf::Text texte_wtp;
     
     Button shop;
 
