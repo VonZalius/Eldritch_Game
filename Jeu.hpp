@@ -153,15 +153,15 @@ struct Gold
 class Jeu
 {
 public:
-    Jeu();
+    Jeu(int Largeur, int Hauteur);
     void executer();
 
     sf::RenderWindow fenetre;
-    static const int F_Hauteur = 1440;
-    static const int F_Largeur = 2560;
+    int F_Hauteur = 1440;
+    int F_Largeur = 2560;
     bool killedStatus = false;
     bool backStatus = false;
-    int TotalScore;
+    //int TotalScore;
     int HighScore1;
     int HighScore2;
     int HighScore3;

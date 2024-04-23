@@ -45,7 +45,7 @@ bool KO_checker(Jeu *jeu)
             std::ofstream fichierOut("data/Score.txt"); // Crée un objet ofstream et ouvre le fichier
             if (fichierOut.is_open())
             {
-                fichierOut << jeu->TotalScore << std::endl << jeu->HighScore1 << std::endl << jeu->HighScore2 << std::endl << jeu->HighScore3 << std::endl << jeu->sprite_reminder << std::endl; // Écrit dans le fichier
+                fichierOut << jeu->F_Largeur << "x" << jeu->F_Hauteur << std::endl << jeu->HighScore1 << std::endl << jeu->HighScore2 << std::endl << jeu->HighScore3 << std::endl << jeu->sprite_reminder << std::endl; // Écrit dans le fichier
                 fichierOut.close(); // Ferme le fichier
             }
             return true; // Collision détectée

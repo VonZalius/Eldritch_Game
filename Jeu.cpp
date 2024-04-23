@@ -1,7 +1,9 @@
 #include "Jeu.hpp"
 
-Jeu::Jeu() : fenetre(sf::VideoMode(F_Largeur, F_Hauteur), "Eldritch", sf::Style::None | sf::Style::Fullscreen)
+Jeu::Jeu(int Largeur, int Hauteur) : fenetre(sf::VideoMode(Largeur, Hauteur), "Eldritch", sf::Style::None | sf::Style::Fullscreen)
 {
+    F_Largeur = Largeur;
+    F_Hauteur = Hauteur;
     initialiserJeu();
 }
 
@@ -17,7 +19,6 @@ void Jeu::initialiserJeu()
     if (fichierIn.is_open())
     {
         getline(fichierIn, ligne);
-        TotalScore = atoi(ligne.c_str());
         getline(fichierIn, ligne);
         HighScore1 = atoi(ligne.c_str());
         getline(fichierIn, ligne);
@@ -503,9 +504,13 @@ void Jeu::mettreAJour(sf::Time deltaTime)
     float deplacementY = 0.0f;
 
     // Ajout de la prise en charge de la manette
-    float joystickThreshold = 15.0f; // Seuil pour ignorer les faibles mouvements du joystick
+    float joystickThreshold = 30.0f; // Seuil pour ignorer les faibles mouvements du joystick
     float joystickX = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
     float joystickY = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+
+    // Application de la zone morte
+    if (std::abs(joystickX) < joystickThreshold) joystickX = 0.0f;
+    if (std::abs(joystickY) < joystickThreshold) joystickY = 0.0f;
 
     // Déplacement gauche/droite avec le clavier ou le stick
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A) || joystickX < -joystickThreshold) && collision(1, deltaTime, joueur.vitesse))

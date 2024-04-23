@@ -59,8 +59,8 @@ void EcranTitre::afficherEcranTitre(Jeu *jeu)
 
     if (!font.loadFromFile("sprites/police.ttf"))
         return;
-    btn.btn_create((jeu->F_Largeur / 2) - 200, 650, 400, 100, 60, font, "Commencer la partie");
-    btn2.btn_create((jeu->F_Largeur / 2) - 100, 800, 200, 100, 60, font, "Quitter");
+    btn.btn_create((jeu->F_Largeur / 2) - 200, (jeu->F_Hauteur / 2) + 100, 400, 100, 60, font, "Commencer la partie");
+    btn2.btn_create((jeu->F_Largeur / 2) - 100, (jeu->F_Hauteur / 2) + 250, 200, 100, 60, font, "Quitter");
 
     while (jeu->fenetre.isOpen())
     {
@@ -164,17 +164,17 @@ void EcranTitre::shop(Jeu *jeu)
 
     if (!font.loadFromFile("sprites/police.ttf"))
         return;
-    btn.btn_create(100, 300, 420, 100, 60, font, "L'Inconnu");
-    btn2.btn_create(100, 450, 420, 100, 60, font, "Sir Tonivar");
-    btn3.btn_create(600, 450, 420, 100, 60, font, "L'Enchanteresse");
-    btn4.btn_create(1100, 450, 420, 100, 60, font, "Mage Barbe-Tordu");
-    btn5.btn_create(100, 600, 420, 100, 60, font, "Sir Valan");
-    btn6.btn_create(600, 600, 420, 100, 60, font, "Dame d'Autrefois");
-    btn7.btn_create(1100, 600, 420, 100, 60, font, "Seigneur dechu");
-    btn8.btn_create(100, 750, 420, 100, 60, font, "Sir Kerwin");
-    btn9.btn_create(600, 750, 420, 100, 60, font, "Cadet Geufroid");
-    btn10.btn_create(1100, 750, 420, 100, 60, font, "Balthazar Griffe-de-Lion");
-    btn11.btn_create(100, 900, 420, 100, 60, font, "Reprendre");
+    btn.btn_create(100, (jeu->F_Hauteur / 7), 420, 100, 60, font, "L'Inconnu");
+    btn2.btn_create(100, (jeu->F_Hauteur / 7) * 2, 420, 100, 60, font, "Sir Tonivar");
+    btn3.btn_create(550, (jeu->F_Hauteur / 7) * 2, 420, 100, 60, font, "L'Enchanteresse");
+    btn4.btn_create(1000, (jeu->F_Hauteur / 7) * 2, 420, 100, 60, font, "Mage Barbe-Tordu");
+    btn5.btn_create(100, (jeu->F_Hauteur / 7) * 3, 420, 100, 60, font, "Sir Valan");
+    btn6.btn_create(550, (jeu->F_Hauteur / 7) * 3, 420, 100, 60, font, "Dame d'Autrefois");
+    btn7.btn_create(1000, (jeu->F_Hauteur / 7) * 3, 420, 100, 60, font, "Seigneur dechu");
+    btn8.btn_create(100, (jeu->F_Hauteur / 7) * 4, 420, 100, 60, font, "Sir Kerwin");
+    btn9.btn_create(550, (jeu->F_Hauteur / 7) * 4, 420, 100, 60, font, "Cadet Geufroid");
+    btn10.btn_create(1000, (jeu->F_Hauteur / 7) * 4, 420, 100, 60, font, "Balthazar Griffe-de-Lion");
+    btn11.btn_create(100, (jeu->F_Hauteur / 7) * 5, 420, 100, 60, font, "Reprendre");
 
     jeu->sound.sound5.play();
     textePaused2.setString("Choisissez votre Hero !");
@@ -315,7 +315,7 @@ void EcranTitre::shop(Jeu *jeu)
                         std::ofstream fichierOut("data/Score.txt"); // Crée un objet ofstream et ouvre le fichier
                         if (fichierOut.is_open())
                         {
-                            fichierOut << jeu->TotalScore << std::endl << jeu->HighScore1 << std::endl << jeu->HighScore2 << std::endl << jeu->HighScore3 << std::endl << jeu->sprite_reminder << std::endl; // Écrit dans le fichier
+                            fichierOut << jeu->F_Largeur << "x" << jeu->F_Hauteur << std::endl << jeu->HighScore1 << std::endl << jeu->HighScore2 << std::endl << jeu->HighScore3 << std::endl << jeu->sprite_reminder << std::endl; // Écrit dans le fichier
                             fichierOut.close(); // Ferme le fichier
                         }
                         return;
@@ -325,15 +325,15 @@ void EcranTitre::shop(Jeu *jeu)
         }
         float goodsize = static_cast<float>(jeu->joueur.TailleSprite) / static_cast<float>(jeu->joueur.frameWidth);
         jeu->joueur.sprite.setScale(goodsize * -12, goodsize * 12);
-        jeu->joueur.sprite.setPosition((jeu->F_Largeur / 1.3), 780);
+        jeu->joueur.sprite.setPosition((jeu->F_Largeur - 250), (jeu->F_Hauteur / 1.7));
         jeu->joueur.sprite.setTextureRect(jeu->joueur.framesJoueur[0]);
 
         textePaused.setString("Personnages");
         float largeurTexte = textePaused.getLocalBounds().width;
-        textePaused.setPosition((jeu->F_Largeur / 2) - (largeurTexte / 2), 200);
+        textePaused.setPosition((jeu->F_Largeur / 2) - (largeurTexte / 2), 50);
 
         float largeurTexte2 = textePaused2.getLocalBounds().width;
-        textePaused2.setPosition((jeu->F_Largeur / 2) - (largeurTexte2 / 2), 1100);
+        textePaused2.setPosition((jeu->F_Largeur / 2) - (largeurTexte2 / 2), (jeu->F_Hauteur / 7) * 6 - 20);
         jeu->fenetre.clear();
         jeu->fenetre.draw(spriteEcranTitre);
         jeu->fenetre.draw(textePaused2);
