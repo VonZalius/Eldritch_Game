@@ -161,7 +161,7 @@ public:
     int F_Largeur = 2560;
     bool killedStatus = false;
     bool backStatus = false;
-    //int TotalScore;
+    int TotalScore;
     int HighScore1;
     int HighScore2;
     int HighScore3;

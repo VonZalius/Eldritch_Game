@@ -57,6 +57,13 @@ void EcranTitre::afficherEcranTitre(Jeu *jeu)
     Button btn;
     Button btn2;
 
+    std::ofstream fichierOut("data/Score.txt"); // Crée un objet ofstream et ouvre le fichier
+    if (fichierOut.is_open())
+    {
+        fichierOut << jeu->TotalScore << std::endl << jeu->HighScore1 << std::endl << jeu->HighScore2 << std::endl << jeu->HighScore3 << std::endl << jeu->sprite_reminder << std::endl << jeu->F_Largeur << "x" << jeu->F_Hauteur << std::endl; // Écrit dans le fichier
+        fichierOut.close(); // Ferme le fichier
+    }
+
     if (!font.loadFromFile("sprites/police.ttf"))
         return;
     btn.btn_create((jeu->F_Largeur / 2) - 200, (jeu->F_Hauteur / 2) + 100, 400, 100, 60, font, "Commencer la partie");
@@ -315,7 +322,7 @@ void EcranTitre::shop(Jeu *jeu)
                         std::ofstream fichierOut("data/Score.txt"); // Crée un objet ofstream et ouvre le fichier
                         if (fichierOut.is_open())
                         {
-                            fichierOut << jeu->F_Largeur << "x" << jeu->F_Hauteur << std::endl << jeu->HighScore1 << std::endl << jeu->HighScore2 << std::endl << jeu->HighScore3 << std::endl << jeu->sprite_reminder << std::endl; // Écrit dans le fichier
+                            fichierOut << jeu->TotalScore << std::endl << jeu->HighScore1 << std::endl << jeu->HighScore2 << std::endl << jeu->HighScore3 << std::endl << jeu->sprite_reminder << std::endl << jeu->F_Largeur << "x" << jeu->F_Hauteur << std::endl; // Écrit dans le fichier
                             fichierOut.close(); // Ferme le fichier
                         }
                         return;

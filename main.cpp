@@ -11,14 +11,19 @@ int main()
     if (fichierIn.is_open())
     {
         getline(fichierIn, ligne);
+        getline(fichierIn, ligne);
+        getline(fichierIn, ligne);
+        getline(fichierIn, ligne);
+        getline(fichierIn, ligne);
+        getline(fichierIn, ligne);
         if (sscanf(ligne.c_str(), "%dx%d", &Largeur, &Hauteur) == 2)
         {
 
         }
         else
         {
-        std::cout << "Erreur de conversion." << std::endl;
-        return 0;
+            Largeur = 1920;
+            Hauteur = 1080;
         }
         fichierIn.close();
     }

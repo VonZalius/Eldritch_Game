@@ -19,6 +19,7 @@ void Jeu::initialiserJeu()
     if (fichierIn.is_open())
     {
         getline(fichierIn, ligne);
+        TotalScore = atoi(ligne.c_str());
         getline(fichierIn, ligne);
         HighScore1 = atoi(ligne.c_str());
         getline(fichierIn, ligne);
