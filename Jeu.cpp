@@ -398,9 +398,13 @@ void Jeu::mettreAJour_hub(sf::Time deltaTime)
     float deplacementY = 0.0f;
 
     // Ajout de la prise en charge de la manette
-    float joystickThreshold = 15.0f; // Seuil pour ignorer les faibles mouvements du joystick
+    float joystickThreshold = 35.0f; // Seuil pour ignorer les faibles mouvements du joystick
     float joystickX = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
     float joystickY = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+
+    // Application de la zone morte
+    if (std::abs(joystickX) < joystickThreshold) joystickX = 0.0f;
+    if (std::abs(joystickY) < joystickThreshold) joystickY = 0.0f;
 
     // Déplacement gauche/droite avec le clavier ou le stick
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A) || joystickX < -joystickThreshold) && collision(1, deltaTime, joueur.vitesse))
@@ -504,7 +508,7 @@ void Jeu::mettreAJour(sf::Time deltaTime)
     float deplacementY = 0.0f;
 
     // Ajout de la prise en charge de la manette
-    float joystickThreshold = 30.0f; // Seuil pour ignorer les faibles mouvements du joystick
+    float joystickThreshold = 35.0f; // Seuil pour ignorer les faibles mouvements du joystick
     float joystickX = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
     float joystickY = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
 
